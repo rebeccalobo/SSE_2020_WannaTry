@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SSE_2020_WannaTry:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/SSE_2020_WannaTry_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SSE_2020_WannaTry/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SSE_2020_WannaTry" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
