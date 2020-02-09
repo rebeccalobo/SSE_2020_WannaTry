@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SSE_2020_WannaTry" target="1.8" />
+      <module name="SSE_2020_WannaTry" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

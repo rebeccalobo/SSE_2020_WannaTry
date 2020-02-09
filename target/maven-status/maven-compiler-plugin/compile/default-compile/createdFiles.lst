@@ -1,1 +1,5 @@
+databaserepo\StudentRepository.class
 Example.class
+model\Students.class
+exceptions\StudentNotFoundException.class
+controller\StudentController.class
