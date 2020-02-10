@@ -8,12 +8,12 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="Home.css">
-    <title>$Title$</title>
+    <title>Wanna Try</title>
 </head>
 <body>
     <ul>
-        <li><a href="Home.jsp">Home</a></li>
-        <li><a href="Register.jsp">Register</a></li>
+        <li><a href="Home">Home</a></li>
+        <li><a href="Register">Register</a></li>
     </ul>
 
     <p>Hello this is a paragraph </p>

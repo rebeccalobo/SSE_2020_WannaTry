@@ -2,5 +2,5 @@ SpringApp\model\Students.class
 SpringApp\Example.class
 SpringApp\exceptions\StudentNotFoundException.class
 SpringApp\controller\HomePageController.class
-SpringApp\controller\MvcConfig.class
 SpringApp\databaserepo\StudentRepository.class
+SpringApp\controller\RegisterController.class

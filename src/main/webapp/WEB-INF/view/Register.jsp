@@ -10,8 +10,12 @@
 <head>
     <link rel="stylesheet" type="text/css" href="Home.css">
     <title>Register Page</title>
+
 </head>
 <body>
-
+<ul>
+    <li><a href="Home">Home</a></li>
+    <li><a href="Register">Register</a></li>
+</ul>
 </body>
 </html>

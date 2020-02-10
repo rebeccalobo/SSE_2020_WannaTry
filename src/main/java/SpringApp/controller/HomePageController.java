@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/")
 public class HomePageController {
 
-    @GetMapping(value = "/")
+    @GetMapping(value= {"/", "/Home"})
     public String homePage(){
         return "Home";
     }
+
 }
