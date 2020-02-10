@@ -1,5 +1,6 @@
-databaserepo\StudentRepository.class
-Example.class
-model\Students.class
-exceptions\StudentNotFoundException.class
-controller\StudentController.class
+SpringApp\model\Students.class
+SpringApp\Example.class
+SpringApp\exceptions\StudentNotFoundException.class
+SpringApp\controller\HomePageController.class
+SpringApp\controller\MvcConfig.class
+SpringApp\databaserepo\StudentRepository.class
