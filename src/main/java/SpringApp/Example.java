@@ -1,17 +1,15 @@
 package SpringApp;
 
-import SpringApp.controller.HomePageController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 
-
-
+//@SpringBootApplication(scanBasePackages = {"com.SSE2020.WannaTry"})
 @SpringBootApplication
-@ComponentScan(basePackageClasses = HomePageController.class)
-
-public class Example {
+@ComponentScan("com")
+public class Example extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(Example.class, args);
     }
