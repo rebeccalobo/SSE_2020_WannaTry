@@ -1,7 +1,7 @@
-SpringApp\model\Students.class
-SpringApp\Example.class
-SpringApp\exceptions\StudentNotFoundException.class
-SpringApp\controller\StudentController.class
-SpringApp\controller\HomePageController.class
-SpringApp\databaserepo\StudentRepository.class
-SpringApp\controller\RegisterController.class
+com\SSE2020\WannaTry\exceptions\StudentNotFoundException.class
+com\SSE2020\WannaTry\controller\HomePageController.class
+com\SSE2020\WannaTry\controller\RegisterController.class
+com\SSE2020\WannaTry\Example.class
+com\SSE2020\WannaTry\model\Students.class
+com\SSE2020\WannaTry\controller\StudentController.class
+com\SSE2020\WannaTry\databaserepo\StudentRepository.class

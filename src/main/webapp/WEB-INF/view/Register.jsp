@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: kiowa
@@ -8,30 +9,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/Home.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/Home.NavBar.css">
     <title>Register Page</title>
 
 </head>
 <body>
-    <ul>
-        <li><a href="Home">Home</a></li>
-        <li><a href="Register">Register</a></li>
-    </ul>
+    <%@include file="NavBar.jsp"%>
 
-    <form name="register">
+    <form:form method="post"
+    action="save" modelAttribute="student">
         First name:<br>
-        <input type="text" name="firstname"><br>
+        <form:input path="student_firstname"/><br>
         Last name:<br>
-        <input type="text" name="lastname"><br><br>
+        <form:input path="student_surname"/><br>
         Email address:<br>
-        <input type="text" name="email"><br><br>
+        <form:input path="email"/><br><br>
+        Password:<br>
+        <form:input path="password"/><br><br>
         Student Number:<br>
-        <input type="text" name="studentnumber"><br><br>
+        <form:input  path="student_id"/><br><br>
         Address:<br>
-        <input type="text" name="address"><br><br>
+        <form:input path="address"/><br><br>
         Phone Number:<br>
-        <input type="text" name="phonenumber"><br><br>
+        <form:input path="phone_number"/><br><br>
         <input type="submit" value="Submit">
-    </form>
+    </form:form>
 </body>
 </html>
