@@ -15,11 +15,12 @@
 <body>
 <%@include file="NavBar.jsp"%>
 
-<form:form method="post" action="login" modelAttribute="student">
+<form:form method="post" action="login_user" modelAttribute="user">
     ID:<br>
     <form:input path="student_id"/><br>
+    Password:<br>
     <form:input path="password"/><br>
-
+    <input type="submit" value="Login">
 </form:form>
 </body>
 </html>

@@ -5,12 +5,16 @@ import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
+@ControllerAdvice
 public class StudentController {
 
 
@@ -23,11 +27,14 @@ public class StudentController {
     public List<Students> getAllNotes() {
         return studentRepository.findAll();
     }
-    // Get a Single Note
-    @GetMapping("/students/{id}")
-    public Students getNoteById(@PathVariable(value = "id") Long studentId) throws StudentNotFoundException {
-        return studentRepository.findById(studentId)
-                .orElseThrow(() -> new StudentNotFoundException(studentId));
+    // Login
+    @RequestMapping(value = "/login_user",method = RequestMethod.POST)
+    public String getStudentById(@ModelAttribute("user")Students student, ModelMap model) throws StudentNotFoundException {
+        String studentId = student.getStudent_id();
+        Students current_user = studentRepository.findById(studentId)
+                .orElseThrow(()->new StudentNotFoundException(studentId));
+        model.addAttribute("current_user",current_user);
+        return "studentDashboard";
     }
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public String saveStudent(@ModelAttribute("student")Students student){
@@ -41,7 +48,7 @@ public class StudentController {
     }
     // Update a Note
     @PutMapping("/students/{id}")
-    public Students updateNote(@PathVariable(value = "id") Long studentId,
+    public Students updateNote(@PathVariable(value = "id") String studentId,
                                @Valid @RequestBody Students studentDetails) throws StudentNotFoundException {
 
         Students student = studentRepository.findById(studentId)
@@ -61,7 +68,7 @@ public class StudentController {
 
     // Delete a Note
     @DeleteMapping("/students/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable(value = "id") Long studentId) throws StudentNotFoundException {
+    public ResponseEntity<?> deleteBook(@PathVariable(value = "id") String studentId) throws StudentNotFoundException {
         Students student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
 

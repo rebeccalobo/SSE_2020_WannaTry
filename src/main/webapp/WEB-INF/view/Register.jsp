@@ -17,7 +17,7 @@
     <%@include file="NavBar.jsp"%>
 
     <form:form method="post"
-    action="save" modelAttribute="student">
+    action="save" modelAttribute="student" name="RegisterForm">
         First name:<br>
         <form:input path="student_firstname"/><br>
         Last name:<br>
@@ -34,5 +34,7 @@
         <form:input path="phone_number"/><br><br>
         <input type="submit" value="Submit">
     </form:form>
+
+
 </body>
 </html>

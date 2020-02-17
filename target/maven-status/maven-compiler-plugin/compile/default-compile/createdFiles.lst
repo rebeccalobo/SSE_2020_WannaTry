@@ -5,3 +5,6 @@ com\SSE2020\WannaTry\Example.class
 com\SSE2020\WannaTry\model\Students.class
 com\SSE2020\WannaTry\controller\StudentController.class
 com\SSE2020\WannaTry\databaserepo\StudentRepository.class
+com\SSE2020\WannaTry\controller\StudentDashboardController.class
+com\SSE2020\WannaTry\controller\LoginController.class
+com\SSE2020\WannaTry\PasswordHashing.class
