@@ -18,6 +18,7 @@ public class RegisterController {
     public String register(Model model){
         Students student = new Students();
         model.addAttribute("student",student);
+        model.addAttribute("incorrectFormat","correct");
         return "Register";
     }
 }

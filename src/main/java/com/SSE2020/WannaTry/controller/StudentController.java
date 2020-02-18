@@ -1,6 +1,7 @@
 package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.CurrentUserSingleton;
+import com.SSE2020.WannaTry.PasswordHashing;
 import com.SSE2020.WannaTry.databaserepo.StudentRepository;
 import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
@@ -12,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Controller
@@ -41,8 +43,28 @@ public class StudentController {
     }
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public String saveStudent(@ModelAttribute("student")Students student){
-        studentRepository.save(student);
-        return "studentDashboard";
+        String fName = student.getStudent_firstname();
+        String lName = student.getStudent_surname();
+        String email = student.getEmail();
+        String address = student.getAddress();
+        String number = student.getPhone_number();
+        String pwd = student.getPassword();
+
+        if((fName.matches("[A-Za-z]"))&&
+                (lName.matches("[A-Za-z]"))&&
+                        (email.matches("[A-Za-z]"))&&
+                                (address.matches("[A-Za-z]"))&&
+                                        (number.matches("[A-Za-z]"))&&
+                                                (pwd.matches("[A-Za-z]"))
+                                        ){
+            studentRepository.save(student);
+            return "studentDashboard";
+        }
+        else{
+            return "Register";
+        }
+
+
     }
     // Create a new Note
     @PostMapping("/students")
@@ -52,10 +74,12 @@ public class StudentController {
     // Update a Note
     @PutMapping("/students/{id}")
     public Students updateNote(@PathVariable(value = "id") String studentId,
-                               @Valid @RequestBody Students studentDetails) throws StudentNotFoundException {
+                               @Valid @RequestBody Students studentDetails) throws StudentNotFoundException, NoSuchAlgorithmException {
 
         Students student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
+
+
 
         student.setStudent_firstname(studentDetails.getStudent_firstname());
         student.setStudent_surname(studentDetails.getStudent_surname());
