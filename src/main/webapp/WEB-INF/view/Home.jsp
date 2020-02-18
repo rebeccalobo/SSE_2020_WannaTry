@@ -13,8 +13,11 @@
     <title>Wanna Try</title>
 </head>
 <body>
-    <%@include file="NavBar.jsp"%>
+    <%@include file="NavBar.jsp"%><br>
+    <div class="main">
+<%--        Home page things go in here!--%>
+        <p>Hello this is a paragraph </p>
+    </div>
 
-    <p>Hello this is a paragraph </p>
 </body>
 </html>

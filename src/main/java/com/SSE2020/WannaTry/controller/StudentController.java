@@ -1,5 +1,6 @@
 package com.SSE2020.WannaTry.controller;
 
+import com.SSE2020.WannaTry.CurrentUserSingleton;
 import com.SSE2020.WannaTry.databaserepo.StudentRepository;
 import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
@@ -22,6 +23,7 @@ public class StudentController {
     @Autowired
     StudentRepository studentRepository;
 
+    private Students current_user = null;
     // Get All Notes
     @GetMapping("/students")
     public List<Students> getAllNotes() {
@@ -31,9 +33,10 @@ public class StudentController {
     @RequestMapping(value = "/login_user",method = RequestMethod.POST)
     public String getStudentById(@ModelAttribute("user")Students student, ModelMap model) throws StudentNotFoundException {
         String studentId = student.getStudent_id();
-        Students current_user = studentRepository.findById(studentId)
+        current_user = studentRepository.findById(studentId)
                 .orElseThrow(()->new StudentNotFoundException(studentId));
         model.addAttribute("current_user",current_user);
+        CurrentUserSingleton.getInstance().setCurrentUser(studentId);
         return "studentDashboard";
     }
     @RequestMapping(value="/save",method=RequestMethod.POST)
@@ -75,5 +78,30 @@ public class StudentController {
         studentRepository.delete(student);
 
         return ResponseEntity.ok().build();
+    }
+    @RequestMapping(value = "/studentDashboard")
+    public String goToDashboardPage(Model model) throws StudentNotFoundException {
+        model.addAttribute("current_user", current_user);
+        return "studentDashboard";
+    }
+    @RequestMapping(value = "/StudentModule")
+    public String goToModulePage(Model model) throws StudentNotFoundException {
+        model.addAttribute("current_user", current_user);
+        return "StudentModule";
+    }
+    @RequestMapping(value = "/Payments")
+    public String goToPaymentPage(Model model) throws StudentNotFoundException {
+        model.addAttribute("current_user", current_user);
+        return "Payments";
+    }
+    @RequestMapping(value = "/StudentGradesAndFeedbackPage")
+    public String goToGradesPage(Model model) throws StudentNotFoundException {
+        model.addAttribute("current_user", current_user);
+        return "StudentGradesAndFeedbackPage";
+    }
+    @RequestMapping(value="/logout")
+    public String logout(){
+        current_user = null;
+        return "redirect:/Home";
     }
 }

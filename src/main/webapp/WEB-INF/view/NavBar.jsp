@@ -10,11 +10,14 @@
 <html>
 <head> <link rel="stylesheet" href='<c:url value ="/resources/css/NavBar.css"/>' type="text/css"/></head>
 <body>
-<ul class="nav_bar">
-    <li><a href="Home">Home</a></li>
-    <li><a href="Register">Register</a></li>
-    <li><a href="Login">Login</a></li>
-</ul>
+<div class="nav_bar">
+    <ul>
+        <li><a href="Home">Home</a></li>
+        <li><a href="Register">Register</a></li>
+        <li><a href="Login">Login</a></li>
+    </ul>
+</div>
+
 
 </body>
 </html>

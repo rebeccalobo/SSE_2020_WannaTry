@@ -1,4 +1,5 @@
 com\SSE2020\WannaTry\exceptions\StudentNotFoundException.class
+com\SSE2020\WannaTry\CurrentUserSingleton.class
 com\SSE2020\WannaTry\controller\HomePageController.class
 com\SSE2020\WannaTry\controller\RegisterController.class
 com\SSE2020\WannaTry\Example.class
