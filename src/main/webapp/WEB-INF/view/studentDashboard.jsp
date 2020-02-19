@@ -16,7 +16,6 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <%@include file="NavBar.jsp"%>
     <h1>${current_user.student_firstname}s Dashboard</h1>
     Student ID: ${current_user.student_id}
     <br>

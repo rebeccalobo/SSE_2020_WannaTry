@@ -37,12 +37,18 @@ public class StudentController {
         String studentId = student.getStudent_id();
         current_user = studentRepository.findById(studentId)
                 .orElseThrow(()->new StudentNotFoundException(studentId));
-        model.addAttribute("current_user",current_user);
-        CurrentUserSingleton.getInstance().setCurrentUser(studentId);
-        return "studentDashboard";
+        if(current_user.getPassword().equals(student.getPassword())) {
+            model.addAttribute("current_user",current_user);
+            CurrentUserSingleton.getInstance().setCurrentUser(current_user);
+            return "studentDashboard";
+        }
+       else{
+           model.addAttribute("password_ok",false);
+           return "Login";
+        }
     }
     @RequestMapping(value="/save",method=RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("student")Students student){
+    public String saveStudent(@ModelAttribute("student")Students student,Model model){
         String fName = student.getStudent_firstname();
         String lName = student.getStudent_surname();
         String email = student.getEmail();
@@ -52,16 +58,24 @@ public class StudentController {
 
         if((fName.matches("[A-Za-z]"))&&
                 (lName.matches("[A-Za-z]"))&&
-                        (email.matches("[A-Za-z]"))&&
-                                (address.matches("[A-Za-z]"))&&
-                                        (number.matches("[A-Za-z]"))&&
+                        (email.matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}"))&&
+                                (address.matches("[A-Za-z0-9]"))&&
+                                        (number.matches("[0-9]"))&&
                                                 (pwd.matches("[A-Za-z]"))
                                         ){
             studentRepository.save(student);
+            current_user = student;
+            CurrentUserSingleton.getInstance().setCurrentUser(student);
+            model.addAttribute("current_user",student);
             return "studentDashboard";
         }
         else{
-            return "Register";
+            //model.addAttribute("flag",true);
+            studentRepository.save(student);
+            current_user = student;
+            CurrentUserSingleton.getInstance().setCurrentUser(student);
+            model.addAttribute("current_user",current_user);
+            return "studentDashboard";
         }
 
 
@@ -126,6 +140,6 @@ public class StudentController {
     @RequestMapping(value="/logout")
     public String logout(){
         current_user = null;
-        return "redirect:/Home";
+        return "redirect:/";
     }
 }

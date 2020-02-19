@@ -15,8 +15,8 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <%@include file="NavBar.jsp"%>
-    hello this is your grade feedback page!
+
+    <h1>hello this is your grade feedback page!</h1>
 </div>
 
 

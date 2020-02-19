@@ -13,14 +13,19 @@
     <title>Login</title>
 </head>
 <body>
-<%@include file="NavBar.jsp"%>
+<%@include file="sidebar.jsp"%>
+<div class="main">
+    <c:if test="${password_ok == false}">
+        <h3>Password incorrect, please try again!</h3>
+    </c:if>
+    <form:form method="post" action="login_user" modelAttribute="user">
+        ID:<br>
+        <form:input path="student_id"/><br>
+        Password:<br>
+        <form:input path="password"/><br>
+        <input type="submit" value="Login">
+    </form:form>
+</div>
 
-<form:form method="post" action="login_user" modelAttribute="user">
-    ID:<br>
-    <form:input path="student_id"/><br>
-    Password:<br>
-    <form:input path="password"/><br>
-    <input type="submit" value="Login">
-</form:form>
 </body>
 </html>
