@@ -1,15 +1,11 @@
 package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.service.BackendRepoService;
-import com.SSE2020.WannaTry.service.CurrentUserSingleton;
-import com.SSE2020.WannaTry.databaserepo.StudentRepository;
 import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,51 +29,7 @@ public class StudentController {
     public List<Students> getAllNotes() {
         return repoService.getStudentRepo().findAll();
     }
-    // Login
-    @RequestMapping(value = "/login_user",method = RequestMethod.POST)
-    public String getStudentById(@ModelAttribute("user")Students student, ModelMap model) throws StudentNotFoundException {
-        String studentId = student.getStudent_id();
-        current_user = repoService.getStudentRepo().findById(studentId)
-                .orElseThrow(()->new StudentNotFoundException(studentId));
-        if(current_user.getPassword().equals(student.getPassword())) {
-            model.addAttribute("current_user",current_user);
-            CurrentUserSingleton.getInstance().setCurrentUser(current_user);
-            return "studentDashboard";
-        }
-       else{
-           model.addAttribute("password_ok",false);
-           return "Login";
-        }
-    }
-    @RequestMapping(value="/save",method=RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("student")Students student,Model model){
-        String fName = student.getStudent_firstname();
-        String lName = student.getStudent_surname();
-        String email = student.getEmail();
-        String address = student.getAddress();
-        String number = student.getPhone_number();
-        String pwd = student.getPassword();
 
-        if((fName.matches("[A-Za-z]"))&&
-                (lName.matches("[A-Za-z]"))&&
-                        (email.matches("^[A-Za-z0-9+_.-]+@(.+)$"))&&
-                                (!address.isEmpty())&&
-                                        (number.matches("[0-9]"))&&
-                                                (pwd.matches("[A-Za-z]"))
-                                        ){
-            repoService.getStudentRepo().save(student);
-            current_user = student;
-            CurrentUserSingleton.getInstance().setCurrentUser(student);
-            model.addAttribute("current_user",student);
-            return "studentDashboard";
-        }
-        else{
-            model.addAttribute("flag",true);
-            return "Register";
-        }
-
-
-    }
     // Create a new Note
     @PostMapping("/students")
     public Students createNote(@Valid @RequestBody Students student) {
@@ -115,29 +67,8 @@ public class StudentController {
 
         return ResponseEntity.ok().build();
     }
-    @RequestMapping(value = "/studentDashboard")
-    public String goToDashboardPage(Model model) throws StudentNotFoundException {
-        model.addAttribute("current_user", current_user);
-        return "studentDashboard";
-    }
-    @RequestMapping(value = "/StudentModule")
-    public String goToModulePage(Model model) throws StudentNotFoundException {
-        model.addAttribute("current_user", current_user);
-        return "StudentModule";
-    }
-    @RequestMapping(value = "/Payments")
-    public String goToPaymentPage(Model model) throws StudentNotFoundException {
-        model.addAttribute("current_user", current_user);
-        return "Payments";
-    }
-    @RequestMapping(value = "/StudentGradesAndFeedbackPage")
-    public String goToGradesPage(Model model) throws StudentNotFoundException {
-        model.addAttribute("current_user", current_user);
-        return "StudentGradesAndFeedbackPage";
-    }
-    @RequestMapping(value="/logout")
-    public String logout(){
-        current_user = null;
-        return "redirect:/";
-    }
+
+
+
+
 }

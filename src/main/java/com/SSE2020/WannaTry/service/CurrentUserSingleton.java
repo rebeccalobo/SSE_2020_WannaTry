@@ -2,14 +2,15 @@ package com.SSE2020.WannaTry.service;
 
 import com.SSE2020.WannaTry.model.Students;
 
+
 public class CurrentUserSingleton {
     private static CurrentUserSingleton currentUserSingleton = null;
-    private Students curerentUser;
+    private Students currentStudent;
     private CurrentUserSingleton(){
-        curerentUser = null;
+        currentStudent = null;
     }
     public void setCurrentUser(Students student){
-        curerentUser = student;
+        currentStudent = student;
     }
     public static CurrentUserSingleton getInstance(){
         if(currentUserSingleton == null){
@@ -18,6 +19,6 @@ public class CurrentUserSingleton {
         return currentUserSingleton;
     }
     public Students getCurrentUser(){
-        return curerentUser;
+        return currentStudent;
     }
 }
