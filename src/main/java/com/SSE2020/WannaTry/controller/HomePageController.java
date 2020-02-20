@@ -1,7 +1,7 @@
 package com.SSE2020.WannaTry.controller;
 
 
-import com.SSE2020.WannaTry.CurrentUserSingleton;
+import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;

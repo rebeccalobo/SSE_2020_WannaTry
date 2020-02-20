@@ -1,7 +1,7 @@
 package com.SSE2020.WannaTry.controller;
 
-import com.SSE2020.WannaTry.CurrentUserSingleton;
-import com.SSE2020.WannaTry.PasswordHashing;
+import com.SSE2020.WannaTry.service.BackendRepoService;
+import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import com.SSE2020.WannaTry.databaserepo.StudentRepository;
 import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
@@ -22,20 +22,22 @@ public class StudentController {
 
 
 
+//    @Autowired
+//    StudentRepository studentRepository;
     @Autowired
-    StudentRepository studentRepository;
+    BackendRepoService repoService;
 
     private Students current_user = null;
     // Get All Notes
     @GetMapping("/students")
     public List<Students> getAllNotes() {
-        return studentRepository.findAll();
+        return repoService.getStudentRepo().findAll();
     }
     // Login
     @RequestMapping(value = "/login_user",method = RequestMethod.POST)
     public String getStudentById(@ModelAttribute("user")Students student, ModelMap model) throws StudentNotFoundException {
         String studentId = student.getStudent_id();
-        current_user = studentRepository.findById(studentId)
+        current_user = repoService.getStudentRepo().findById(studentId)
                 .orElseThrow(()->new StudentNotFoundException(studentId));
         if(current_user.getPassword().equals(student.getPassword())) {
             model.addAttribute("current_user",current_user);
@@ -58,24 +60,20 @@ public class StudentController {
 
         if((fName.matches("[A-Za-z]"))&&
                 (lName.matches("[A-Za-z]"))&&
-                        (email.matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}"))&&
-                                (address.matches("[A-Za-z0-9]"))&&
+                        (email.matches("^[A-Za-z0-9+_.-]+@(.+)$"))&&
+                                (!address.isEmpty())&&
                                         (number.matches("[0-9]"))&&
                                                 (pwd.matches("[A-Za-z]"))
                                         ){
-            studentRepository.save(student);
+            repoService.getStudentRepo().save(student);
             current_user = student;
             CurrentUserSingleton.getInstance().setCurrentUser(student);
             model.addAttribute("current_user",student);
             return "studentDashboard";
         }
         else{
-            //model.addAttribute("flag",true);
-            studentRepository.save(student);
-            current_user = student;
-            CurrentUserSingleton.getInstance().setCurrentUser(student);
-            model.addAttribute("current_user",current_user);
-            return "studentDashboard";
+            model.addAttribute("flag",true);
+            return "Register";
         }
 
 
@@ -83,14 +81,14 @@ public class StudentController {
     // Create a new Note
     @PostMapping("/students")
     public Students createNote(@Valid @RequestBody Students student) {
-        return studentRepository.save(student);
+        return repoService.getStudentRepo().save(student);
     }
     // Update a Note
     @PutMapping("/students/{id}")
     public Students updateNote(@PathVariable(value = "id") String studentId,
                                @Valid @RequestBody Students studentDetails) throws StudentNotFoundException, NoSuchAlgorithmException {
 
-        Students student = studentRepository.findById(studentId)
+        Students student = repoService.getStudentRepo().findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
 
 
@@ -102,7 +100,7 @@ public class StudentController {
         student.setPhone_number(studentDetails.getPhone_number());
         student.setPassword(studentDetails.getPassword());
 
-        Students updatedStudent = studentRepository.save(student);
+        Students updatedStudent = repoService.getStudentRepo().save(student);
 
         return updatedStudent;
     }
@@ -110,10 +108,10 @@ public class StudentController {
     // Delete a Note
     @DeleteMapping("/students/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable(value = "id") String studentId) throws StudentNotFoundException {
-        Students student = studentRepository.findById(studentId)
+        Students student = repoService.getStudentRepo().findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
 
-        studentRepository.delete(student);
+        repoService.getStudentRepo().delete(student);
 
         return ResponseEntity.ok().build();
     }
