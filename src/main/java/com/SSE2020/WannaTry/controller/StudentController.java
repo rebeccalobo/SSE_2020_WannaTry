@@ -9,21 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Controller
 @ControllerAdvice
 public class StudentController {
 
-
-
-//    @Autowired
-//    StudentRepository studentRepository;
     @Autowired
     BackendRepoService repoService;
 
-    private Students current_user = null;
     // Get All Notes
     @GetMapping("/students")
     public List<Students> getAllNotes() {
@@ -38,7 +32,7 @@ public class StudentController {
     // Update a Note
     @PutMapping("/students/{id}")
     public Students updateNote(@PathVariable(value = "id") String studentId,
-                               @Valid @RequestBody Students studentDetails) throws StudentNotFoundException, NoSuchAlgorithmException {
+                               @Valid @RequestBody Students studentDetails) throws StudentNotFoundException {
 
         Students student = repoService.getStudentRepo().findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
@@ -52,9 +46,7 @@ public class StudentController {
         student.setPhone_number(studentDetails.getPhone_number());
         student.setPassword(studentDetails.getPassword());
 
-        Students updatedStudent = repoService.getStudentRepo().save(student);
-
-        return updatedStudent;
+        return repoService.getStudentRepo().save(student);
     }
 
     // Delete a Note
