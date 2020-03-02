@@ -1,12 +1,10 @@
 package com.SSE2020.WannaTry.controller;
 
-import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import com.SSE2020.WannaTry.service.ValidateRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +44,7 @@ public class RegisterController {
     }
 
     // Delete a Note
-    @DeleteMapping("/unregister")
+    @GetMapping("/unregister")
     public String deleteBook(){
         repoService.getStudentRepo().delete(CurrentUserSingleton.getInstance().getCurrentUser());
         CurrentUserSingleton.getInstance().setCurrentUser(null);

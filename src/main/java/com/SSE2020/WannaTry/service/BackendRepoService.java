@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 public class BackendRepoService {
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
     StaffRepository staffRepository;
+    @Autowired
     ModuleRepository moduleRepository;
-
     //add the other repos here
     public StaffRepository getStaffRepo() {return staffRepository; }
     public StudentRepository getStudentRepo(){

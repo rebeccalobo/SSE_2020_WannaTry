@@ -1,6 +1,7 @@
 package com.SSE2020.WannaTry.controller;
 
 
+import com.SSE2020.WannaTry.service.CurrentStaffSingleton;
 import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import org.springframework.stereotype.Controller;
 
@@ -21,6 +22,7 @@ public class HomePageController {
     @GetMapping(value = "/Home")
     public String home(Model model){
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
+        model.addAttribute("current_staff", CurrentStaffSingleton.getInstance().getCurrentUser());
         return "Home";
     }
 

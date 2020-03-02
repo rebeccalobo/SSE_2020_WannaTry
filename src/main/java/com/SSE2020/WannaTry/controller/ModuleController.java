@@ -1,11 +1,15 @@
 package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.exceptions.ModuleNotFoundException;
+import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Modules;
 import com.SSE2020.WannaTry.service.BackendRepoService;
+import com.SSE2020.WannaTry.service.CurrentStaffSingleton;
+import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,7 +50,7 @@ public class ModuleController {
     }
 
     // Delete a Note
-    @DeleteMapping("/staff/{id}")
+    @DeleteMapping("/module/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable(value = "id") String moduleId) throws ModuleNotFoundException {
         Modules modules = repoService.getModuleRepo().findById(moduleId)
                 .orElseThrow(() -> new ModuleNotFoundException(moduleId));
@@ -54,5 +58,10 @@ public class ModuleController {
         repoService.getModuleRepo().delete(modules);
 
         return ResponseEntity.ok().build();
+    }
+    @RequestMapping(value = "/StaffModule")
+    public String goToModulePage(Model model) {
+        model.addAttribute("current_staff", CurrentStaffSingleton.getInstance().getCurrentUser());
+        return "StaffModulePage";
     }
 }
