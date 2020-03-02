@@ -15,6 +15,8 @@ public class ValidateRegistrationService {
         String pwd = student.getPassword();
         String id = student.getStudent_id();
 
+//        String fnamestaff = staff.get
+
 
         return (fName.matches("^[a-zA-Z]+$")) &&
                 (lName.matches("^[a-zA-Z]+$")) &&

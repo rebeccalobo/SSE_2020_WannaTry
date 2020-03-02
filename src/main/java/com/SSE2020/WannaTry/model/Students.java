@@ -1,9 +1,9 @@
 package com.SSE2020.WannaTry.model;
 
 
-import org.hibernate.validator.constraints.UniqueElements;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -53,8 +53,7 @@ public class Students {
     public String getPhone_number(){return phone_number;}
     public String getPassword(){return password;}
 
-    public void setStudent_id(String id) {
-        this.student_id = id;}
+    public void setStudent_id(String id) { this.student_id = id;}
     public void setStudent_firstname(String student_firstname) {
         this.student_firstname = student_firstname;
     }
