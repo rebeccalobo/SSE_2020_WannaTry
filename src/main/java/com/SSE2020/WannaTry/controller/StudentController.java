@@ -4,7 +4,6 @@ import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,16 +49,7 @@ public class StudentController {
         return repoService.getStudentRepo().save(student);
     }
 
-    // Delete a Note
-    @DeleteMapping("/students/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable(value = "id") String studentId) throws StudentNotFoundException {
-        Students student = repoService.getStudentRepo().findById(studentId)
-                .orElseThrow(() -> new StudentNotFoundException(studentId));
 
-        repoService.getStudentRepo().delete(student);
-
-        return ResponseEntity.ok().build();
-    }
 
 
 

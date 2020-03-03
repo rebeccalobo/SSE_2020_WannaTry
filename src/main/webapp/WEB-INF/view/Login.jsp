@@ -18,6 +18,10 @@
     <c:if test="${password_ok == false}">
         <h3> incorrect, please try again!</h3>
     </c:if>
+    <c:if test="${error!=null}">
+        <h3> ${error}</h3>
+    </c:if>
+
     <form:form method="post" action="login_user" modelAttribute="user">
         ID:<br>
         <form:input path="student_id"/><br>

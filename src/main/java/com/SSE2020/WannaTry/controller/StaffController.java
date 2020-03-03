@@ -3,9 +3,11 @@ package com.SSE2020.WannaTry.controller;
 import com.SSE2020.WannaTry.exceptions.StaffNotFoundException;
 import com.SSE2020.WannaTry.model.Staff;
 import com.SSE2020.WannaTry.service.BackendRepoService;
+import com.SSE2020.WannaTry.service.CurrentStaffSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -55,6 +57,11 @@ public class StaffController {
         repoService.getStaffRepo().delete(staff);
 
         return ResponseEntity.ok().build();
+    }
+    @RequestMapping("/StaffDashboard")
+    public String goToStaffDashboard(Model model){
+        model.addAttribute("current_staff", CurrentStaffSingleton.getInstance().getCurrentUser());
+        return "staffDashboard";
     }
 
 
