@@ -20,13 +20,13 @@
     <ul>
 
         <c:choose>
-            <c:when test="${current_user==null || current_Staff==null}">
+            <c:when test="${current_user==null && current_staff==null}">
                 <li><a href="/">Home</a></li>
                 <li><a href="Register">Register</a> </li>
                 <li><a href="Login">Student Login</a></li>
                 <li><a href="StaffLogin">Staff Login</a></li>
                 </c:when>
-            <c:otherwise>
+            <c:when test="${current_user!=null && current_staff==null}">
                 <li><a href="Home">Home</a></li>
                 <li><a href="studentDashboard">Dashboard</a></li>
                 <li><a href="StudentGradesAndFeedbackPage">Grades</a></li>
@@ -34,7 +34,12 @@
                 <li><a href="Payments">Payments</a></li>
                 <li><a href="logout">Logout</a> </li>
                 <li><form action="unregister" class="confirmation"><input type="submit" value="delete" onclick="return confirm('Are you sure you want to unregister')"></form></li>
-            </c:otherwise>
+            </c:when>
+            <c:when test="${current_user==null && current_staff!=null}">
+                <li><a href="StaffDashboard">Dashboard</a></li>
+                <li><a href="StaffModule">My Modules</a></li>
+                <li><a href="logout">Logout</a> </li>
+            </c:when>
         </c:choose>
     </ul>
 </div>

@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
+<%--    <link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">--%>
     <title>Register Page</title>
 
 </head>

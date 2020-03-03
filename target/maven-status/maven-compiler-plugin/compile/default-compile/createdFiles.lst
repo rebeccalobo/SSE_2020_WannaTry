@@ -13,16 +13,6 @@ com\SSE2020\WannaTry\model\Modules.class
 com\SSE2020\WannaTry\service\PasswordHashing.class
 com\SSE2020\WannaTry\controller\StudentDashboardController.class
 com\SSE2020\WannaTry\controller\LoginController.class
-com\SSE2020\WannaTry\service\BackendRepoService.class
-com\SSE2020\WannaTry\service\ValidateRegistrationService.class
-com\SSE2020\WannaTry\controller\StaffController.class
-com\SSE2020\WannaTry\model\Students.class
-com\SSE2020\WannaTry\controller\StudentController.class
-com\SSE2020\WannaTry\databaserepo\StudentRepository.class
-com\SSE2020\WannaTry\controller\ModuleController.class
-com\SSE2020\WannaTry\controller\LogoutController.class
-com\SSE2020\WannaTry\model\Staff.class
-com\SSE2020\WannaTry\controller\PaymentsController.class
 com\SSE2020\WannaTry\service\CurrentStaffSingleton.class
 com\SSE2020\WannaTry\service\BackendRepoService.class
 com\SSE2020\WannaTry\service\ValidateRegistrationService.class

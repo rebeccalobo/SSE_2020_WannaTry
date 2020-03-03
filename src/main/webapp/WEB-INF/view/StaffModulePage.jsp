@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href='<c:url value ="/resources/css/sidebar.css"/>' type="text/css"/>
+<%--    <link rel="stylesheet" href='<c:url value ="/resources/css/sidebar.css"/>' type="text/css"/>--%>
     <title>Staff Dashboard</title>
 </head>
 <body>
-<%@include file="StaffSideBar.jsp"%>
+<%@include file="sidebar.jsp"%>
 <div class="main">
     <h1>Hello ${current_staff.staff_firstname}, Welcome to your Module Dashboard!</h1>
 </div>
