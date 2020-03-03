@@ -46,7 +46,7 @@ public class ModuleController {
     }
 
     // Delete a Note
-    @DeleteMapping("/staff/{id}")
+    @DeleteMapping("/module/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable(value = "id") String moduleId) throws ModuleNotFoundException {
         Modules modules = repoService.getModuleRepo().findById(moduleId)
                 .orElseThrow(() -> new ModuleNotFoundException(moduleId));

@@ -16,10 +16,22 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <h1>${current_user.student_firstname}s Dashboard</h1>
-    Student ID: ${current_user.student_id}
+    <h1>${current_user.student_firstname}'s Dashboard</h1>
     <br>
-    Student name: ${current_user.student_firstname} ${current_user.student_surname}
+    <br>
+    <h6>Name: ${current_user.student_firstname} ${current_user.student_surname}
+        <br>
+        ID: ${current_user.student_id}
+        <br>
+        Gender: ${current_user.gender}
+        <br>
+        Stage: ${current_user.stage}
+        <br>
+        Email: ${current_user.email}
+        <br>
+        Home Address: ${current_user.address}
+        <br>
+    </h6>
 </div>
 
 

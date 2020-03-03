@@ -1,8 +1,8 @@
 package com.SSE2020.WannaTry.controller;
 
-import com.SSE2020.WannaTry.service.BackendRepoService;
 import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Students;
+import com.SSE2020.WannaTry.service.BackendRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -46,6 +46,7 @@ public class StudentController {
         student.setPhone_number(studentDetails.getPhone_number());
         student.setPassword(studentDetails.getPassword());
 
+
         return repoService.getStudentRepo().save(student);
     }
 
@@ -59,6 +60,8 @@ public class StudentController {
 
         return ResponseEntity.ok().build();
     }
+
+
 
 
 
