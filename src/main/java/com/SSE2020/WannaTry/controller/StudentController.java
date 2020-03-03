@@ -45,8 +45,11 @@ public class StudentController {
         student.setPhone_number(studentDetails.getPhone_number());
         student.setPassword(studentDetails.getPassword());
 
+
         return repoService.getStudentRepo().save(student);
     }
+
+
 
 
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kiowa
@@ -8,11 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href='<c:url value ="/resources/css/sidebar.css"/>' type="text/css"/>
+<%--    <link rel="stylesheet" href='<x:url value ="/resources/css/sidebar.css"/>' type="text/css"/>--%>
     <title>Staff Dashboard</title>
 </head>
 <body>
-<%@include file="StaffSideBar.jsp"%>
+<%@include file="sidebar.jsp"%>
 <div class="main">
     <h1>Hello ${current_staff.staff_firstname}, Welcome to your dashboard</h1>
 </div>

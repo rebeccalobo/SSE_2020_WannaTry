@@ -12,7 +12,9 @@
 <head>
     <title>Staff Login</title>
 </head>
+
 <body>
+<%@include file="sidebar.jsp"%>
 <div class="main">
     <c:if test="${error!=null}">
         <h3>${error}</h3>
@@ -31,4 +33,5 @@
 
 
 </body>
+
 </html>
