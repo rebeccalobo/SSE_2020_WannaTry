@@ -21,5 +21,6 @@ public class StudentModuleController {
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
         return "StudentModule";
     }
-
+    //DISPLAY ALL THE STUDENTS MODULE
+    //DISPLAY AVAILABLE MODULES
 }
