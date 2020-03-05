@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.persistence.Query;
 import java.util.Optional;
 
 @Controller
@@ -65,7 +66,6 @@ public class LoginController {
         String staffId = staff.getStaff_id();
         try{
             queried_staff = repoService.getStaffRepo().findById(staffId).orElseThrow(()->new StaffNotFoundException(staffId));
-
         }catch (StaffNotFoundException s){
             model.addAttribute("error","No staff with the id :"+staffId+" found!");
             return "StaffLogin";
