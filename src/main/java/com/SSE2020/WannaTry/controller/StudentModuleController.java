@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 
 @Controller
 public class StudentModuleController {
@@ -19,6 +20,8 @@ public class StudentModuleController {
     @RequestMapping(value = "/StudentModule")
     public String goToModulePage(Model model) throws StudentNotFoundException {
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
+        ArrayList<Modules> modules = backendRepoService.getModuleRepo().getModules(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
+        model.addAttribute("modules",modules);
         return "StudentModule";
     }
     //DISPLAY ALL THE STUDENTS MODULE
