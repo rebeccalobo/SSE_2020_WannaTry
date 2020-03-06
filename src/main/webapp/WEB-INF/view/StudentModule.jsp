@@ -23,6 +23,8 @@
     </ul>
 
 </div>
+<div class="available">
+</div>
 
 
 </body>

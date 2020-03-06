@@ -1,11 +1,9 @@
 package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.exceptions.ModuleNotFoundException;
-import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
 import com.SSE2020.WannaTry.model.Modules;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import com.SSE2020.WannaTry.service.CurrentStaffSingleton;
-import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -59,9 +57,5 @@ public class ModuleController {
 
         return ResponseEntity.ok().build();
     }
-    @RequestMapping(value = "/StaffModule")
-    public String goToModulePage(Model model) {
-        model.addAttribute("current_staff", CurrentStaffSingleton.getInstance().getCurrentUser());
-        return "StaffModulePage";
-    }
+
 }

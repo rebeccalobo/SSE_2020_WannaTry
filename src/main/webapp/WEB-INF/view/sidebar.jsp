@@ -37,7 +37,7 @@
             </c:when>
             <c:when test="${current_user==null && current_staff!=null}">
                 <li><a href="StaffDashboard">Dashboard</a></li>
-                <li><a href="StaffModule">My Modules</a></li>
+                <li><a href="StaffModule">Grades And Feedback</a></li>
                 <li><a href="logout">Logout</a> </li>
             </c:when>
         </c:choose>

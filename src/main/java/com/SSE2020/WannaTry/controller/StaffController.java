@@ -1,9 +1,12 @@
 package com.SSE2020.WannaTry.controller;
 
+import com.SSE2020.WannaTry.exceptions.ModuleNotFoundException;
 import com.SSE2020.WannaTry.exceptions.StaffNotFoundException;
+import com.SSE2020.WannaTry.model.Modules;
 import com.SSE2020.WannaTry.model.Staff;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import com.SSE2020.WannaTry.service.CurrentStaffSingleton;
+import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -47,6 +52,13 @@ public class StaffController {
 
         return repoService.getStaffRepo().save(staff);
     }
+    @RequestMapping(value ="/edit_description", method = RequestMethod.POST)
+    public String editDescription(@RequestParam("description") String desc,@RequestParam("module_id")String module_id ) throws StaffNotFoundException, ModuleNotFoundException {
+        Modules modules = repoService.getModuleRepo().findById(module_id).orElseThrow(()->new ModuleNotFoundException(module_id));
+        modules.setDescription(desc);
+        repoService.getModuleRepo().save(modules);
+        return "redirect:/StaffDashboard";
+    }
 
     // Delete a Note
     @DeleteMapping("/staff/{id}")
@@ -60,7 +72,17 @@ public class StaffController {
     }
     @RequestMapping("/StaffDashboard")
     public String goToStaffDashboard(Model model){
-        model.addAttribute("current_staff", CurrentStaffSingleton.getInstance().getCurrentUser());
+        Staff current_staff = CurrentStaffSingleton.getInstance().getCurrentUser();
+        HashMap<String, ArrayList<String>> students_enroled_in_module = new HashMap<>();
+        model.addAttribute("current_staff", current_staff);
+        ArrayList<Modules> modules = repoService.getModuleRepo().getStaffModules(current_staff.getStaff_id());
+        for(Modules m : modules){
+            students_enroled_in_module.put(m.getModule_name(),
+                    repoService.getModuleRepo().getStudentsInSpecificModuleStaff(m.getModule_id(),current_staff.getStaff_id()));
+        }
+        model.addAttribute("hashmap",students_enroled_in_module);
+        model.addAttribute("modules",modules);
+        model.addAttribute("description","");
         return "staffDashboard";
     }
 

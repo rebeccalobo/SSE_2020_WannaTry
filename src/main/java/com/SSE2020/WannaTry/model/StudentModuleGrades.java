@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="student_module_grades")
 public class StudentModuleGrades {
-    @Id
+    @NotNull
     private String module_id;
     @NotNull
     private String student_id;
@@ -16,15 +16,26 @@ public class StudentModuleGrades {
     private Double percentage;
     @NotNull
     private String letter_grade;
+    @Id @NotNull
+    private String relation_id;
 
 
     public StudentModuleGrades() {
     }
-    public StudentModuleGrades(String module_id,String student_id,Double percentage,String letter_grade) {
+    public StudentModuleGrades(String relation_id,String module_id,String student_id,Double percentage,String letter_grade) {
         this.module_id=module_id;
         this.student_id=student_id;
         this.percentage=percentage;
         this.letter_grade=letter_grade;
+        this.relation_id=relation_id;
+    }
+
+    public String getRelation_id() {
+        return relation_id;
+    }
+
+    public void setRelation_id(String relation_id) {
+        this.relation_id = relation_id;
     }
 
     public String getModule_id() {

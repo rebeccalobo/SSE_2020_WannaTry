@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "module_enrolments")
 public class ModuleEnrolment {
-    @Id @GeneratedValue
-    private int relation_id;
+    @Id @NotNull
+    private String relation_id;
     @NotNull
     private String module_id;
     @NotNull
@@ -27,11 +27,11 @@ public class ModuleEnrolment {
         this.student_id = s_id;
     }
 
-    public int getRelation_id() {
+    public String getRelation_id() {
         return relation_id;
     }
 
-    public void setRelation_id(int relation_id) {
+    public void setRelation_id(String relation_id) {
         this.relation_id = relation_id;
     }
 
