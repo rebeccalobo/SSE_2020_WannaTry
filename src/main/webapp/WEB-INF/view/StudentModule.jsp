@@ -15,7 +15,13 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <h1>hello this is your module page!</h1>
+    <h1>MY MODULES</h1>
+    <ul>
+        <c:forEach items="${modules}" var="module">
+            <li>${module.module_name}</li>
+        </c:forEach>
+    </ul>
+
 </div>
 
 
