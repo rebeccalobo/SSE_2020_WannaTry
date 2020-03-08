@@ -11,4 +11,8 @@ import java.util.ArrayList;
 public interface ModuleRepository extends JpaRepository<Modules, String> {
     @Query(value= "SELECT * FROM modules as m INNER JOIN module_enrolments as en ON m.module_id = en.module_id WHERE en.student_id = ?1",nativeQuery=true)
     ArrayList<Modules> getModules(String id);
+    @Query(value= "SELECT sum(m.price) FROM modules as m INNER JOIN module_enrolments as en ON m.module_id = en.module_id\n" +
+            "\n" +
+            "WHERE en.student_id = ?1",nativeQuery=true)
+    Double getFees(String id);
 }

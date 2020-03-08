@@ -2,6 +2,7 @@ package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.exceptions.StaffNotFoundException;
 import com.SSE2020.WannaTry.exceptions.StudentNotFoundException;
+import com.SSE2020.WannaTry.model.Modules;
 import com.SSE2020.WannaTry.model.Staff;
 import com.SSE2020.WannaTry.model.Students;
 import com.SSE2020.WannaTry.service.BackendRepoService;
@@ -15,8 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.persistence.Query;
-import java.util.Optional;
+import java.util.ArrayList;
 
 @Controller
 public class LoginController {
@@ -51,6 +51,8 @@ public class LoginController {
         }
         if(queried_user.getPassword().equals(student.getPassword())) {
             model.addAttribute("current_user",queried_user);
+            ArrayList<Modules> modules = repoService.getModuleRepo().getModules(queried_user.getStudent_id());
+            model.addAttribute("modules", modules);
             CurrentUserSingleton.getInstance().setCurrentUser(queried_user);
             return "studentDashboard";
         }

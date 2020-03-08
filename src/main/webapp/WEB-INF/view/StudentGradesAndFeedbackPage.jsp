@@ -17,6 +17,11 @@
 <div class="main">
 
     <h1>hello this is your grade feedback page!</h1>
+    <ul>
+        <c:forEach items="${grades}" var="grade">
+            <li>${grade.module_id}, ${grade.percentage}, ${grade.letter_grade}</li>
+        </c:forEach>
+    </ul>
 </div>
 
 

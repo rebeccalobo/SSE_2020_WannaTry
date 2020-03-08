@@ -19,6 +19,7 @@
     <h1>${current_user.student_firstname}'s Dashboard</h1>
     <br>
     <br>
+    <h2>Your Details</h2>
     <h6>Name: ${current_user.student_firstname} ${current_user.student_surname}
         <br>
         ID: ${current_user.student_id}
@@ -32,6 +33,12 @@
         Home Address: ${current_user.address}
         <br>
     </h6>
+    <h2>Your Modules</h2>
+    <ul>
+        <c:forEach items="${modules}" var="module">
+            <li>${module.module_name}</li>
+        </c:forEach>
+    </ul>
 </div>
 
 

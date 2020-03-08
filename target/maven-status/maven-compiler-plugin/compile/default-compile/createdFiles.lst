@@ -1,5 +1,6 @@
 com\SSE2020\WannaTry\controller\GradesAndFeedbackController.class
 com\SSE2020\WannaTry\databaserepo\StaffRepository.class
+com\SSE2020\WannaTry\model\ModuleEnrolment.class
 com\SSE2020\WannaTry\controller\RegisterController.class
 com\SSE2020\WannaTry\Example.class
 com\SSE2020\WannaTry\controller\StudentModuleController.class
@@ -11,6 +12,7 @@ com\SSE2020\WannaTry\exceptions\ModuleNotFoundException.class
 com\SSE2020\WannaTry\controller\HomePageController.class
 com\SSE2020\WannaTry\exceptions\StaffNotFoundException.class
 com\SSE2020\WannaTry\model\Modules.class
+com\SSE2020\WannaTry\controller\StudentGradesController.class
 com\SSE2020\WannaTry\service\PasswordHashing.class
 com\SSE2020\WannaTry\controller\StudentDashboardController.class
 com\SSE2020\WannaTry\controller\LoginController.class
@@ -26,3 +28,4 @@ com\SSE2020\WannaTry\controller\ModuleController.class
 com\SSE2020\WannaTry\controller\LogoutController.class
 com\SSE2020\WannaTry\model\Staff.class
 com\SSE2020\WannaTry\controller\PaymentsController.class
+com\SSE2020\WannaTry\databaserepo\ModuleEnrolmentsRepository.class

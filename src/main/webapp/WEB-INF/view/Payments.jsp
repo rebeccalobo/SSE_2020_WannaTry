@@ -17,8 +17,8 @@
 <%@include file="sidebar.jsp"%>
 <div class="main">
     <h1>Hello ${current_user.student_firstname}, welcome to your payments page!</h1>
-    <h4>Your current balance is € ${current_user.amount_paid}.</h4>
-    <h6>You have € ${current_user.remainingPay()} in fees to pay.</h6>
+    <h4>You have contributed € ${current_user.amount_paid} towards your fees for this year.</h4>
+    <h6>You have € ${current_user.remainingPay(fees)} in fees remaining to pay.</h6>
 
     <form:form method = "post" action="/update_balance" modelAttribute="fees_input">
         <h6>You can pay your fees here</h6>

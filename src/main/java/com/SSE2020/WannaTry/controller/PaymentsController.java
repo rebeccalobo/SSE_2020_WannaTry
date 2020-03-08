@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-
 @Controller
 public class PaymentsController {
 
@@ -24,6 +23,8 @@ public class PaymentsController {
     public String goToPaymentPage(Model model) throws StudentNotFoundException {
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
         model.addAttribute("fees_input", "");
+        double fees = repoService.getModuleRepo().getFees(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
+        model.addAttribute("fees", fees);
         return "Payments";
     }
 
@@ -36,6 +37,8 @@ public class PaymentsController {
         repoService.getStudentRepo().save(students);
         CurrentUserSingleton.getInstance().setCurrentUser(students);
         model.addAttribute("current_user", students);
+        double fees = repoService.getModuleRepo().getFees(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
+        model.addAttribute("fees", fees);
         return "Payments";
 
 

@@ -95,8 +95,8 @@ public class Students {
     public void setStage(String stage) { this.stage = stage; }
 
 
-    public Double remainingPay() {
-        return 1000.43 - getAmount_paid();
+    public double remainingPay(double d) {
+        return d - getAmount_paid();
     }
 
 
