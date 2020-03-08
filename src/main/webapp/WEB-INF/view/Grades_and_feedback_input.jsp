@@ -1,22 +1,22 @@
-<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="a" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kiowa
   Date: 02/03/2020
-  Time: 19:14
+  Time: 18:58
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<link rel="stylesheet" href='<x:url value ="/resources/css/sidebar.css"/>' type="text/css"/>
+<link rel="stylesheet" href='<a:url value ="/resources/css/sidebar.css"/>' type="text/css"/>
     <title>Staff Dashboard</title>
 </head>
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <h1>Hello ${current_staff.staff_firstname}, Welcome to your dashboard</h1>
+    <h1>Grade input Wizard</h1>
     <ul>
         <c:forEach items="${modules}" var="module">
             <li>
@@ -24,31 +24,24 @@
                 <div class="content">
                     <ul>
                         <li>
-                            <button type="button" class="collapsible">Description</button>
-                            <div class = "content">
-                                <p>${module.description}</p>
-                                <button type="button" class="collapsible">Edit description</button>
-                                <div class="content">
-                                    <form:form method="post" action="edit_description">
-                                        <input type="text" style="height: 50px" name="description" id="description">
-                                        <input type="hidden" name="module_id" id="module_id" value="${module.module_id}">
-                                        <input type="submit">
-                                    </form:form>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <button type="button" class="collapsible">Module Duration</button>
-                            <div class = "content">
-                                <p>This module runs during the period between ${module.start_date} and ${module.end_date}</p>
-                            </div>
-                        </li>
-                        <li>
                             <button type="button" class="collapsible">Enrolled Students</button>
                             <div class = "content">
                                 <ul>
                                     <c:forEach items="${hashmap.get(module.module_name)}" var="student">
-                                        <li>${student}</li>
+                                        <li>
+                                            <button type="button" class="collapsible">${student}</button>
+                                            <div class="content">
+                                                <form:form action="submit_grade" method="post">
+                                                    <input type="hidden" id = "student" name = "student" value="${student}">
+                                                    <input type="hidden" id = "module" name = "module" value="${module.module_id}">
+                                                    <label for="Percentage">Percentage</label>
+                                                    <input type="text" name="Percentage" id="Percentage">
+                                                    <label for="Letter">Letter Grade</label>
+                                                    <input type="text" name="Letter" id="Letter">
+                                                    <input type="submit">
+                                                </form:form>
+                                            </div>
+                                        </li>
                                     </c:forEach>
                                 </ul>
                             </div>

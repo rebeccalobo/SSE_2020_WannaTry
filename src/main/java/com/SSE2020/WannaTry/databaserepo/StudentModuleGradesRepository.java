@@ -15,4 +15,7 @@ public interface StudentModuleGradesRepository extends JpaRepository<StudentModu
             "WHERE en.student_id = ?1 AND  m.end_date <= ?2 ",nativeQuery=true)
     ArrayList<StudentModuleGrades> getGrades(String id, Date d)
             ;
+    @Query(value = "REPLACE INTO wannatryschema.student_module_grades (module_id, student_id, percentage, letter_grade) value (?1,?2,?3,?4)",nativeQuery = true)
+    void updateGrade(String m_id,String s_id,String p,String l);
+
 }

@@ -19,6 +19,7 @@ com\SSE2020\WannaTry\controller\LoginController.class
 com\SSE2020\WannaTry\service\CurrentStaffSingleton.class
 com\SSE2020\WannaTry\service\BackendRepoService.class
 com\SSE2020\WannaTry\service\ValidateRegistrationService.class
+com\SSE2020\WannaTry\exceptions\StudentGradesNotFoundException.class
 com\SSE2020\WannaTry\controller\StaffController.class
 com\SSE2020\WannaTry\model\Students.class
 com\SSE2020\WannaTry\controller\StudentController.class
