@@ -5,11 +5,15 @@
   Time: 21:41
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <html>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
 <head>
+    <link rel="stylesheet" href='<f:url value ="/resources/css/Home.css?ver=<?php echo rand(111,999)?>"/>' type="text/css"/>
+    <style>
 
+    </style>
 
     <title>Wanna Try</title>
 </head>
@@ -22,9 +26,22 @@
 
     <div class="main">
 <%--        Home page things go in here!--%>
+        <div class="parallax_top"></div>
         <h1>Welcome to WannaTry University Portal</h1>
-        <p>Hello this is a paragraph </p>
+        <p> Here At Universtiy College Dublin we strive to be diverse and inclusive.
+            Our vision is to create safe and effective learning spaces for students of all backgrounds!
+        </p>
+        <div class="parallax_gender"></div>
         <div id="pie-chart-area" style="text-align: center"></div>
+        <p> Our modules are tailored to group work to ensure each student is given the oppertunity to broaded their minds
+            through multi-cultural teamwork.
+        </p>
+        <div class="parallax_gender_class"></div>
+        <p>
+            Here at UCD we boast our impressive Employability Ranking - Number 1 in Ireland and a staggering 78 worldwide!
+        </p>
+        <div class="parallax_graduates"></div>
+
 
     </div>
 
