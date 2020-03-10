@@ -34,6 +34,8 @@
         <form:input path="stage" class='input-box' placeholder='Stage'/><br><br>
         <form:input path="address" class='input-box' placeholder='Home Address'/><br><br>
         <form:input path="phone_number" class='input-box' placeholder='Phone Number'/><br><br>
+        <sub-label>Current Fees are set to €0.0</sub-label><br><br>
+        <form:input type = "hidden" path="amount_paid" class="input-box" readonly="true" value = "0.0"/><br><br>
         <input type="submit" class='button' value="Submit">
     </form:form>
 </div>

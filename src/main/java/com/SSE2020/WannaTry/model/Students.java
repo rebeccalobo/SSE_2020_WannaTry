@@ -36,7 +36,7 @@ public class Students {
         super();
     }
 
-    public Students(String id, String student_firstname, String student_surname, String email, String password, String address, String phone_number, Double amount_paid, String gender, Date dob, String stage) {
+    public Students(String id, String student_firstname, String student_surname, String email, String password, String address, String phone_number, String amount_paid, String gender, Date dob, String stage) {
         super();
         this.student_id = id;
         this.email=email;
@@ -45,7 +45,7 @@ public class Students {
         this.student_firstname = student_firstname;
         this.student_surname = student_surname;
         this.password = password;
-        this.amount_paid = amount_paid;
+        this.amount_paid = Double.parseDouble(amount_paid);
         this.gender = gender;
         this.dob = dob;
         this.stage = stage;

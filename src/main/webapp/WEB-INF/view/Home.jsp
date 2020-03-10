@@ -27,7 +27,7 @@
     <div class="main">
 <%--        Home page things go in here!--%>
         <div class="parallax_top"></div>
-        <h1>Welcome to WannaTry University Portal</h1>
+        <title-large>Springfield University School of Computer Science</title-large>
         <p> Here At the School of Computer Science we strive to be diverse and inclusive.
 
             Our vision is to create safe and effective learning spaces for students of all backgrounds!
@@ -42,11 +42,11 @@
 
             The School has over 130 postgraduate students working on the latest topics in computer science.
 
-            We host the Insight Centre for Data Analytics, the UCD Centre for Cybersecurity & Cybercrime Investigation, and the SFI Centre for Research Training in Machine Learning, amongst others.
+            We host the Insight Centre for Data Analytics, the Springfield University Centre for Cybersecurity & Cybercrime Investigation, and the SFI Centre for Research Training in Machine Learning, amongst others.
         </p>
         <div class="parallax_gender_class"></div>
         <p>
-            UCD is ranked #1 in Ireland for graduate employability and graduates from the School are in high-demand from industry.
+            SU is ranked #1 in Ireland for graduate employability and graduates from the School are in high-demand from industry.
             These industry opportunities are supported by popular internships programmes embedded within our B.Sc. and M.Sc. curricula.
         </p>
         <div class="parallax_graduates"></div>
@@ -81,7 +81,7 @@
     // set the color scale
     var color = d3.scaleOrdinal()
         .domain(data)
-        .range(["#10c500", "#0044ff", "#ffaf00", "#ff0200", "#a05d56"])
+        .range(["#8794a6","#0f7c80", "#568078",])
 
     // Compute the position of each group on the pie:
     var pie = d3.pie()
@@ -116,5 +116,6 @@
         .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
         .style("text-anchor", "middle")
         .style("font-size", 17)
+        .style("font-color","#3ddc97")
 
 </script>
