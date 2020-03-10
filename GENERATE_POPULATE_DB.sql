@@ -168,6 +168,8 @@ CREATE PROCEDURE WhileLoop()
     END$$
 DELIMITER ;
 CALL WhileLoop();
+REPLACE INTO staff
+Values("test1234",LPAD(99,8,0),"Samantha","Carter");
 
 -- GENERATE STUDENTS
 USE wannatryschema;
@@ -436,6 +438,11 @@ CREATE PROCEDURE WhileLoop()
     END$$
 DELIMITER ;
 CALL WhileLoop();
+-- --- constant staff 
+
+REPLACE INTO modules 
+values("COMP0099","Introduction to Web QA Engineering","00000099","This module revolves around testing web products and generating bug reports",'2019-11-19',360.0,'2019-09-14');
+
 drop function if exists randomStudent;
 DELIMITER $$
 CREATE FUNCTION randomStudent() returns varchar(8)
@@ -474,3 +481,22 @@ CREATE PROCEDURE WhileLoop()
     END$$
 DELIMITER ;
 CALL WhileLoop();
+DROP procedure if exists WhileLoop;
+DELIMITER $$
+CREATE Procedure WhileLoop()
+	BEGIN
+		declare x INT;
+        DECLARE S  varchar(8);
+        DECLARE R varchar(17);
+		SET X = 1;
+	REPEAT
+		SET S = randomStudent();
+		SET R = concat('COMP0099',concat("/",S));
+		REPLACE INTO module_enrolments VALUES ('COMP0099',S,R);
+		SET X = X + 1;
+    UNTIL X > 6
+    END REPEAT;
+    END$$
+DELIMITER ;
+CALL WhileLoop();
+
