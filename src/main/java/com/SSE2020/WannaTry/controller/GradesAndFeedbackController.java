@@ -41,11 +41,18 @@ public class GradesAndFeedbackController {
                 @RequestParam("Percentage")String percentage,
                 @RequestParam("Letter")String letter,
                 @RequestParam("student")String id){
+            System.out.println(m_id);
+            System.out.println(id);
+            System.out.println(percentage);
+            System.out.println(letter);
             try {
                 StudentModuleGrades studentModuleGrades = backendRepoService.getSmgRepo()
                         .findById(m_id+"/"+id).orElseThrow(()->new StudentGradesNotFoundException(m_id+"/"+id));
                 studentModuleGrades.setLetter_grade(letter);
-                studentModuleGrades.setPercentage(Double.valueOf(percentage));
+                studentModuleGrades.setPercentage(Double.parseDouble(percentage));
+                studentModuleGrades.setModule_id(m_id);
+                studentModuleGrades.setStudent_id(id);
+                studentModuleGrades.setRelation_id(m_id+"/"+id);
                 backendRepoService.getSmgRepo().save(studentModuleGrades);
             } catch (StudentGradesNotFoundException e) {
                 StudentModuleGrades studentModuleGrades = new StudentModuleGrades( m_id, id, Double.valueOf(percentage), letter,m_id+"/"+id);

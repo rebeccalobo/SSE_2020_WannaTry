@@ -17,7 +17,7 @@ public class StudentModuleGrades {
     private Double percentage;
     @NotNull
     private String letter_grade;
-    @Id @GeneratedValue
+    @Id
     private String relation_id;
 
     public StudentModuleGrades() {

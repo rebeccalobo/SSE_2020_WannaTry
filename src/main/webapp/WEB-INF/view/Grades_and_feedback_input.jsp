@@ -18,6 +18,7 @@
 <div class="main">
     <title-medium>Welcome to the <g>Grades</g> & <g>Feedback</g> wizard</title-medium>
     <div class="main-content">
+        <p>Youre Modules will be available here for grade input when the end-date has passed!</p>
       <c:forEach items="${modules}" var="module">
         <div class="main-content">
             <sub-label><g>${module.module_id}</g></sub-label><br>
@@ -26,7 +27,7 @@
             <c:forEach items="${hashmap.get(module.module_name)}" var="student">
                 <div class="content-outline">
                     <sub-label><sub-color>Student ID: </sub-color>${student}</sub-label><br>
-                    <form:form action="submit_grade" method="post" class="button-and-input">
+                    <form:form action="/submit_grade" method="post" class="button-and-input">
                         <input type="hidden" id = "student" name = "student" value="${student}">
                         <input type="hidden" id = "module" name = "module" value="${module.module_id}">
                         <input type="text" name="Percentage" id="Percentage" class='input-box' placeholder="Percentage Grade">
@@ -53,7 +54,7 @@
                                         <li>
                                             <button type="button" class="collapsible">${student}</button>
                                             <div class="content">
-                                                <form:form action="submit_grade" method="post">
+                                                <form:form action="/submit_grade" method="post">
                                                     <input type="hidden" id = "student" name = "student" value="${student}">
                                                     <input type="hidden" id = "module" name = "module" value="${module.module_id}">
                                                     <input type="text" name="Percentage" id="Percentage" class='input-box' placeholder="Percentage Grade">
