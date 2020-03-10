@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @Controller
@@ -20,20 +21,25 @@ import java.util.ArrayList;
 public class HomePageController {
     @Autowired
     BackendRepoService repoService;
-    @GetMapping(value= "/")
+    @GetMapping(value={ "/","/Home"})
     public String homePage(Model model){
-        model.addAttribute("current_user",null);
-        ArrayList<String> genders = repoService.getStudentRepo().getGenders();
-        model.addAttribute("genders",genders);
-        return "Home";
-    }
-    @GetMapping(value = "/Home")
-    public String home(Model model){
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
         model.addAttribute("current_staff", CurrentStaffSingleton.getInstance().getCurrentUser());
         ArrayList<String> genders = repoService.getStudentRepo().getGenders();
-        model.addAttribute("genders",genders);
+        HashMap<String,Integer> genderHash = new HashMap<>();
+        for(String s : genders){
+            if(genderHash.containsKey(s)){
+                genderHash.put(s,genderHash.get(s)+1);
+            }else{
+                genderHash.put(s,1);
+            }
+        }
+        model.addAttribute("genders",genderHash);
         return "Home";
     }
+//    @GetMapping(value = "/Home")
+//    public String home(Model model){
+//
+//    }
 
 }
