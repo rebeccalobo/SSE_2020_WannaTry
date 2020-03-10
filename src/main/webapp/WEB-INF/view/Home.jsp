@@ -28,19 +28,29 @@
 <%--        Home page things go in here!--%>
         <div class="parallax_top"></div>
         <h1>Welcome to WannaTry University Portal</h1>
-        <p> Here At Universtiy College Dublin we strive to be diverse and inclusive.
+        <p> Here At the School of Computer Science we strive to be diverse and inclusive.
+
             Our vision is to create safe and effective learning spaces for students of all backgrounds!
+
+
+            With over one thousand students on our Dublin campus, the UCD School of Computer Science is the largest computer science department in Ireland. We offer a 4-year BSc Honours degree in Computer Science, a range a Masters degrees for both computer science graduates and conversion students, plus a suite of 4-year Structured PhD programmes. Our courses cover the principles and practise of computer science encompassing programming, algorithm development, and data science. All of our teaching is informed by state-of-the-art research conducted within the School. In short, our programmes are Software-Focused and Research-Led
+
         </p>
         <div class="parallax_gender"></div>
         <div id="pie-chart-area" style="text-align: center"></div>
-        <p> Our modules are tailored to group work to ensure each student is given the oppertunity to broaded their minds
-            through multi-cultural teamwork.
+        <p> The School has topped the rankings for computer science research in Ireland for many years.
+
+            The School has over 130 postgraduate students working on the latest topics in computer science.
+
+            We host the Insight Centre for Data Analytics, the UCD Centre for Cybersecurity & Cybercrime Investigation, and the SFI Centre for Research Training in Machine Learning, amongst others.
         </p>
         <div class="parallax_gender_class"></div>
         <p>
-            Here at UCD we boast our impressive Employability Ranking - Number 1 in Ireland and a staggering 78 worldwide!
+            UCD is ranked #1 in Ireland for graduate employability and graduates from the School are in high-demand from industry.
+            These industry opportunities are supported by popular internships programmes embedded within our B.Sc. and M.Sc. curricula.
         </p>
         <div class="parallax_graduates"></div>
+    <p>We are a vibrant community of educators, researchers, students, staff, collaborators and friends. Join us.</p>
 
 
     </div>
