@@ -60,6 +60,7 @@
     <orderEntry type="library" name="Spring Security-5.2.1" level="project" />
     <orderEntry type="library" name="Spring Batch-2.2.6" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="d3.v5" level="application" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.2.4.RELEASE" level="project" />
@@ -131,5 +132,6 @@
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.9.5" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.19" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:d3js:5.9.7" level="project" />
   </component>
 </module>

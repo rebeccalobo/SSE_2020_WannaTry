@@ -9,15 +9,20 @@
 
     <html>
 <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <title>Wanna Try</title>
 </head>
 <body>
+
+
     <%@include file="sidebar.jsp"%><br>
+
     <div class="main">
 <%--        Home page things go in here!--%>
         <h1>Welcome to WannaTry University Portal</h1>
         <p>Hello this is a paragraph </p>
+
     </div>
 
 </body>

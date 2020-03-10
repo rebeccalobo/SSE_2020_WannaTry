@@ -32,4 +32,8 @@ public interface ModuleRepository extends JpaRepository<Modules, String> {
             "INNER JOIN module_enrolments as me on m.module_id = me.module_id\n" +
             "WHERE me.student_id != ?1 and date_add(m.start_date, INTERVAL 21 DAY) >= ?2",nativeQuery = true)
     ArrayList<Modules> getAllModulesNotEnrolledNotExpired(String id, Date date);
+
+    @Query(value = "SELECT percentage FROM student_modules_grades WHERE module_id = ?1",nativeQuery = true)
+    ArrayList<Double> getModuleSpecificGrades(String m_id);
+
 }

@@ -5,6 +5,7 @@ C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\databaserepo\StudentRepository.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\LoginController.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\Staff.java
+C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\exceptions\EnrolementNotFoundException.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\exceptions\StudentGradesNotFoundException.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\GradesAndFeedbackController.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\exceptions\ModuleNotFoundException.java

@@ -4,6 +4,7 @@ com\SSE2020\WannaTry\model\ModuleEnrolment.class
 com\SSE2020\WannaTry\controller\RegisterController.class
 com\SSE2020\WannaTry\Example.class
 com\SSE2020\WannaTry\controller\StudentModuleController.class
+com\SSE2020\WannaTry\exceptions\EnrolementNotFoundException.class
 com\SSE2020\WannaTry\databaserepo\StudentModuleGradesRepository.class
 com\SSE2020\WannaTry\databaserepo\ModuleRepository.class
 com\SSE2020\WannaTry\service\CurrentUserSingleton.class

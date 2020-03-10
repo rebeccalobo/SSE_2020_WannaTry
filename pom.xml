@@ -54,6 +54,13 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.webjars/d3js -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>d3js</artifactId>
+            <version>5.9.7</version>
+        </dependency>
+
 
     </dependencies>
     <build>
