@@ -17,9 +17,13 @@ public class StudentModuleController {
     BackendRepoService backendRepoService;
     @RequestMapping(value = "/StudentModule")
     public String goToModulePage(Model model) throws StudentNotFoundException {
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
         ArrayList<Modules> modules = backendRepoService.getModuleRepo().getModules(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
+        ArrayList<Modules> not_enorlled = backendRepoService.getModuleRepo().getAllModulesNotEnrolledNotExpired(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id(),date);
         model.addAttribute("modules",modules);
+        model.addAttribute("available_modules",not_enorlled);
         return "StudentModule";
     }
     //DISPLAY ALL THE STUDENTS MODULE
