@@ -10,27 +10,24 @@
 
 <html>
 <head>
-    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/Main.css">
+    <title>Student Login</title>
 </head>
 <body>
-<%@include file="sidebar.jsp"%>
-<div class="main">
-    <c:if test="${password_ok == false}">
-        <h3> incorrect, please try again!</h3>
-    </c:if>
-    <c:if test="${error!=null}">
-        <h3> ${error}</h3>
-    </c:if>
-
-    <form:form method="post" action="login_user" modelAttribute="user">
-        ID:<br>
-        <form:input path="student_id"/><br>
-        Password:<br>
-        <form:input path="password"/><br>
-        <input type="submit" value="Login">
-    </form:form>
-</div>
-
-
+    <%@include file="sidebar.jsp"%>
+    <div class="form-container">
+        <title-medium>Student Login</title-medium>
+        <form:form method="post" action="login_user" modelAttribute="user" class='main-content'>
+            <form:input path="student_id" class='input-box' placeholder='Student ID'/><br><br>
+            <c:if test="${error!=null}">
+                <error-text>${error}</error-text><br><br>
+            </c:if>
+            <form:input path="password" class='input-box' placeholder='Password'/><br><br>
+            <c:if test="${password_ok == false}">
+                <error-text>Incorrect password, please try again!</error-text><br><br>
+            </c:if>
+            <input type="submit" class='button' value="Login">
+        </form:form>
+    </div>
 </body>
 </html>

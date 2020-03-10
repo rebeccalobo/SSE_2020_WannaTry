@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href='<f:url value ="/resources/css/Home.css?ver=<?php echo rand(111,999)?>"/>' type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/Main.css">
     <style>
 
     </style>

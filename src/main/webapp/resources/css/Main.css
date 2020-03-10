@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300');
+
+:root {
+
+}
+
+::placeholder {
+  color: #8794a6;
+  opacity: 1;
+}
+
+body {
+    background-color: #1d222c;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+title-large {
+    color: white;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #484e57;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+
+    font-size: 50px;
+    font-family: 'Roboto Slab', serif;
+}
+
+title-medium {
+    color: white;
+    background-color: #191e27;
+
+    border-right: 1px solid #484e57;
+    border-left: 1px solid #484e57;
+    border-top: 1px solid #484e57;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+
+    font-size: 25px;
+    font-family: 'Roboto Slab', serif;
+}
+
+p {
+    color: white;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #484e57;
+    padding: 20px 20px 20px 20px;
+
+    font-size: 25px;
+    font-family: 'Roboto Slab', serif;
+}
+img {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #484e57;
+}
+
+error-text {
+    color: #ff495c;    
+    padding: 10px 10px 10px 0px;
+
+    font-size: 15px;
+    font-family: 'Roboto Slab', serif; 
+}
+
+sub-label {
+    color: white;    
+    padding: 10px 10px 10px 0px;
+
+    font-size: 15px;
+    font-family: 'Roboto Slab', serif; 
+}
+
+/* Green accent colour for inline text colour changes.  */
+g {
+    color: #3ddc97;
+}
+
+sub-color {
+    color: #8794a6;
+}
+
+/* s-b for slightly bigger text. */
+s-b {
+    font-size: 20px;
+}
+
+.input-box {
+    color: white;
+    background-color: #191e27;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #484e57;
+    padding: 10px 10px 10px 10px;
+
+    margin-right: 10px;
+
+    font-size: 15px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.main {
+    padding: 20px 20px 20px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin-left: 200px;
+    margin-right: 20px;
+}
+
+.main-content {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #484e57;
+
+    padding: 20px 20px 20px 20px;
+}
+
+.content-outline {
+    padding: 5px 5px 5px 5px;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #484e57;
+
+    margin-bottom: 5px;
+}
+
+.form-container {
+    text-decoration-color: white;
+    width: 1000px;
+    padding: 20px 20px 20px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin-left: 200px;
+    margin-right: 20px;
+}
+
+.button {
+    color: #104e40;
+    background-color: #3ddc97;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #104e40;
+    padding: 10px 10px 10px 10px;
+
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.button-and-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 10px 10px 0px 0px;
+}
+
+.button-red {
+    color: #6d1c25;
+    background-color: #ff495c;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #6d1c25;
+    padding: 10px 10px 10px 10px;
+
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.collapsible {
+    color: white;
+    background-color: #191e27;
+
+    padding: 20px 0px 20px 20px;
+    
+    border-right: 1px solid #484e57;
+    border-left: 1px solid #484e57;
+    border-top: 1px solid #484e57;
+
+    cursor: pointer;
+   
+    text-align: left;
+    outline: none;
+
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+    background-color: #374b66;
+}
+
+.content {
+    border-style: solid;
+    border-width: 1px;
+    border-color: green;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+.parallax_top{
+    /* The image used */
+    background-image: url("/resources/images/university_fancy_building.jpg");
+
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax_gender{
+    /* The image used */
+    background-image: url("/resources/images/diverse.jpg");
+
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax_gender_class{
+    /* The image used */
+    background-image: url("/resources/images/grup_work.jpg");
+
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax_graduates{
+    /* The image used */
+    background-image: url("/resources/images/graduate.jpg");
+
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

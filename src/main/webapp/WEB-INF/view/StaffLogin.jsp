@@ -10,24 +10,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Staff Login</title>
+  <link rel="stylesheet" type="text/css" href="../../resources/css/Main.css">
+  <title>Staff Login</title>
 </head>
 
 <body>
 <%@include file="sidebar.jsp"%>
-<div class="main">
-    <c:if test="${error!=null}">
-        <h3>${error}</h3>
-    </c:if>
-    <c:if test="${password_ok == false}">
-        <h3> incorrect password, please try again!</h3>
-    </c:if>
-    <form:form method="post" action="login_staff" modelAttribute="staff">
-        ID:<br>
-        <form:input path="staff_id"/><br>
-        Password:<br>
-        <form:input path="password"/><br>
-        <input type="submit" value="Login">
+<div class="form-container">    
+    <title-medium>Staff Login</title-medium>
+    <form:form method="post" action="login_staff" modelAttribute="staff" class='main-content'>
+      <form:input path="staff_id" class='input-box' placeholder='Staff ID'/><br><br>
+      <c:if test="${error!=null}">
+        <error-text>${error}</error-text><br><br>
+      </c:if>
+      <form:input path="password" class='input-box' placeholder='Password'/><br><br>
+      <c:if test="${password_ok == false}">
+        <error-text>Incorrect password, please try again!</error-text><br><br>
+      </c:if>
+      <input type="submit" class='button' value="Login">
     </form:form>
 </div>
 

@@ -9,19 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<%--    <link rel="stylesheet" href='<c:url value ="/resources/css/sidebar.css"/>' type="text/css"/>--%>
-    <title>Title</title>
+	<link rel="stylesheet" type="text/css" href="../../resources/css/Main.css">
+    <title>Student Portal - Grades</title>
 </head>
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-
-    <h1>hello this is your grade feedback page!</h1>
-    <ul>
-        <c:forEach items="${grades}" var="grade">
-            <li>${grade.module_id}, ${grade.percentage}, ${grade.letter_grade}</li>
-        </c:forEach>
-    </ul>
+    <h1>Hello this is your grade feedback page!</h1>
 </div>
 
 

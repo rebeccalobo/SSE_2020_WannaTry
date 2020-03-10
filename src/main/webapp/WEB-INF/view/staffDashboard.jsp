@@ -10,13 +10,35 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<link rel="stylesheet" href='<x:url value ="/resources/css/sidebar.css"/>' type="text/css"/>
+<link rel="stylesheet" href='<x:url value ="/resources/css/Main.css"/>' type="text/css"/>
     <title>Staff Dashboard</title>
 </head>
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <h1>Hello ${current_staff.staff_firstname}, Welcome to your dashboard</h1>
+    <title-medium>Hello <g>${current_staff.staff_firstname}</g>, welcome to your dashboard</title-medium>
+    <div class="main-content">
+      <c:forEach items="${modules}" var="module">
+        <div class="main-content">
+            <sub-label><g>${module.module_id}</g></sub-label><br>
+            <sub-label><s-b>${module.module_name}</s-b></sub-label><br><br>
+            <sub-label><g>Module Description:</g></sub-label><br>
+            <sub-label>${module.description}</sub-label><br>
+                <form:form method="post" action="edit_description" class="button-and-input">
+                    <input type="text" class="input-box" name="description" id="description" placeholder="Edit Description">
+                    <input type="hidden" name="module_id" id="module_id" value="${module.module_id}">
+                    <input type="submit"value="Submit" class="button">
+                </form:form><br>
+            <sub-label><g>Module Duration:</g></sub-label><br>
+            <sub-label><sub-color>${module.start_date} to ${module.end_date}</sub-color></sub-label><br><br>
+            <sub-label><g>Enrolled Students:</g></sub-label><br>
+            <c:forEach items="${hashmap.get(module.module_name)}" var="student">
+                <sub-label><sub-color>Student ID:</sub-color> ${student}</sub-label><br>
+            </c:forEach>
+        </div><br><br>
+      </c:forEach>
+    </div>
+    <!--
     <ul>
         <c:forEach items="${modules}" var="module">
             <li>
@@ -57,8 +79,10 @@
                 </div>
             </li>
         </c:forEach>
-    </ul>
+    </ul> /!-->
 </div>
+
+<!--
 <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
@@ -74,7 +98,7 @@
             }
         });
     }
-</script>
+</script> /!-->
 
 </body>
 </html>

@@ -10,16 +10,38 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<link rel="stylesheet" href='<a:url value ="/resources/css/sidebar.css"/>' type="text/css"/>
+    <link rel="stylesheet" href='<a:url value ="/resources/css/Main.css"/>' type="text/css"/>
     <title>Staff Dashboard</title>
 </head>
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <h1>Grade input Wizard</h1>
+    <title-medium>Welcome to the <g>Grades</g> & <g>Feedback</g> wizard</title-medium>
+    <div class="main-content">
+      <c:forEach items="${modules}" var="module">
+        <div class="main-content">
+            <sub-label><g>${module.module_id}</g></sub-label><br>
+            <sub-label><s-b>${module.module_name}</s-b></sub-label><br><br>
+            <sub-label><g>Enrolled Students:</g></sub-label><br><br>
+            <c:forEach items="${hashmap.get(module.module_name)}" var="student">
+                <div class="content-outline">
+                    <sub-label><sub-color>Student ID: </sub-color>${student}</sub-label><br>
+                    <form:form action="submit_grade" method="post" class="button-and-input">
+                        <input type="hidden" id = "student" name = "student" value="${student}">
+                        <input type="hidden" id = "module" name = "module" value="${module.module_id}">
+                        <input type="text" name="Percentage" id="Percentage" class='input-box' placeholder="Percentage Grade">
+                        <input type="text" name="Letter" id="Letter" class="input-box" placeholder="Letter Grade">
+                        <input type="submit" class='button' value="Submit">
+                    </form:form>
+                </div><br>
+            </c:forEach>
+        </div><br><br>
+      </c:forEach>
+    </div>
+
+<!--
     <ul>
         <c:forEach items="${modules}" var="module">
-            <li>
                 <button type="button" class="collapsible">${module.module_name}</button>
                 <div class="content">
                     <ul>
@@ -34,11 +56,9 @@
                                                 <form:form action="submit_grade" method="post">
                                                     <input type="hidden" id = "student" name = "student" value="${student}">
                                                     <input type="hidden" id = "module" name = "module" value="${module.module_id}">
-                                                    <label for="Percentage">Percentage</label>
-                                                    <input type="text" name="Percentage" id="Percentage">
-                                                    <label for="Letter">Letter Grade</label>
-                                                    <input type="text" name="Letter" id="Letter">
-                                                    <input type="submit">
+                                                    <input type="text" name="Percentage" id="Percentage" class='input-box' placeholder="Percentage Grade">
+                                                    <input type="text" name="Letter" id="Letter" class="input-box" placeholder="Letter Grade">
+                                                    <input type="submit" class='button'>
                                                 </form:form>
                                             </div>
                                         </li>
@@ -48,10 +68,10 @@
                         </li>
                     </ul>
                 </div>
-            </li>
         </c:forEach>
-    </ul>
+    </ul></!-->
 </div>
+<!--
 <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
@@ -68,6 +88,6 @@
         });
     }
 </script>
-
+</!-->
 </body>
 </html>

@@ -10,24 +10,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<%--    <link rel="stylesheet" href='<c:url value ="/resources/css/sidebar.css"/>' type="text/css"/>--%>
-    <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="../../resources/css/Main.css">
+  <title>Student Portal - Payments</title>
 </head>
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <h1>Hello ${current_user.student_firstname}, welcome to your payments page!</h1>
-    <h4>You have contributed € ${current_user.amount_paid} towards your fees for this year.</h4>
-    <h6>You have € ${current_user.remainingPay(fees)} in fees remaining to pay.</h6>
-
-    <form:form method = "post" action="/update_balance" modelAttribute="fees_input">
-        <h6>You can pay your fees here</h6>
-        <br>
-        <label for="fees_input"> € </label>
-        <input type="text" id="fees_input" name="fees_input"><br><br>
-        <input type="submit" value="Submit">
-    </form:form>
-
+    <title-medium>Hello <g>${current_user.student_firstname}</g>, welcome to your payments page!</title-medium>
+    <div class="main-content">
+      <sub-label>Your current balance is €<g>${current_user.amount_paid}</g>.</sub-label><br><br>
+      <sub-label>You have €<g>${current_user.remainingPay(fees)}</g> in fees left to pay.</sub-label><br><br>
+      <form:form method = "post" action="/update_balance" modelAttribute="fees_input">
+          <sub-label>You can pay your fees here:</sub-label><br><br>
+          <sub-label for="fees_input">€ </sub-label>
+          <input type="text" id="fees_input" name="fees_input" class="input-box" placeholder="Amount"><br><br>
+          <input type="submit" value="Submit" class="button">
+      </form:form>
+    </div>
 </div>
 </body>
 </html>

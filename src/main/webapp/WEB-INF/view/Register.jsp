@@ -9,42 +9,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<%--    <link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">--%>
-    <title>Register Page</title>
-
+    <link rel="stylesheet" type="text/css" href="../../resources/css/Main.css">
+    <title>Registration Page</title>
 </head>
 <body>
 
 <%@include file="sidebar.jsp" %>
-<br><br>
-<div class="main">
+<div class="form-container">
     <c:if test="${flag==true}">
-        <h3>Please ensure that you enter the correct values when registering!</h3>
+        <error-text>Please ensure that you enter the correct values when registering!</error-text>
     </c:if>
-    <br><br>
-    <form:form method="post"
-               action="save" modelAttribute="student" name="RegisterForm">
-        First name:<br>
-        <form:input path="student_firstname"/><br>
-        Last name:<br>
-        <form:input path="student_surname"/><br>
-        Email address:<br>
-        <form:input path="email"/><br><br>
-        Password:<br>
-        <form:input path="password"/><sub>Password must contain atleast 1 letter, atleast one number and be between 8-20 characters</sub><br><br>
-        Student Number:<br>
-        <form:input path="student_id"/><br><br>
-        Gender:<br>
-        <form:input path="gender"/><br><br>
-        Date of Birth:<br>
-        <form:input path="dob"/><br><sub>Must be in format YEAR-MONTH-DATE <b> e.g. 25th December 2020 -> 2020-12-25 </b></sub><br>
-        Stage:<br>
-        <form:input path="stage"/><br><sub>Stage or current year in your course. <b> e.g. Stage 4</b></sub><br>
-        Home Address:<br>
-        <form:input path="address"/><br><br>
-        Phone Number:<br>
-        <form:input path="phone_number"/><br><br>
-        <input type="submit" value="Submit">
+    <title-medium>Student Registration</title-medium>
+    <form:form method="post" action="save" modelAttribute="student" name="RegisterForm" class='main-content'>
+        <form:input path="student_firstname" class='input-box' placeholder='Name'/><br><br>
+        <form:input path="student_surname" class='input-box' placeholder='Surname'/><br><br>
+        <form:input path="email" class='input-box' placeholder='Email Address'/><br><br>
+        <sub-label>Password must contain at least 1 letter, at least 1 number and be between 8-20 characters</sub-label><br><br>
+        <form:input path="password" class='input-box' placeholder='Password'/><br><br>
+        <form:input path="student_id" class='input-box' placeholder='Student Number'/><br><br>
+        <form:input path="gender" class='input-box' placeholder='Gender'/><br><br>
+        <sub-label>Must be in format YEAR-MONTH-DATE <i>e.g. 25th December 2020 -> 2020-12-25</i></sub-label><br><br>
+        <form:input path="dob" class='input-box' placeholder='Date of Birth'/><br><br>
+        <sub-label>Stage or current year of your course. <i>e.g. Stage 4</i></sub-label><br><br>
+        <form:input path="stage" class='input-box' placeholder='Stage'/><br><br>
+        <form:input path="address" class='input-box' placeholder='Home Address'/><br><br>
+        <form:input path="phone_number" class='input-box' placeholder='Phone Number'/><br><br>
+        <input type="submit" class='button' value="Submit">
     </form:form>
 </div>
 </body>
