@@ -22,13 +22,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import java.sql.Date;
+import java.util.ArrayList;
+
 
 @Controller
 public class GradesAndFeedbackController {
     @Autowired
     BackendRepoService backendRepoService;
+
     @RequestMapping(value = "/StudentGradesAndFeedbackPage")
     public String goToGradesPage(Model model) throws StudentNotFoundException {
+        model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        ArrayList<StudentModuleGrades> grades = backendRepoService.getSmgRepo().getGrades(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id(), date);
+        model.addAttribute("grades",grades);
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
         return "StudentGradesAndFeedbackPage";
     }

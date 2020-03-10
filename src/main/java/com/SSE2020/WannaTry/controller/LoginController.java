@@ -53,6 +53,8 @@ public class LoginController {
         }
         if(queried_user.getPassword().equals(student.getPassword())) {
             model.addAttribute("current_user",queried_user);
+            ArrayList<Modules> modules = repoService.getModuleRepo().getModules(queried_user.getStudent_id());
+            model.addAttribute("modules", modules);
             CurrentUserSingleton.getInstance().setCurrentUser(queried_user);
             return "studentDashboard";
         }

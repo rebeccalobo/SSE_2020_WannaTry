@@ -30,7 +30,7 @@
                 <li><a href="Home">Home</a></li>
                 <li><a href="studentDashboard">Dashboard</a></li>
                 <li><a href="StudentGradesAndFeedbackPage">Grades</a></li>
-                <li><a href="StudentModule">Modules</a></li>
+<%--            <li><a href="StudentModule">Modules</a></li>--%>
                 <li><a href="Payments">Payments</a></li>
                 <li><a href="logout">Logout</a> </li>
                 <li><form action="unregister" class="confirmation"><input type="submit" value="delete" onclick="return confirm('Are you sure you want to unregister')"></form></li>

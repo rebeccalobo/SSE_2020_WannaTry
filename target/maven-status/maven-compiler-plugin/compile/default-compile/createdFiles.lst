@@ -12,6 +12,7 @@ com\SSE2020\WannaTry\exceptions\ModuleNotFoundException.class
 com\SSE2020\WannaTry\controller\HomePageController.class
 com\SSE2020\WannaTry\exceptions\StaffNotFoundException.class
 com\SSE2020\WannaTry\model\Modules.class
+com\SSE2020\WannaTry\controller\StudentGradesController.class
 com\SSE2020\WannaTry\service\PasswordHashing.class
 com\SSE2020\WannaTry\controller\StudentDashboardController.class
 com\SSE2020\WannaTry\controller\LoginController.class

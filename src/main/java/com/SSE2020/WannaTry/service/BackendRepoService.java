@@ -13,21 +13,15 @@ public class BackendRepoService {
     @Autowired
     ModuleRepository moduleRepository;
     @Autowired
-    ModuleEnrolmentsRepository moduleEnrolmentsRepository;
+    ModuleEnrolmentsRepository enrolRepository;
     @Autowired
-    StudentModuleGradesRepository studentModuleGradesRepository;
+    StudentModuleGradesRepository smgRepository;
     //add the other repos here
     public StaffRepository getStaffRepo() {return staffRepository; }
     public StudentRepository getStudentRepo(){
         return studentRepository;
     }
     public ModuleRepository getModuleRepo() {return moduleRepository;}
-
-    public ModuleEnrolmentsRepository getModuleEnrolmentsRepository() {
-        return moduleEnrolmentsRepository;
-    }
-
-    public StudentModuleGradesRepository getStudentModuleGradesRepository() {
-        return studentModuleGradesRepository;
-    }
+    public ModuleEnrolmentsRepository getEnrolRepo() {return enrolRepository;}
+    public StudentModuleGradesRepository getSmgRepo() {return smgRepository;}
 }
