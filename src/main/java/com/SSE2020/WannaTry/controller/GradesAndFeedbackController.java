@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.HashMap;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
 
 
@@ -48,14 +49,14 @@ public class GradesAndFeedbackController {
                 @RequestParam("Letter")String letter,
                 @RequestParam("student")String id){
             try {
-                StudentModuleGrades studentModuleGrades = backendRepoService.getStudentModuleGradesRepository()
+                StudentModuleGrades studentModuleGrades = backendRepoService.getSmgRepo()
                         .findById(m_id+"/"+id).orElseThrow(()->new StudentGradesNotFoundException(m_id+"/"+id));
                 studentModuleGrades.setLetter_grade(letter);
                 studentModuleGrades.setPercentage(Double.valueOf(percentage));
-                backendRepoService.getStudentModuleGradesRepository().save(studentModuleGrades);
+                backendRepoService.getSmgRepo().save(studentModuleGrades);
             } catch (StudentGradesNotFoundException e) {
-                StudentModuleGrades studentModuleGrades = new StudentModuleGrades(m_id+"/"+id,m_id,id,Double.valueOf(percentage),letter);
-                backendRepoService.getStudentModuleGradesRepository().save(studentModuleGrades);
+                StudentModuleGrades studentModuleGrades = new StudentModuleGrades( m_id, id, Double.valueOf(percentage), letter,m_id+"/"+id);
+                backendRepoService.getSmgRepo().save(studentModuleGrades);
                 e.printStackTrace();
             }
 

@@ -18,7 +18,7 @@ public class StudentModuleController {
     @RequestMapping(value = "/StudentModule")
     public String goToModulePage(Model model) throws StudentNotFoundException {
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
-        ArrayList<Modules> modules = backendRepoService.getModuleRepo().getStudentsModules(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
+        ArrayList<Modules> modules = backendRepoService.getModuleRepo().getModules(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
         model.addAttribute("modules",modules);
         return "StudentModule";
     }
