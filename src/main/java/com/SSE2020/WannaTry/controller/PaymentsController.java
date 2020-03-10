@@ -23,8 +23,14 @@ public class PaymentsController {
     public String goToPaymentPage(Model model) throws StudentNotFoundException {
         model.addAttribute("current_user", CurrentUserSingleton.getInstance().getCurrentUser());
         model.addAttribute("fees_input", "");
-        double fees = repoService.getModuleRepo().getFees(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
-        model.addAttribute("fees", fees);
+        try{
+            double fees = repoService.getModuleRepo().getFees(CurrentUserSingleton.getInstance().getCurrentUser().getStudent_id());
+            model.addAttribute("fees", fees);
+        }catch (NullPointerException e){
+            model.addAttribute("fees", 0.0);
+        }
+
+
         return "Payments";
     }
 

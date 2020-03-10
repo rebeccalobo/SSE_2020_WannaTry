@@ -21,10 +21,11 @@ public class ModuleEnrolment {
         super();
     }
 
-    public ModuleEnrolment(String m_id, String s_id) {
+    public ModuleEnrolment(String relation_id, String m_id, String s_id) {
         super();
         this.module_id = m_id;
         this.student_id = s_id;
+        this.relation_id = relation_id;
     }
 
     public String getRelation_id() {

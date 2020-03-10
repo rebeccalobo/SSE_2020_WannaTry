@@ -1,6 +1,9 @@
 package com.SSE2020.WannaTry.controller;
 
+import com.SSE2020.WannaTry.databaserepo.ModuleEnrolmentsRepository;
+import com.SSE2020.WannaTry.exceptions.EnrolementNotFoundException;
 import com.SSE2020.WannaTry.exceptions.ModuleNotFoundException;
+import com.SSE2020.WannaTry.model.ModuleEnrolment;
 import com.SSE2020.WannaTry.model.Modules;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import com.SSE2020.WannaTry.service.CurrentStaffSingleton;
@@ -58,4 +61,22 @@ public class ModuleController {
         return ResponseEntity.ok().build();
     }
 
+    //ENROL AND UNENROL
+    @RequestMapping(value = "/enrol",method = RequestMethod.POST)
+    public String enrol(@RequestParam("student")String student,@RequestParam("value")String module ){
+        ModuleEnrolment me = new ModuleEnrolment(module+"/"+student,module,student);
+        repoService.getEnrolRepo().save(me);
+        return "redirect:/studentDashboard";
+    }
+    @RequestMapping(value = "/un_enrol",method = RequestMethod.POST)
+    public String UnEnrol(Model model, @RequestParam("student") String student,@RequestParam("module")String module){
+        try{
+            ModuleEnrolment me = repoService.getEnrolRepo().findById(module+"/"+student).orElseThrow(()->new EnrolementNotFoundException(module+"/"+student));
+            repoService.getEnrolRepo().delete(me);
+        }catch (EnrolementNotFoundException e){
+            model.addAttribute("error",e);
+            return "error";
+        }
+        return "redirect:/studentDashboard";
+    }
 }

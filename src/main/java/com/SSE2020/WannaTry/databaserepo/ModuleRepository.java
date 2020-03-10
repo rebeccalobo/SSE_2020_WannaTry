@@ -28,4 +28,8 @@ public interface ModuleRepository extends JpaRepository<Modules, String> {
             "WHERE en.student_id = ?1",nativeQuery=true)
     Double getFees(String id);
 
+    @Query(value = "SELECT DISTINCT m.* FROM modules as m \n" +
+            "INNER JOIN module_enrolments as me on m.module_id = me.module_id\n" +
+            "WHERE me.student_id != ?1 and date_add(m.start_date, INTERVAL 21 DAY) >= ?2",nativeQuery = true)
+    ArrayList<Modules> getAllModulesNotEnrolledNotExpired(String id, Date date);
 }

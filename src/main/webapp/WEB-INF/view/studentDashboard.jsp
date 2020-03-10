@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -36,7 +37,13 @@
     <h2>Your Modules</h2>
     <ul>
         <c:forEach items="${modules}" var="module">
-            <li>${module.module_name}</li>
+            <li>${module.module_name}
+                <form:form action="/un_enrol" method="post">
+                    <input type="hidden" id = "student" name = "student" value="${current_user.student_id}">
+                    <input type="hidden" id = "module" name = "module" value="${module.module_id}">
+                    <input type="submit" value="Un-Enrol">
+                </form:form>
+            </li>
         </c:forEach>
     </ul>
 </div>
