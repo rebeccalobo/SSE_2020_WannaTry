@@ -47,7 +47,9 @@ public class RegisterController {
     @GetMapping("/unregister")
     public String deleteBook(){
         repoService.getStudentRepo().delete(CurrentUserSingleton.getInstance().getCurrentUser());
+
         CurrentUserSingleton.getInstance().setCurrentUser(null);
+
         return "Home";
     }
 }

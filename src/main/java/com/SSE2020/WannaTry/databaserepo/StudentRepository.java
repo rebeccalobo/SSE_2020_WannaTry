@@ -16,4 +16,6 @@ import java.util.ArrayList;
 public interface StudentRepository extends JpaRepository<Students, String> {
     @Query(value = "SELECT gender from wannatryschema.students",nativeQuery = true)
     ArrayList<String> getGenders();
+//    @Query(value = "DELETE from wannatryschema.students where student_id = ?1;DELETE from wannatryschema.module_enrolments where student_id = ?1;DELETE from wannatryschema.student_module_grades where student_id = ?1;",nativeQuery = true)
+//    ArrayList<String> deleteStudent(String id);
 }

@@ -97,7 +97,8 @@ CREATE TABLE IF NOT EXISTS `wannatryschema`.`module_enrolments` (
     REFERENCES `wannatryschema`.`modules` (`module_id`),
   CONSTRAINT `student_id`
     FOREIGN KEY (`student_id`)
-    REFERENCES `wannatryschema`.`students` (`student_id`))
+    REFERENCES `wannatryschema`.`students` (`student_id`)
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 94663705
 DEFAULT CHARACTER SET = utf8;
@@ -122,7 +123,8 @@ CREATE TABLE IF NOT EXISTS `wannatryschema`.`student_module_grades` (
     REFERENCES `wannatryschema`.`modules` (`module_id`),
   CONSTRAINT `student`
     FOREIGN KEY (`student_id`)
-    REFERENCES `wannatryschema`.`students` (`student_id`))
+    REFERENCES `wannatryschema`.`students` (`student_id`)
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

@@ -15,9 +15,23 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <h1>Hello this is your grade feedback page!</h1>
+    <title-medium>My <g>Grades</g> & <g>Feedback</g> area</title-medium>
+    <div class="main-content">
+    	<sub-label>Module grades will appear below once the module has been <g>completed</g> (<i>i.e. when its end date has passed</i>)</sub-label><br><br>
+	    <c:forEach items="${modules}" var="module">
+	        <div class="main-content">
+	            <sub-label><g>${module.module_id}</g></sub-label><br>
+	            <sub-label><s-b>${module.module_name}</s-b></sub-label><br><br>
+	            <sub-label><g>Grade %:</g></sub-label><br>
+	            <sub-label><g>69</g></sub-label><br>
+	            <sub-label>Letter Grade:</sub-label><br>
+	            <sub-label><g>69</g></sub-label><br>
+	        </div><br>
+		</c:forEach>
+  </div>
 </div>
 
+<div class="available"></div>
 
 </body>
 </html>

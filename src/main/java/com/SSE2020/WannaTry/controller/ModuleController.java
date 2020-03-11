@@ -63,7 +63,7 @@ public class ModuleController {
 
     //ENROL AND UNENROL
     @RequestMapping(value = "/enrol",method = RequestMethod.POST)
-    public String enrol(@RequestParam("student")String student,@RequestParam("value")String module ){
+    public String enrol(@RequestParam("student")String student,@RequestParam("module")String module ){
         ModuleEnrolment me = new ModuleEnrolment(module+"/"+student,module,student);
         repoService.getEnrolRepo().save(me);
         return "redirect:/studentDashboard";
@@ -73,6 +73,7 @@ public class ModuleController {
         try{
             ModuleEnrolment me = repoService.getEnrolRepo().findById(module+"/"+student).orElseThrow(()->new EnrolementNotFoundException(module+"/"+student));
             repoService.getEnrolRepo().delete(me);
+
         }catch (EnrolementNotFoundException e){
             model.addAttribute("error",e);
             return "error";

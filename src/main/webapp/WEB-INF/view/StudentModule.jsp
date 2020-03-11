@@ -24,7 +24,33 @@
             <sub-label><g>Module Description:</g></sub-label><br>
             <sub-label>${module.description}</sub-label><br><br>
             <sub-label><g>Module Duration:</g></sub-label><br>
-            <sub-label><sub-color>${module.start_date} to ${module.end_date}</sub-color></sub-label>
+            <sub-label><sub-color>${module.start_date} to ${module.end_date}</sub-color></sub-label><br><br>
+            <form method="post" action="un_enrol" modelAttribute="student" class="confirmation">
+              <input  type="hidden" id = "student_unEnrol" name = "student" value="${current_user.student_id}"/>
+              <input  type="hidden" id = "module_UnEnrol" name = "module" value="${module.module_id}"/>
+              <input type="submit" value="Unenrol / Drop" onclick="return confirm('Are you sure you want to drop this module?')" class="button-red">
+            </form>
+          </div><br>
+      </c:forEach>
+    </div>
+  </div><br><br>
+
+  <div class="main">
+    <title-medium>Available Modules</title-medium>
+    <div class="main-content">
+      <c:forEach items="${available_modules}" var="module">
+        <div class="main-content">
+            <sub-label><g>${module.module_id}</g></sub-label><br>
+            <sub-label><s-b>${module.module_name}</s-b></sub-label><br><br>
+            <sub-label><g>Module Description:</g></sub-label><br>
+            <sub-label>${module.description}</sub-label><br><br>
+            <sub-label><g>Module Duration:</g></sub-label><br>
+            <sub-label><sub-color>${module.start_date} to ${module.end_date}</sub-color></sub-label><br><br>
+            <form method="post" action="enrol" modelAttribute="student" class="confirmation">
+              <input  type="hidden" id = "student" name = "student" value="${current_user.student_id}"/>
+              <input  type="hidden" id = "module" name = "module" value="${module.module_id}"/>
+              <input type="submit" value="Enrol" onclick="return confirm('Are you sure you want to enrol into this module?')" class="button">
+            </form>
           </div><br>
       </c:forEach>
     </div>
