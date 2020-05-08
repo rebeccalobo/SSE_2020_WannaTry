@@ -17,12 +17,12 @@
     <%@include file="sidebar.jsp"%>
     <div class="form-container">
         <title-medium>Student Login</title-medium>
-        <form:form method="post" action="login_user" modelAttribute="user" class='main-content'>
-            <form:input path="student_id" class='input-box' placeholder='Student ID'/><br><br>
+        <form:form method="post"  class='main-content'>
+            <input type ="number" class='input-box' placeholder='Student ID' name="id" min="0" max ="2147483647"><br><br>
             <c:if test="${error!=null}">
                 <error-text>${error}</error-text><br><br>
             </c:if>
-            <form:input path="password" class='input-box' placeholder='Password'/><br><br>
+            <input path="password" class='input-box' placeholder='Password' name="pwd"/><br><br>
             <c:if test="${password_ok == false}">
                 <error-text>Incorrect password, please try again!</error-text><br><br>
             </c:if>

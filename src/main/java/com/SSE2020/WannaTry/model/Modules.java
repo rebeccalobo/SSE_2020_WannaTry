@@ -1,12 +1,11 @@
 package com.SSE2020.WannaTry.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "modules")

@@ -11,7 +11,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
-<head>  <link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css"></head>
+<head>  <link rel="stylesheet" type="text/css" href="../../resources/css/sidebar.css">
+    <title>Springfield University</title></head>
 <body>
 <script type = "text/javascript">
 
@@ -19,25 +20,18 @@
 <div class="sidebar">
     <ul>
         <c:choose>
-            <c:when test="${current_user==null && current_staff==null}">
-                <a href="/">Home</a>
+            <c:when test="${flag == true}">
+                <a href="">Home</a>
                 <a href="Register">Register</a>
-                <a href="Login">Student Login</a>
-                <a href="StaffLogin">Staff Login</a>
+                <a href="Login">Login</a>
                 </c:when>
-            <c:when test="${current_user!=null && current_staff==null}">
+            <c:otherwise>
                 <a href="Home">Home</a>
-                <a href="studentDashboard">Dashboard</a>
-                <a href="StudentGradesAndFeedbackPage">Grades</a>
+                <a href="Dashboard">Dashboard</a>
+                <a href="grades">Grades</a>
                 <a href="StudentModule">Modules</a>
-                <a href="Payments">Payments</a>
                 <a href="logout">Logout</a>
-            </c:when>
-            <c:when test="${current_user==null && current_staff!=null}">
-                <a href="StaffDashboard">Dashboard</a>
-                <a href="StaffModule">Grades And Feedback</a>
-                <a href="logout">Logout</a>
-            </c:when>
+            </c:otherwise>
         </c:choose>
     </ul>
 </div>

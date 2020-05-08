@@ -1,40 +1,37 @@
 package com.SSE2020.WannaTry.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "module_enrolments")
+@Table(name = "module_enrolement")
 public class ModuleEnrolment {
-    @Id @NotNull
-    private String relation_id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @NotNull
     private String module_id;
     @NotNull
-    private String student_id;
+    private long student_id;
 
     public ModuleEnrolment() {
         super();
     }
 
-    public ModuleEnrolment(String relation_id, String m_id, String s_id) {
+    public ModuleEnrolment(String m_id, long s_id) {
         super();
         this.module_id = m_id;
         this.student_id = s_id;
-        this.relation_id = relation_id;
+
     }
 
-    public String getRelation_id() {
-        return relation_id;
+    public int getRelation_id() {
+        return id;
     }
 
-    public void setRelation_id(String relation_id) {
-        this.relation_id = relation_id;
-    }
+
 
     public String getModule_id() {
         return module_id;
@@ -44,11 +41,11 @@ public class ModuleEnrolment {
         this.module_id = module_id;
     }
 
-    public String getStudent_id() {
+    public long getStudent_id() {
         return student_id;
     }
 
-    public void setStudent_id(String student_id) {
+    public void setStudent_id(long student_id) {
         this.student_id = student_id;
     }
 }

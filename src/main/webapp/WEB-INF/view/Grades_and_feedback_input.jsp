@@ -26,7 +26,7 @@
             <c:forEach items="${hashmap.get(module.module_name)}" var="student">
                 <div class="content-outline">
                     <sub-label><sub-color>Student ID: </sub-color>${student}</sub-label><br>
-                    <form:form action="submit_grade" method="post" class="button-and-input">
+                    <form:form action="submit_grade" method="post" class="button-and-input" modelAttribute="">
                         <input type="hidden" id = "student" name = "student" value="${student}">
                         <input type="hidden" id = "module" name = "module" value="${module.module_id}">
                         <input type="text" name="Percentage" id="Percentage" class='input-box' placeholder="Percentage Grade">

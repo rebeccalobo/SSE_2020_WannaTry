@@ -6,22 +6,37 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BackendRepoService {
-    @Autowired
-    StudentRepository studentRepository;
-    @Autowired
-    StaffRepository staffRepository;
+
+
     @Autowired
     ModuleRepository moduleRepository;
     @Autowired
     ModuleEnrolmentsRepository enrolRepository;
     @Autowired
-    StudentModuleGradesRepository smgRepository;
+    GradesRepository smgRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    RoleRepository roleRepository;
+    @Autowired
+    PrivilegeRepository privilegeRepository;
     //add the other repos here
-    public StaffRepository getStaffRepo() {return staffRepository; }
-    public StudentRepository getStudentRepo(){
-        return studentRepository;
-    }
+
     public ModuleRepository getModuleRepo() {return moduleRepository;}
     public ModuleEnrolmentsRepository getEnrolRepo() {return enrolRepository;}
-    public StudentModuleGradesRepository getSmgRepo() {return smgRepository;}
+    public GradesRepository getSmgRepo() {return smgRepository;}
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public RoleRepository getRoleRepository() {
+        return roleRepository;
+    }
+
+    public PrivilegeRepository getPrivilegeRepository() {
+        return privilegeRepository;
+    }
+
+
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ModuleEnrolmentsRepository extends JpaRepository<ModuleEnrolment, String> {
+public interface ModuleEnrolmentsRepository extends JpaRepository<ModuleEnrolment, Integer> {
 }

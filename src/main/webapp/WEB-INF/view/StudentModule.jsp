@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,11 +26,11 @@
             <sub-label>${module.description}</sub-label><br><br>
             <sub-label><g>Module Duration:</g></sub-label><br>
             <sub-label><sub-color>${module.start_date} to ${module.end_date}</sub-color></sub-label><br><br>
-            <form method="post" action="un_enrol" modelAttribute="student" class="confirmation">
-              <input  type="hidden" id = "student_unEnrol" name = "student" value="${current_user.student_id}"/>
+            <form:form method="post" action="un_enrol" class="confirmation">
+              <input  type="hidden" id = "student_unEnrol" name = "student" value="${current_user.ID}"/>
               <input  type="hidden" id = "module_UnEnrol" name = "module" value="${module.module_id}"/>
-              <input type="submit" value="Unenrol / Drop" onclick="return confirm('Are you sure you want to drop this module?')" class="button-red">
-            </form>
+              <input type="submit" value="Un-enrol / Drop" onclick="return confirm('Are you sure you want to drop this module?')" class="button-red">
+            </form:form>
           </div><br>
       </c:forEach>
     </div>
@@ -46,11 +47,11 @@
             <sub-label>${module.description}</sub-label><br><br>
             <sub-label><g>Module Duration:</g></sub-label><br>
             <sub-label><sub-color>${module.start_date} to ${module.end_date}</sub-color></sub-label><br><br>
-            <form method="post" action="enrol" modelAttribute="student" class="confirmation">
-              <input  type="hidden" id = "student" name = "student" value="${current_user.student_id}"/>
-              <input  type="hidden" id = "module" name = "module" value="${module.module_id}"/>
-              <input type="submit" value="Enrol" onclick="return confirm('Are you sure you want to enrol into this module?')" class="button">
-            </form>
+            <form:form method="post" action="enrol"  class="confirmation">
+                <input  type="hidden" id = "module" name = "module" value="${module.module_id}"/>
+                <input type="submit" value="Enrol" onclick="return confirm('Are you sure you want to enrol into this module?')" class="button">
+
+            </form:form>
           </div><br>
       </c:forEach>
     </div>

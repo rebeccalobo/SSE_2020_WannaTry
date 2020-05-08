@@ -16,7 +16,7 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <title-medium>Hello <g>${current_staff.staff_firstname}</g>, welcome to your dashboard</title-medium>
+    <title-medium>Hello <g>${current_user.FName}</g>, welcome to your dashboard</title-medium>
     <div class="main-content">
       <c:forEach items="${modules}" var="module">
         <div class="main-content">

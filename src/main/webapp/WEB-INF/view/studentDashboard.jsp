@@ -15,12 +15,11 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <title-medium><g>${current_user.student_firstname}</g>'s Dashboard</title-medium>
+    <title-medium><g>${current_user.FName}</g>'s Dashboard</title-medium>
     <div class="main-content">
-      <sub-label>Full Name: <g>${current_user.student_firstname} ${current_user.student_surname}</g></sub-label><br><br>
-      <sub-label>Student ID: <g>${current_user.student_id}</g></sub-label><br><br>
+      <sub-label>Full Name: <g>${current_user.FName} ${current_user.LName}</g></sub-label><br><br>
+      <sub-label>Student ID: <g>${current_user.ID}</g></sub-label><br><br>
       <sub-label>Gender: <g>${current_user.gender}</g></sub-label><br><br>
-      <sub-label>Stage: <g>${current_user.stage}</g></sub-label><br><br>
       <sub-label>Email Address: <g>${current_user.email}</g></sub-label><br><br>
       <sub-label>Home Address: <g>${current_user.address}</g></sub-label><br><br>
     </div><br><br>
