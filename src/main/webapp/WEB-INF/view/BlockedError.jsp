@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>ERROR</title>
 </head>
 <body>
+    <H1>IP BLOCKED</H1>
 
+    <p>This IP has been blocked due to multiple failed login attempts<br>Please contact help.@wannatry.come for more information</p>
 </body>
 </html>

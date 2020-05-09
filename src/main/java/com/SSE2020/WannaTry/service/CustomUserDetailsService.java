@@ -27,13 +27,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public CustomUserDetails loadUserByUsername(String username){
+    public CustomUserDetails loadUserByUsername(String username) {
         Optional<User> opt = userRepository.findById(Integer.valueOf(username));
+
         try {
             opt.orElseThrow(()->new UserNotFoundException(username));
         } catch (UserNotFoundException e) {
             e.printStackTrace();
         }
+
         return opt.map(CustomUserDetails::new).get();
     }
 

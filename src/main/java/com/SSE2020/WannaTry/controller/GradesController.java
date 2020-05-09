@@ -1,10 +1,7 @@
 package com.SSE2020.WannaTry.controller;
 
-import com.SSE2020.WannaTry.exceptions.StudentGradesNotFoundException;
 import com.SSE2020.WannaTry.model.*;
 import com.SSE2020.WannaTry.service.BackendRepoService;
-import com.SSE2020.WannaTry.service.CurrentStaffSingleton;
-import com.SSE2020.WannaTry.service.CurrentUserSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.swing.text.html.Option;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;

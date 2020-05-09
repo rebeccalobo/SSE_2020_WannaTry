@@ -9,7 +9,7 @@ import java.util.Collection;
 public class Privilege {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @NotNull
     private String name;

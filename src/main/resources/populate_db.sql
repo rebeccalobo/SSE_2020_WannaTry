@@ -8,6 +8,15 @@ CREATE TABLE if not exists `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
 
+-- login attempt table --
+CREATE TABLE `wannatryschema`.`failed_attempts` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `IP_ADDRESS` VARCHAR(15) NOT NULL,
+  `ATTEMPTS` INT NOT NULL,
+  `LAST_ATTEMPT` DATETIME NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `IP_ADDRESS_UNIQUE` (`IP_ADDRESS` ASC) VISIBLE);
+  
 -- PRIVILEGE TABLE --
 CREATE TABLE if not exists `priveleges` (
   `id` int NOT NULL UNIQUE,

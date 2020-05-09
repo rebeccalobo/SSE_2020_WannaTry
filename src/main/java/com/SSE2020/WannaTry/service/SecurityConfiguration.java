@@ -49,13 +49,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/editDescription").hasAnyRole("ADMIN","STAFF")
                     .antMatchers("/Dashboard","/StudentModule","/grades","/enrol","/un_enrol").hasAnyRole("ADMIN","STAFF","STUDENT")
-                    .antMatchers("/","/Home","**/Register","**/resources/**","**/save","/Login","/login_user").permitAll()
+                    .antMatchers("/","/Home","**/Register","**/resources/**","**/save","/Login","/login_user","/LoginFailed","/blocked").permitAll()
                     .and()
                 .formLogin()
                     .loginPage("/Login")
                     .usernameParameter("id").passwordParameter("pwd")
-                    .defaultSuccessUrl("/LoginSuccess",true)
-                    .failureForwardUrl("/error")
+                    .defaultSuccessUrl("/LoginSuccess",true).failureUrl("/LoginFailed")
+                    .failureForwardUrl("/LoginFailed")
                     .permitAll()
                     .and()
                 .logout()
@@ -84,6 +84,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         return daoAuthenticationProvider;
     }
-
+    //EXCEPTION HANDLERS
+    @ExceptionHandler(UserNotFoundException.class)
+    public String handleUserNotFound(UserNotFoundException ex, Model model){
+        return "redirect:/LoginFailed";
+    }
 
 }
