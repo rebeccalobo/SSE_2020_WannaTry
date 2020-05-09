@@ -1,12 +1,14 @@
 package com.SSE2020.WannaTry.controller;
 
 
+import com.SSE2020.WannaTry.exceptions.UserNotFoundException;
 import com.SSE2020.WannaTry.model.CustomUserDetails;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -31,9 +33,16 @@ public class HomePageController {
         return "Home";
     }
     @GetMapping(value = "/error")
-    public String error(){
+    public String error(Model model){
+        model.addAttribute("flag",true);
         return "error";
     }
 
-
+    //EXCEPTION HANDLERS
+    @ExceptionHandler(UserNotFoundException.class)
+    public String handleUserNotFound(UserNotFoundException ex, Model model){
+        model.addAttribute("error_found","User not found");
+        model.addAttribute("flag",true);
+        return "redirect:/error";
+    }
 }

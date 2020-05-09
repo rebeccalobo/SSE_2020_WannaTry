@@ -49,12 +49,13 @@ public class SetUpDataLoader implements ApplicationListener<ContextRefreshedEven
 
         Role adminRole = roleRepository.findByName("ROLE_ADMIN");
         User user = new User();
+        user.setID(16343961);
         user.setFName("Kiowa");
         user.setLName("Daly");
         user.setAddress("17 Cherryfield, Arklow");
         user.setEmail("kiowa.daly@ucdconnect.ie");
         user.setDOB(new Date(1997-12-23));
-        user.setPassword(passwordEncoder.encode("TEST123"));
+        user.setPassword(passwordEncoder.encode("ADMIN123"));
         user.setGender('M');
         user.setEthnicity("White");
         user.setRoles(Arrays.asList(adminRole));

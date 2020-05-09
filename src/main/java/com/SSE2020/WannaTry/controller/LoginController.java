@@ -30,6 +30,7 @@ public class LoginController {
         model.addAttribute("user",user);
         return "Login";
     }
+
     @GetMapping(value = "/LoginSuccess")
     public String redirectToDashBoard(HttpSession session){
         session.setMaxInactiveInterval(120);

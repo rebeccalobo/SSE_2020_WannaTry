@@ -1,6 +1,10 @@
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 <%@ page import="com.SSE2020.WannaTry.model.CustomUserDetails" %>
-<%@ page import="com.SSE2020.WannaTry.model.User" %><%--
+<%@ page import="com.SSE2020.WannaTry.model.User" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
+
+<%--
   Created by IntelliJ IDEA.
   User: kiowa
   Date: 23/04/2020
@@ -19,13 +23,8 @@
 <div class ="form-container">
     <h1>Looks like there was an error </h1>
     <p>
-        <%
-            String originalUri = (String) request.getAttribute(RequestDispatcher.FORWARD_REQUEST_URI);
-            out.println("Error trying to reach : "+originalUri);
-            CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User myUser = user.getUser();
-            out.println("\n"+myUser.getFName());
-        %>
+        An error has occurred.<br><br>
+        <c:out value="${error_found}"/>
     </p>
 
 

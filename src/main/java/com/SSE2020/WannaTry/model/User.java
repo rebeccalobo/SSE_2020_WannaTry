@@ -14,8 +14,7 @@ public class User implements Serializable {
     //region Instance Variables
     @Id
     @NotNull
-    @Column(name = "ID")
-    private long ID;
+    private int id;
     @NotNull
     private String FName;
     @NotNull
@@ -50,7 +49,7 @@ public class User implements Serializable {
 
     }
     public User(User user){
-        this.ID = getID();
+        this.id = getID();
         this.FName = getFName();
         this.LName = getLName();
         this.email = getEmail();
@@ -64,12 +63,12 @@ public class User implements Serializable {
 
     }
     //region ID Getter
-    public long getID() {
-        return ID;
+    public int getID() {
+        return id;
     }
     //endregion
-    public void setID(long id){
-        this.ID = id;
+    public void setID(int id){
+        this.id = id;
     }
 
     //region Name getters and setters

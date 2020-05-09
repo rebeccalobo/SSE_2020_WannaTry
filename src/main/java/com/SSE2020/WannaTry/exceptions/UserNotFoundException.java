@@ -5,4 +5,5 @@ public class UserNotFoundException extends Exception {
     public UserNotFoundException(String student_id){
         super(String.format("No student was found with id: %s", student_id));
     }
+
 }
