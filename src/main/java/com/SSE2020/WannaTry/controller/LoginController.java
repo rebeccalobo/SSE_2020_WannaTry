@@ -61,7 +61,9 @@ public class LoginController {
     @PostMapping(value="/LoginFailed")
     public String handleFailedLogin(HttpServletRequest request,Model model){
         String ip = request.getRemoteAddr();
-
+        if(isBlackListed(ip)){
+            return "redirect:/blocked";
+        }
 
 
 
@@ -84,7 +86,7 @@ public class LoginController {
         model.addAttribute("flag",true);
         model.addAttribute("user",user);
         model.addAttribute("failed_attempt",true);
-        return "/Home";
+        return "redirect:/Login";
     }
 
     private boolean isBlackListed(String IP){

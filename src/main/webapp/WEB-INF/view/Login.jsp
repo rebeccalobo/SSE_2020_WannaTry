@@ -15,8 +15,10 @@
 </head>
 <body>
     <%@include file="sidebar.jsp"%>
+
     <div class="form-container">
         <title-medium>Student Login</title-medium>
+        <c:if test="${failed_attempt == true}"><p>Username or password incorrect</p>p</c:if>
         <form:form method="post"  class='main-content'>
             <input type ="number" class='input-box' placeholder='Student ID' name="id" min="0" max ="2147483647"><br><br>
             <c:if test="${error!=null}">
