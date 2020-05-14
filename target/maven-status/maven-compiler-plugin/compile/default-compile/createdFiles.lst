@@ -21,7 +21,6 @@ com\SSE2020\WannaTry\service\IDGenerator.class
 com\SSE2020\WannaTry\service\BackendRepoService.class
 com\SSE2020\WannaTry\databaserepo\PrivilegeRepository.class
 com\SSE2020\WannaTry\service\WannaTryUserDetailsService.class
-com\SSE2020\WannaTry\model\BLACKLIST.class
 com\SSE2020\WannaTry\service\ValidateRegistrationService.class
 com\SSE2020\WannaTry\exceptions\StudentGradesNotFoundException.class
 com\SSE2020\WannaTry\model\Grades.class
@@ -39,6 +38,7 @@ com\SSE2020\WannaTry\model\FailedAttempts.class
 com\SSE2020\WannaTry\databaserepo\RoleRepository.class
 com\SSE2020\WannaTry\service\SecurityConfiguration.class
 com\SSE2020\WannaTry\exceptions\BlockedIPException.class
+com\SSE2020\WannaTry\model\IP_Blacklist.class
 com\SSE2020\WannaTry\databaserepo\BlacklistRepository.class
 com\SSE2020\WannaTry\databaserepo\ModuleEnrolmentsRepository.class
 com\SSE2020\WannaTry\model\CustomUserDetails.class

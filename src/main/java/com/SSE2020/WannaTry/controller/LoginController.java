@@ -2,11 +2,13 @@ package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.databaserepo.BlacklistRepository;
 import com.SSE2020.WannaTry.databaserepo.LoginAttemptRepository;
-import com.SSE2020.WannaTry.model.BLACKLIST;
+import com.SSE2020.WannaTry.model.IP_Blacklist;
 import com.SSE2020.WannaTry.model.FailedAttempts;
 import com.SSE2020.WannaTry.model.User;
 import com.SSE2020.WannaTry.service.BackendRepoService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +35,7 @@ public class LoginController {
     @Autowired
     PasswordEncoder passwordEncoder;
     private final int MAX_ATTEMPTS = 5;
+    private static Logger log = Logger.getLogger(LoginController.class);
 
     @GetMapping(value = "/blocked")
     public String routeToBlockedPage(){
@@ -41,14 +44,14 @@ public class LoginController {
 
     @RequestMapping(value = "/Login",method = RequestMethod.GET)
     public String showLoginPage(Model model,HttpServletRequest request){
-        if(isBlackListed(request.getRemoteAddr())){
+        if (!isBlackListed(request.getRemoteAddr())) {
+            User user = new User();
+            model.addAttribute("flag",true);
+            model.addAttribute("user",user);
+            return "Login";
+        } else {
             return "redirect:/blocked";
         }
-
-        User user = new User();
-        model.addAttribute("flag",true);
-        model.addAttribute("user",user);
-        return "Login";
     }
 
     @GetMapping(value = "/LoginSuccess")
@@ -64,35 +67,42 @@ public class LoginController {
         if(isBlackListed(ip)){
             return "redirect:/blocked";
         }
+        else{
+            Optional<FailedAttempts> optAttempt = loginAttemptRepository.findById(ip);
+            if(optAttempt.isPresent()){
 
-
-
-        Optional<FailedAttempts> optAttempt = loginAttemptRepository.findById(ip);
-        if(optAttempt.isPresent()){
-
-            FailedAttempts failedAttempts = optAttempt.get();
-            int attempts = failedAttempts.getATTEMPTS() + 1;
-            if(attempts >=MAX_ATTEMPTS){
-                blockIP(failedAttempts.getIP_ADDRESS());
-                return "redirect:/blocked";
+                FailedAttempts failedAttempts = optAttempt.get();
+                int attempts = failedAttempts.getATTEMPTS() + 1;
+                if(attempts >=MAX_ATTEMPTS){
+                    blockIP(failedAttempts.getIP_ADDRESS());
+                    SecurityContextHolder.clearContext();
+                    HttpSession session = request.getSession();
+                    session.invalidate();
+                    return "redirect:/blocked";
+                }
+                loginAttemptRepository.updateAttempt(ip,attempts,new Date());
+            }else{
+                Date date = new Date();
+                FailedAttempts failedAttempts = new FailedAttempts(ip,1,date);
+                loginAttemptRepository.save(failedAttempts);
             }
-            loginAttemptRepository.updateAttempt(ip,attempts,new Date());
-        }else{
-            Date date = new Date();
-            FailedAttempts failedAttempts = new FailedAttempts(ip,1,date);
-            loginAttemptRepository.save(failedAttempts);
+            User user = new User();
+            model.addAttribute("flag",true);
+            model.addAttribute("user",user);
+            model.addAttribute("failed_attempt",true);
+            return "/Login";
         }
-        User user = new User();
-        model.addAttribute("flag",true);
-        model.addAttribute("user",user);
-        model.addAttribute("failed_attempt",true);
-        return "redirect:/Login";
+
+
     }
 
     private boolean isBlackListed(String IP){
-        Optional<BLACKLIST> blacklistedIP = blacklistRepository.findById(IP);
+        log.info("checking if ip is blocked");
+        Optional<IP_Blacklist> blacklistedIP = blacklistRepository.findById(IP);
         if(blacklistedIP.isPresent()){
-            return true;
+            if(blacklistedIP.get().getIP_ADDRESS().equals(IP)){
+                return true;
+            }
         }
         return false;
     }

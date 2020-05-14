@@ -30,12 +30,12 @@ C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\service\BackendRepoService.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\LogoutController.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\service\IDGenerator.java
-C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\BLACKLIST.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\service\Configuration.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\exceptions\StaffNotFoundException.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\Grades.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\StudentGradesController.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\HomePageController.java
+C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\IP_Blacklist.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\service\SecurityConfiguration.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\service\MyAuthenticationRequest.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\Modules.java
