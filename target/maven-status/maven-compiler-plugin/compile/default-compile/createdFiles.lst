@@ -11,6 +11,7 @@ com\SSE2020\WannaTry\databaserepo\LoginAttemptRepository.class
 com\SSE2020\WannaTry\exceptions\ModuleNotFoundException.class
 com\SSE2020\WannaTry\service\CustomFailedAuthentication.class
 com\SSE2020\WannaTry\controller\HomePageController.class
+com\SSE2020\WannaTry\model\User_Fee.class
 com\SSE2020\WannaTry\service\CustomUserDetailsService.class
 com\SSE2020\WannaTry\exceptions\StaffNotFoundException.class
 com\SSE2020\WannaTry\model\Modules.class
@@ -20,7 +21,6 @@ com\SSE2020\WannaTry\databaserepo\GradesRepository.class
 com\SSE2020\WannaTry\service\IDGenerator.class
 com\SSE2020\WannaTry\service\BackendRepoService.class
 com\SSE2020\WannaTry\databaserepo\PrivilegeRepository.class
-com\SSE2020\WannaTry\service\WannaTryUserDetailsService.class
 com\SSE2020\WannaTry\service\ValidateRegistrationService.class
 com\SSE2020\WannaTry\exceptions\StudentGradesNotFoundException.class
 com\SSE2020\WannaTry\model\Grades.class
@@ -37,6 +37,7 @@ com\SSE2020\WannaTry\service\MyAuthenticationRequest.class
 com\SSE2020\WannaTry\model\FailedAttempts.class
 com\SSE2020\WannaTry\databaserepo\RoleRepository.class
 com\SSE2020\WannaTry\service\SecurityConfiguration.class
+com\SSE2020\WannaTry\controller\PaymentsController.class
 com\SSE2020\WannaTry\exceptions\BlockedIPException.class
 com\SSE2020\WannaTry\model\IP_Blacklist.class
 com\SSE2020\WannaTry\databaserepo\BlacklistRepository.class

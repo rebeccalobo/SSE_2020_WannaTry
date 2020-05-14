@@ -15,7 +15,6 @@ C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\CustomUserDetails.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\Role.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\databaserepo\ModuleEnrolmentsRepository.java
-C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\service\WannaTryUserDetailsService.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\databaserepo\GradesRepository.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\ModuleEnrolment.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\StaffController.java
@@ -34,6 +33,7 @@ C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\exceptions\StaffNotFoundException.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\Grades.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\StudentGradesController.java
+C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\User_Fee.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\controller\HomePageController.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\model\IP_Blacklist.java
 C:\Users\kiowa\IdeaProjects\SSE_2020_WannaTry\src\main\java\com\SSE2020\WannaTry\service\SecurityConfiguration.java

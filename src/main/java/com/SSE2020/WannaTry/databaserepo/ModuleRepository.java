@@ -1,6 +1,7 @@
 package com.SSE2020.WannaTry.databaserepo;
 
 import com.SSE2020.WannaTry.model.Modules;
+import com.sun.tracing.dtrace.ModuleAttributes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.OptionalDouble;
 
 @Repository
 public interface ModuleRepository extends JpaRepository<Modules, String> {
@@ -25,7 +28,17 @@ public interface ModuleRepository extends JpaRepository<Modules, String> {
     @Query(value= "SELECT sum(m.price) FROM modules as m INNER JOIN module_enrolement as en ON m.module_id = en.module_id\n" +
             "\n" +
             "WHERE en.student_id = ?1",nativeQuery=true)
-    Double getFees(int id);
+    double calculateFees(int id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "REPLACE INTO user_fee(id,fees) value(?1,?2)",nativeQuery = true)
+    void updateFees(int id,double fees);
+
+    @Query(value = "Select fees from user_fee where id = ?1",nativeQuery = true)
+    Optional<Double> getFeesDue(int id);
+
+
 
     @Query(value = "SELECT DISTINCT * FROM modules ",nativeQuery = true)
     ArrayList<Modules> getAllModules();

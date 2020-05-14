@@ -16,14 +16,16 @@
 <body>
 <%@include file="sidebar.jsp"%>
 <div class="main">
-    <title-medium>Hello <g>${current_user.student_firstname}</g>, welcome to your payments page!</title-medium>
+    <title-medium>Hello <g>${current_user.FName}</g>, welcome to your payments page!</title-medium>
     <div class="main-content">
-      <sub-label>Your current balance is €<g>${current_user.amount_paid}</g>.</sub-label><br><br>
-      <sub-label>You have €<g>${current_user.remainingPay(fees)}</g> in fees left to pay.</sub-label><br><br>
-      <form:form method = "post" action="/update_balance" modelAttribute="fees_input">
+        <c:if test="${invalid == true}">
+            <p><g>Please select a number that is less than or equal to the fees due</g></p>
+        </c:if>
+      <sub-label>You have €<g>${fees_due}</g> in fees left to pay.</sub-label><br><br>
+      <form:form method = "post" action="/update_balance" >
           <sub-label>You can pay your fees here:</sub-label><br><br>
           <sub-label for="fees_input">€ </sub-label>
-          <input type="text" id="fees_input" name="fees_input" class="input-box" placeholder="Amount"><br><br>
+          <input type="number" step="0.01" min="0.00" id="fees_input" name="fees_input" class="input-box" placeholder="Amount"><br><br>
           <input type="submit" value="Submit" class="button">
       </form:form>
     </div>

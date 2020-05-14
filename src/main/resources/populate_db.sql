@@ -5,7 +5,7 @@ create schema wannatryschema;
 DROP TABLE if exists  wannatryschema.`grades`, `wannatryschema`.`module_enrolement`, `wannatryschema`.`modules`, `wannatryschema`.`new_table`, `wannatryschema`.`priveleges`, `wannatryschema`.`roles`, `wannatryschema`.`roles_priveleges`, `wannatryschema`.`user`, `wannatryschema`.`user_fee`, `wannatryschema`.`user_roles`;
 
 -- ROLE TABLE --
-CREATE TABLE if not exists `roles` (
+CREATE TABLE if not exists `wannatryschema`.`roles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
@@ -21,14 +21,14 @@ CREATE TABLE `wannatryschema`.`failed_attempts` (
   UNIQUE INDEX `IP_ADDRESS_UNIQUE` (`IP_ADDRESS` ASC) VISIBLE);
   
 -- PRIVILEGE TABLE --
-CREATE TABLE if not exists `priveleges` (
+CREATE TABLE if not exists `wannatryschema`.`priveleges` (
   `id` int NOT NULL UNIQUE,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 
 -- ROLES_PRIVILIGE --
-CREATE TABLE if not exists `roles_priveleges` (
+CREATE TABLE if not exists `wannatryschema`.`roles_priveleges` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role_id` int NOT NULL,
   `privelege_id` int NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE if not exists `roles_priveleges` (
 ) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- USER TABLE --
-CREATE TABLE if not exists `user` (
+CREATE TABLE if not exists `wannatryschema`.`user` (
   `id` int NOT NULL,
   `address` varchar(255) NOT NULL,
   `dob` date NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE if not exists `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- USER ROLES --
-CREATE TABLE if not exists `user_roles` (
+CREATE TABLE if not exists `wannatryschema`.`user_roles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `role_id` int NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE if not exists `user_roles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3140 DEFAULT CHARSET=utf8;
 
 -- MODULE --
-CREATE TABLE if not exists `modules` (
+CREATE TABLE if not exists `wannatryschema`.`modules` (
   `module_id` varchar(8) NOT NULL,
   `module_name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE if not exists `modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- module enrolement --
-CREATE TABLE if not exists`module_enrolement` (
+CREATE TABLE if not exists `wannatryschema`.`module_enrolement` (
   `id` int NOT NULL AUTO_INCREMENT,
   `student_id` int NOT NULL,
   `module_id` varchar(8) NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE if not exists`module_enrolement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE if not exists `grades` (
+CREATE TABLE if not exists `wannatryschema`.`grades` (
   `id` int NOT NULL AUTO_INCREMENT,
   `module_id` varchar(8) NOT NULL,
   `student_id` int NOT NULL,
@@ -102,14 +102,13 @@ CREATE TABLE if not exists `grades` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE if not existS `new_table` (
+CREATE TABLE if not existS `wannatryschema`.`new_table` (
   `id` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE if not exists `user_fee` (
+CREATE TABLE `wannatryschema`.`user_fee` (
   `id` int NOT NULL,
-  `student_id` int NOT NULL,
   `fees` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -121,21 +120,21 @@ CREATE TABLE if not exists `user_fee` (
 -- ----------------------
 -- CREATE ROLES
 
-drop procedure if exists load_role_data;
+drop procedure if exists `wannatryschema`.`load_role_data`;
 delimiter $$
-CREATE procedure load_role_data()
+CREATE procedure wannatryschema.load_role_data()
 	BEGIN
 		REPLACE INTO roles VALUE (50,"ROLE_ADMIN");
 		REPLACE INTO roles VALUE (60,"ROLE_STAFF");
 		REPLACE INTO roles VALUE (70,"ROLE_STUDENT");
 	END $$
 DELIMITER ;
-CALL load_role_data();
+CALL wannatryschema.load_role_data();
 
 -- CREATE RANDOM ADDRESS
-DROP function if exists generateAddress;
+DROP function if exists wannatryschema.generateAddress;
 DELIMITER $$
-CREATE FUNCTION  generateAddress() RETURNS varchar(255)
+CREATE FUNCTION  wannatryschema.generateAddress() RETURNS varchar(255)
 BEGIN
 	RETURN ELT(FLOOR(1 + (RAND() * (100-1))),"36 Newgate Street, Cottingham, HU16 4DT",
 "10 Ballards Close, Mickleton, GL55 6RL",
@@ -241,9 +240,9 @@ END $$
 DELIMITER ;
 
 -- RANDOM DATE --
-drop function if exists dateRand;
+drop function if exists wannatryschema.dateRand;
 DELIMITER $$
-CREATE function dateRand() returns DATE
+CREATE function wannatryschema.dateRand() returns DATE
 	BEGIN
 		DECLARE days_between int;
 		DECLARE startdate DATE;
@@ -258,53 +257,53 @@ CREATE function dateRand() returns DATE
 DELIMITER ;
 
 -- RANDOM ETHNICITY --
-drop function if exists random_ethnicity;
+drop function if exists wannatryschema.random_ethnicity;
 DELIMITER $$
-CREATE FUNCTION random_ethnicity() RETURNS varchar(255)
+CREATE FUNCTION wannatryschema.random_ethnicity() RETURNS varchar(255)
 BEGIN
 	return ELT(FLOOR(1+(RAND() * (4))),"White","Black or African American","Ameican Indian or Alaska Native","Asian","African");
 END $$
 DELIMITER ;
 
 -- RANDOM FNAME
-DROP function if exists generate_fname;
+DROP function if exists wannatryschema.generate_fname;
 DELIMITER $$
-CREATE FUNCTION generate_fname () RETURNS varchar(255)
+CREATE FUNCTION wannatryschema.generate_fname () RETURNS varchar(255)
 BEGIN
 	RETURN ELT(FLOOR(1 + (RAND() * (100-1))), "James","Mary","John","Patricia","Robert","Linda","Michael","Barbara","William","Elizabeth","David","Jennifer","Richard","Maria","Charles","Susan","Joseph","Margaret","Thomas","Dorothy","Christopher","Lisa","Daniel","Nancy","Paul","Karen","Mark","Betty","Donald","Helen","George","Sandra","Kenneth","Donna","Steven","Carol","Edward","Ruth","Brian","Sharon","Ronald","Michelle","Anthony","Laura","Kevin","Sarah","Jason","Kimberly","Matthew","Deborah","Gary","Jessica","Timothy","Shirley","Jose","Cynthia","Larry","Angela","Jeffrey","Melissa","Frank","Brenda","Scott","Amy","Eric","Anna","Stephen","Rebecca","Andrew","Virginia","Raymond","Kathleen","Gregory","Pamela","Joshua","Martha","Jerry","Debra","Dennis","Amanda","Walter","Stephanie","Patrick","Carolyn","Peter","Christine","Harold","Marie","Douglas","Janet","Henry","Catherine","Carl","Frances","Arthur","Ann","Ryan","Joyce","Roger","Diane");
 END $$
 DELIMITER ;
 -- RANDOM LNAME --
-DROP function if exists generate_lname;
+DROP function if exists wannatryschema.generate_lname;
 DELIMITER $$
-CREATE FUNCTION generate_lname () RETURNS varchar(255)
+CREATE FUNCTION wannatryschema.generate_lname () RETURNS varchar(255)
 BEGIN
 	RETURN ELT(FLOOR(1 + (RAND() * (100-1))), "Smith","Johnson","Williams","Jones","Brown","Davis","Miller","Wilson","Moore","Taylor","Anderson","Thomas","Jackson","White","Harris","Martin","Thompson","Garcia","Martinez","Robinson","Clark","Rodriguez","Lewis","Lee","Walker","Hall","Allen","Young","Hernandez","King","Wright","Lopez","Hill","Scott","Green","Adams","Baker","Gonzalez","Nelson","Carter","Mitchell","Perez","Roberts","Turner","Phillips","Campbell","Parker","Evans","Edwards","Collins","Stewart","Sanchez","Morris","Rogers","Reed","Cook","Morgan","Bell","Murphy","Bailey","Rivera","Cooper","Richardson","Cox","Howard","Ward","Torres","Peterson","Gray","Ramirez","James","Watson","Brooks","Kelly","Sanders","Price","Bennett","Wood","Barnes","Ross","Henderson","Coleman","Jenkins","Perry","Powell","Long","Patterson","Hughes","Flores","Washington","Butler","Simmons","Foster","Gonzales","Bryant","Alexander","Russell","Griffin","Diaz","Hayes");
 END $$
 DELIMITER ;
 
 -- RANDOM GENDER
-drop function if exists random_gender;
+drop function if exists wannatryschema.random_gender;
 DELIMITER $$
-CREATE FUNCTION random_gender() RETURNS varchar(1)
+CREATE FUNCTION wannatryschema.random_gender() RETURNS varchar(1)
 BEGIN
 	return ELT(FLOOR(1+RAND()*2),"M","F","O");
 END $$
 DELIMITER ;
 
 -- RANDOM STAFF --
-DROP function if exists findStaff;
+DROP function if exists wannatryschema.findStaff;
 DELIMITER $$
-CREATE function findStaff() RETURNS int
+CREATE function wannatryschema.findStaff() RETURNS int
 BEGIN 
 	RETURN ((SELECT u.id FROM user as u join user_roles as ur where u.id = ur.user_id and ur.role_id = 60)  ORDER BY RAND() LIMIT 1);
 END $$
 DELIMITER ;
 
 -- RANDOM START DATE --
-DROP function if exists get_start_date;
+DROP function if exists wannatryschema.get_start_date;
 DELIMITER $$
-CREATE function get_start_date() RETURNS date
+CREATE function wannatryschema.get_start_date() RETURNS date
 BEGIN 
 	DECLARE sem1 DATE;
     DECLARE sem2 DATE;
@@ -315,9 +314,9 @@ BEGIN
 END $$
 DELIMITER ;
 -- RANDOM END DATE --
-DROP function if exists get_end_date;
+DROP function if exists wannatryschema.get_end_date;
 DELIMITER $$
-CREATE function get_end_date() RETURNS date
+CREATE function wannatryschema.get_end_date() RETURNS date
 	BEGIN 
 		DECLARE sem1 DATE;
 		DECLARE sem2 DATE;
@@ -327,24 +326,24 @@ CREATE function get_end_date() RETURNS date
 	END $$
 DELIMITER ;
 
-DROP function if exists generate_name_prefix;
+DROP function if exists wannatryschema.generate_name_prefix;
 DELIMITER $$
-CREATE function generate_name_prefix() RETURNS varchar(255)
+CREATE function wannatryschema.generate_name_prefix() RETURNS varchar(255)
 BEGIN 
 	RETURN ELT(FLOOR(1 + (RAND() * (3))), "Introduction to ","Advanced ","Secure ","Modern ","Theoretical ");
 END$$
 DELIMITER ;
 
-DROP function if exists generate_name_suffix;
+DROP function if exists wannatryschema.generate_name_suffix;
 DELIMITER $$
-CREATE function generate_name_suffix() RETURNS varchar(255)
+CREATE function wannatryschema.generate_name_suffix() RETURNS varchar(255)
 BEGIN 
 	RETURN ELT(FLOOR(1 + (RAND() * (7))), "Software Engineering","Networking","Android Development","Ethical Hacking","iOS Development","Data Structures and Algorithms","Artificial Intelligence","Functional Programming","Linear Algebra","Game Development");
 END$$
 DELIMITER ;
-Drop function if exists random_id;
+Drop function if exists wannatryschema.random_id;
 Delimiter $$
-Create function random_id() returns int
+Create function wannatryschema.random_id() returns int
 BEGIN
 	declare ID int;
     set ID = (select * from new_table order by Rand() limit 1);
@@ -355,16 +354,16 @@ DELIMITER ;
 
 
 -- CREATES 200 RANDOM IDS
-drop procedure if exists load_foo_test_data;
+drop procedure if exists wannatryschema.load_foo_test_data;
 
 delimiter $$
-create procedure load_foo_test_data()
+create procedure wannatryschema.load_foo_test_data()
 begin
 
 declare v_max int unsigned default 3000;
 declare v_counter int unsigned default 0;
 
-  truncate table new_table;
+  truncate table wannatryschema.new_table;
   start transaction;
   while v_counter < v_max do
     replace into wannatryschema.new_table values( LPAD(FLOOR(RAND() * 9999999), 8,1));
@@ -375,25 +374,25 @@ end $$
 
 delimiter ;
 
-call load_foo_test_data();
+call wannatryschema.load_foo_test_data();
 
 -- RANDOM ID PROCEDURE --
-drop procedure if exists RANDOM_ID;
+drop procedure if exists wannatryschema.RANDOM_ID;
 delimiter $$
-create procedure RANDOM_ID()
+create procedure wannatryschema.RANDOM_ID()
 BEGIN
     declare ID int;
-    set ID = (select * from new_table order by Rand() limit 1);
-    DELETE FROM new_table where new_table.id = ID;
+    set ID = (select * from wannatryschema.new_table order by Rand() limit 1);
+    DELETE FROM wannatryschema.new_table where wannatryschema.new_table.id = ID;
 	SELECT ID;
 END $$
 delimiter ;
 
 
 -- CREATES STUDENTS AND ASSIGNS STUDENT ROLE
-drop procedure if exists load_user_data;
+drop procedure if exists wannatryschema.load_user_data;
 delimiter $$
-create procedure load_user_data()
+create procedure wannatryschema.load_user_data()
 begin
 declare v_max int unsigned default 100;
 declare v_counter int unsigned default 0;
@@ -411,12 +410,12 @@ VALUES (mid,generateAddress(),dateRand(),random_ethnicity(),generate_fname(),ran
 end $$
 delimiter ;
 
-call load_user_data();
+call wannatryschema.load_user_data();
 
 -- CREATES STAFF AND ASSIGNS STAFF ROLE
-drop procedure if exists load_staff_data;
+drop procedure if exists wannatryschema.load_staff_data;
 delimiter #
-create procedure load_staff_data()
+create procedure wannatryschema.load_staff_data()
 begin
 declare v_max int unsigned default 15;
 declare v_counter int unsigned default 0;
@@ -426,7 +425,7 @@ declare mid int;
   while v_counter < v_max do
   set mid = random_id();
     replace INTO wannatryschema.user (id,address,dob,ethnicity,fname,gender,lname,password,phone_number,email)
-VALUES (mid,generate_address(),dateRand(),random_ethnicity(),generate_fname(),random_gender(),generate_lname(),'$2a$10$fUwYy1YDiQNWg345oRVer.Aqvy02pnTfahNwhtXrnyx1bGY4JcDwW',123456789,'staffemail@gmail.com');
+VALUES (mid,generateAddress(),dateRand(),random_ethnicity(),generate_fname(),random_gender(),generate_lname(),'$2a$10$fUwYy1YDiQNWg345oRVer.Aqvy02pnTfahNwhtXrnyx1bGY4JcDwW',123456789,'staffemail@gmail.com');
     replace Into wannatryschema.user_roles (user_id,role_id)
     VALUES (mid,60);
     set v_counter=v_counter+1;
@@ -435,11 +434,11 @@ VALUES (mid,generate_address(),dateRand(),random_ethnicity(),generate_fname(),ra
 end #
 delimiter ;
 
-call load_staff_data();
+call wannatryschema.load_staff_data();
 
-DROP procedure if exists load_module_data;
+DROP procedure if exists wannatryschema.load_module_data;
 DELIMITER $$
-CREATE PROCEDURE load_module_data()
+CREATE PROCEDURE wannatryschema.load_module_data()
 	BEGIN
 		DECLARE		X	INT;
         DECLARE s_date DATE;
@@ -458,7 +457,7 @@ CREATE PROCEDURE load_module_data()
     END$$
 DELIMITER ;
 
-call load_module_data();
+call wannatryschema.load_module_data();
 
 -- CREATES STAFF AND ASSIGNS STAFF ROLE
 -- drop procedure if exists load_staff_module_data;
@@ -483,9 +482,9 @@ call load_module_data();
 
 
 -- random enrolment --
-drop procedure if exists random_enrol;
+drop procedure if exists wannatryschema.random_enrol;
 DELIMITER $$
-CREATE procedure random_enrol()
+CREATE procedure wannatryschema.random_enrol()
 BEGIN
 	DECLARE COUNTER INT ;
 	DECLARE s_id INT;
@@ -501,11 +500,11 @@ BEGIN
     END REPEAT;
 	END $$
 DELIMITER ;
-call random_enrol();
+call wannatryschema.random_enrol();
 
-drop procedure if exists populate_roles_privi;
+drop procedure if exists wannatryschema.populate_roles_privi;
 DELIMITER $$
-CREATE procedure populate_roles_privi()
+CREATE procedure wannatryschema.populate_roles_privi()
 BEGIN
 	INSERT INTO priveleges(id,name) VALUE(20,"READ");
     INSERT INTO priveleges(id,name) VALUE(30,"WRITE");
@@ -523,4 +522,5 @@ BEGIN
     
 END $$
 DELIMITER ;
-call populate_roles_privi();
+call wannatryschema.populate_roles_privi();
+
