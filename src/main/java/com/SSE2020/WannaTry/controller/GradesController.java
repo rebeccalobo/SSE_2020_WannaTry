@@ -92,7 +92,7 @@ public class GradesController {
         long millis=System.currentTimeMillis();
         java.sql.Date date=new java.sql.Date(millis);
 
-        HashMap<String, ArrayList<Long>> students_enroled_in_module = new HashMap<>();
+        HashMap<String, ArrayList<Integer>> students_enroled_in_module = new HashMap<>();
 
 
         ArrayList<Modules> modules = backendRepoService.getModuleRepo().getStaffModules(user.getID());

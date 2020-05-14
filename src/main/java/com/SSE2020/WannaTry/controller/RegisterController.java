@@ -6,8 +6,6 @@ import com.SSE2020.WannaTry.model.IP_Blacklist;
 import com.SSE2020.WannaTry.model.Role;
 import com.SSE2020.WannaTry.model.User;
 import com.SSE2020.WannaTry.service.BackendRepoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -24,13 +22,18 @@ import java.util.Optional;
 @Controller
 public class RegisterController {
 
-    @Autowired
+    final
     BackendRepoService repoService;
-    @Autowired
+    final
     BlacklistRepository blacklistRepository;
-    @Autowired
+    final
     PasswordEncoder passwordEncoder;
 
+    public RegisterController(BackendRepoService repoService, BlacklistRepository blacklistRepository, PasswordEncoder passwordEncoder) {
+        this.repoService = repoService;
+        this.blacklistRepository = blacklistRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
     @GetMapping(value="/Register")
@@ -48,15 +51,10 @@ public class RegisterController {
     }
     private boolean isBlackListed(String IP){
         Optional<IP_Blacklist> blacklistedIP = blacklistRepository.findById(IP);
-        if(blacklistedIP.isPresent()){
-            if(blacklistedIP.get().getIP_ADDRESS().equals(IP)){
-                return true;
-            }
-        }
-        return false;
+        return blacklistedIP.map(ip_blacklist -> ip_blacklist.getIP_ADDRESS().equals(IP)).orElse(false);
     }
     @RequestMapping(value="/save",method=RequestMethod.POST)
-    public String saveUser(HttpServletRequest request, @ModelAttribute("User")User user, Model model){
+    private String saveUser(@ModelAttribute("User") User user){
         ArrayList<Role> roles = new ArrayList<>();
         Role role = repoService.getRoleRepository().findByName("ROLE_STUDENT");
         roles.add(role);
@@ -69,10 +67,11 @@ public class RegisterController {
 
     // Delete a Note
     @GetMapping("/unregister")
-    public String deleteUser(){
+    public String deleteUser(HttpServletRequest request){
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDetails.getUser();
         repoService.getUserRepository().delete(user);
+        request.getSession().invalidate();
         return "redirect:/logout";
     }
 }

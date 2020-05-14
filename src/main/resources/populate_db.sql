@@ -1,5 +1,8 @@
 SET GLOBAL log_bin_trust_function_creators = 1;
-DROP TABLE `wannatryschema`.`grades`, `wannatryschema`.`module_enrolement`, `wannatryschema`.`modules`, `wannatryschema`.`new_table`, `wannatryschema`.`priveleges`, `wannatryschema`.`roles`, `wannatryschema`.`roles_priveleges`, `wannatryschema`.`user`, `wannatryschema`.`user_fee`, `wannatryschema`.`user_roles`;
+drop schema if exists wannatryschema;
+create schema wannatryschema;
+
+DROP TABLE if exists  wannatryschema.`grades`, `wannatryschema`.`module_enrolement`, `wannatryschema`.`modules`, `wannatryschema`.`new_table`, `wannatryschema`.`priveleges`, `wannatryschema`.`roles`, `wannatryschema`.`roles_priveleges`, `wannatryschema`.`user`, `wannatryschema`.`user_fee`, `wannatryschema`.`user_roles`;
 
 -- ROLE TABLE --
 CREATE TABLE if not exists `roles` (

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,9 +36,10 @@ public class DashboardController {
         for(Role r : user.getRoles()){
             if(r.getName().equals("ROLE_STAFF")){
                 //GET LIST OF STUDENTS ENROLLED IN MODULE
+                System.out.println("Hello");
                 ArrayList<Modules> modules = backendRepoService.getModuleRepo().getStaffModules(user.getID());
                 model.addAttribute("modules",modules);
-                HashMap<String, ArrayList<Long>> hashMap = new HashMap<>();
+                HashMap<String, ArrayList<Integer>> hashMap = new HashMap<>();
                 for(Modules m : modules){
                     hashMap.put(m.getModule_id(),
                             backendRepoService.getModuleRepo().getStudentsInSpecificModuleStaff(m.getModule_id(),user.getID()));
