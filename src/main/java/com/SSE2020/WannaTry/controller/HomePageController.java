@@ -44,6 +44,8 @@ public class HomePageController {
             model.addAttribute("isStudent",false);
             model.addAttribute("flag",true);
         }
+
+
         return "Home";
     }
     @GetMapping(value = "/error")

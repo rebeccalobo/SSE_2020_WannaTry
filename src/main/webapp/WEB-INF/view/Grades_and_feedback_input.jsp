@@ -29,7 +29,7 @@
                     <form:form action="submit_grade" method="post" class="button-and-input">
                         <input type="hidden" id = "student" name = "student" value="${student}">
                         <input type="hidden" id = "module" name = "module" value="${module.module_id}">
-                        <input type="number" step="0.01" name="percentage" id="percentage" class='input-box' placeholder="Percentage Grade">
+                        <input type="number" step="0.01" min = 0.00 name="percentage" id="percentage" class='input-box' placeholder="Percentage Grade" required>
                         <input type="submit" class='button' value="Submit">
                     </form:form>
                 </div><br>

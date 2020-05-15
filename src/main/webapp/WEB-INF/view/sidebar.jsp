@@ -20,7 +20,7 @@
 
 </script>
 <div class="sidebar">
-    <ul>
+
 
         <c:choose>
             <c:when test="${isStaff and !flag}">
@@ -43,7 +43,7 @@
             </c:otherwise>
         </c:choose>
 
-    </ul>
+
 </div>
 
 

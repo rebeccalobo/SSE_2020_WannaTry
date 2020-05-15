@@ -25,7 +25,7 @@
       <form:form method = "post" action="/update_balance" >
           <sub-label>You can pay your fees here:</sub-label><br><br>
           <sub-label for="fees_input">€ </sub-label>
-          <input type="number" step="0.01" min="0.00" id="fees_input" name="fees_input" class="input-box" placeholder="Amount"><br><br>
+          <input type="number" step="0.01" min="0.00" id="fees_input" name="fees_input" class="input-box" placeholder="Amount" required ><br><br>
           <input type="submit" value="Submit" class="button">
       </form:form>
     </div>

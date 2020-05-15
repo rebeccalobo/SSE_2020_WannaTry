@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value="CALL wannatryschema.random_id();",nativeQuery = true)
     int getRandomID();
+
+
 }

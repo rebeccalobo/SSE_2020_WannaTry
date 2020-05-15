@@ -25,7 +25,7 @@
             <sub-label><g>Module Description:</g></sub-label><br>
             <sub-label>${module.description}</sub-label><br>
                 <form:form method="post" action="edit_description" class="button-and-input">
-                    <input type="text" class="input-box" name="description" id="description" placeholder="Edit Description">
+                    <input type="text" class="input-box" name="description" id="description" placeholder="Edit Description" required>
                     <input type="hidden" name="module_id" id="module_id" value="${module.module_id}">
                     <input type="submit"value="Submit" class="button">
                 </form:form><br>

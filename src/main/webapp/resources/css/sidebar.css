@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300');
 
 .sidebar {
+
     background-color: #191e27;
 
     border-right: 1px solid #484e57;
@@ -19,11 +20,12 @@
 }
 
 a {
+
     text-decoration: none;
     color: white;
     text-align: right;
 
-    display: block;
+    display: inline-block;
     width: 160px;
 
     border-bottom: 1px solid #484e57;
@@ -38,8 +40,8 @@ a:hover {
 }
 
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
 }
 
 h1, p{
