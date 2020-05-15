@@ -3,6 +3,8 @@ package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.exceptions.UserNotFoundException;
 import com.SSE2020.WannaTry.model.CustomUserDetails;
+import com.SSE2020.WannaTry.model.Role;
+import com.SSE2020.WannaTry.model.User;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -22,7 +24,26 @@ public class HomePageController {
     @GetMapping(value={ "/","/Home"})
     public String homePage(Model model){
         Object context = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("flag", !(context instanceof CustomUserDetails));
+        if(context instanceof CustomUserDetails){
+            User user = ((CustomUserDetails) context).getUser();
+            for(Role r : user.getRoles()){
+                if(r.getName().equals("ROLE_STAFF")){
+                    model.addAttribute("isStaff",true);
+                    model.addAttribute("isStudent",false);
+                    model.addAttribute("flag",false);
+                }
+                else if(r.getName().equals("ROLE_STUDENT")){
+                    model.addAttribute("isStaff",false);
+                    model.addAttribute("isStudent",true);
+                    model.addAttribute("flag",false);
+                }
+            }
+        }
+        else{
+            model.addAttribute("isStaff",false);
+            model.addAttribute("isStudent",false);
+            model.addAttribute("flag",true);
+        }
         return "Home";
     }
     @GetMapping(value = "/error")

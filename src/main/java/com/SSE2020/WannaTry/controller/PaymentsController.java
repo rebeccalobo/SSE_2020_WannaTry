@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -37,6 +38,30 @@ public class PaymentsController {
                 return "redirect:/Dashboard";
             }
             model.addAttribute("fees_due",opt_fees_due.get());
+            model.addAttribute("isStaff",false);
+            model.addAttribute("isStudent",true);
+            model.addAttribute("flag",false);
+            return "Payments";
+        }
+        return "error";
+    }
+    @RequestMapping(value = "/PaymentsError",method = RequestMethod.GET)
+    public String goToPaymentPageError(Model model){
+
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDetails.getUser();
+        model.addAttribute("current_user",user);
+
+        Optional<Double> opt_fees_due = repoService.getModuleRepo().getFeesDue(user.getID());
+        if(opt_fees_due.isPresent()){
+            if(opt_fees_due.get() == 0.00){
+                return "redirect:/Dashboard";
+            }
+            model.addAttribute("fees_due",opt_fees_due.get());
+            model.addAttribute("isStaff",false);
+            model.addAttribute("isStudent",true);
+            model.addAttribute("flag",false);
+            model.addAttribute("invalid",true);
             return "Payments";
         }
         return "error";
@@ -53,8 +78,7 @@ public class PaymentsController {
         double input_amount = Double.valueOf(input);
 
         if(opt_fees_due.get()-input_amount <0.00){
-            model.addAttribute("invalid",true);
-            return "Payments";
+            return "redirect:/PaymentsError";
         }
         repoService.getModuleRepo().updateFees(user.getID(),opt_fees_due.get()-input_amount);
         return "redirect:/Payments";

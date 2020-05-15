@@ -17,7 +17,7 @@ public class Modules{
     @NotNull
     private String description;
     @NotNull
-    private String lecturer_id;
+    private int lecturer_id;
     @NotNull
     private Date start_date;
     @NotNull
@@ -31,7 +31,7 @@ public class Modules{
         super();
     }
 
-    public Modules(String module_id, String module_name, String description, String lecturer_id,Date start_date,Date end_date,Double price) {
+    public Modules(String module_id, String module_name, String description, int lecturer_id,Date start_date,Date end_date,Double price) {
         super();
         this.module_id = module_id;
         this.module_name = module_name;
@@ -49,7 +49,7 @@ public class Modules{
         return module_name;
     }
     public String getDescription() { return description; }
-    public String getLecturer_id() { return lecturer_id; }
+    public int getLecturer_id() { return lecturer_id; }
 
     public Date getStart_date() {
         return start_date;
@@ -66,7 +66,7 @@ public class Modules{
     public void setModule_id(String id) { this.module_id = id; }
     public void setModule_name(String module_name) {this.module_name = this.module_name; }
     public void setDescription(String description) { this.description = description; }
-    public void setLecturer_id(String lecturer_id) { this.lecturer_id = lecturer_id; }
+    public void setLecturer_id(int lecturer_id) { this.lecturer_id = lecturer_id; }
 
     public void setStart_date(Date start_date) {
         this.start_date = start_date;

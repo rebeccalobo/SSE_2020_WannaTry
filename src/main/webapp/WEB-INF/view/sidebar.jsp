@@ -21,20 +21,28 @@
 </script>
 <div class="sidebar">
     <ul>
+
         <c:choose>
-            <c:when test="${flag == true}">
-                <a href="">Home</a>
-                <a href="Register">Register</a>
-                <a href="Login">Login</a>
-                </c:when>
+            <c:when test="${isStaff and !flag}">
+                <a href="Home">Home</a>
+                <a href="Dashboard">Dashboard </a>
+                <a href="grades">Grades</a>
+                <a href="logout">Logout</a>
+            </c:when>
+            <c:when test="${isStudent and !flag}">
+                <a href="Home">Home</a>
+                <a href="Dashboard">Dashboard </a>
+                <a href="grades">Grades</a>
+                <a href="StudentModule"}>Modules</a>
+                <a href="logout">Logout</a>
+            </c:when>
             <c:otherwise>
                 <a href="Home">Home</a>
-                <a href="Dashboard">Dashboard</a>
-                <a href="grades">Grades</a>
-                <a href="StudentModule">Modules</a>
-                <a href="logout">Logout</a>
+                <a href="Register">Register</a>
+                <a href="Login">Login</a>
             </c:otherwise>
         </c:choose>
+
     </ul>
 </div>
 

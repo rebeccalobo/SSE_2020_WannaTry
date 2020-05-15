@@ -30,16 +30,8 @@ public class DashboardController {
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = customUserDetails.getUser();
         session.setMaxInactiveInterval(120);
-        Optional<Double> feeOptional = backendRepoService.getModuleRepo().getFeesDue(user.getID());
-
-        if(!feeOptional.isPresent()){
-            double fees_due =  backendRepoService.getModuleRepo().calculateFees(user.getID());
-            backendRepoService.getModuleRepo().updateFees(user.getID(),fees_due);
-        }
-        //check what role they are -> if staff goto staff dashboard page
 
         model.addAttribute("current_user", user);
-
 
         for(Role r : user.getRoles()){
             if(r.getName().equals("ROLE_STAFF")){
@@ -52,14 +44,31 @@ public class DashboardController {
                             backendRepoService.getModuleRepo().getStudentsInSpecificModuleStaff(m.getModule_id(),user.getID()));
                 }
                 model.addAttribute("hashmap",hashMap);
+                model.addAttribute("isStaff",true);
+                model.addAttribute("isStudent",false);
+                model.addAttribute("flag",false);
                 return "staffDashboard";
             }
         }
+        Optional<Double> feeOptional = backendRepoService.getModuleRepo().getFeesDue(user.getID());
+
+        if(!feeOptional.isPresent()){
+            Optional<Double> fees_due =  backendRepoService.getModuleRepo().calculateFees(user.getID());
+            if(fees_due.isPresent()){
+                backendRepoService.getModuleRepo().updateFees(user.getID(),fees_due.get());
+            }else{
+                backendRepoService.getModuleRepo().updateFees(user.getID(),0.00);
+            }
+        }
+        //check what role they are -> if staff goto staff dashboard page
         if(areFeesPaid(user.getID())){
             model.addAttribute("fees_paid",true);
         }else{
             model.addAttribute("fees_paid",false);
         }
+        model.addAttribute("isStaff",false);
+        model.addAttribute("isStudent",true);
+        model.addAttribute("flag",false);
         return "studentDashboard";
     }
 

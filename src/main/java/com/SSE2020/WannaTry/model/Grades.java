@@ -10,28 +10,19 @@ public class Grades {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotNull
-    @JoinTable(
-            name = "modules",
-            joinColumns = @JoinColumn(
-                    name = "module_id", referencedColumnName = "module_id"))
     private String module_id;
     @NotNull
-    @JoinTable(
-            name = "user",
-            joinColumns = @JoinColumn(
-                    name = "id", referencedColumnName = "student_id"))
-    private Long student_id;
+    private int student_id;
     @NotNull
     private Double percentage;
     @NotNull
     private String Letter;
 
-
     private String feedback;
 
     public Grades() {
     }
-    public Grades(String module_id, long student_id, Double percentage, String letter_grade,String feedback) {
+    public Grades(String module_id, int student_id, Double percentage, String letter_grade,String feedback) {
         this.module_id=module_id;
         this.student_id=student_id;
         this.percentage=percentage;
@@ -47,11 +38,11 @@ public class Grades {
         this.module_id = module_id;
     }
 
-    public long getStudent_id() {
+    public int getStudent_id() {
         return student_id;
     }
 
-    public void setStudent_id(Long student_id) {
+    public void setStudent_id(int student_id) {
         this.student_id = student_id;
     }
 

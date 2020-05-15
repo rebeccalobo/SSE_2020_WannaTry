@@ -74,7 +74,7 @@ CREATE TABLE if not exists `wannatryschema`.`modules` (
   `end_date` date NOT NULL,
   `price` double NOT NULL,
   `start_date` date NOT NULL,
-  `lecturer_id` varchar(255) NOT NULL,
+  `lecturer_id` INT NOT NULL,
   PRIMARY KEY (`module_id`),
   UNIQUE KEY `module_name_UNIQUE` (`module_name`),
   UNIQUE KEY `module_id_UNIQUE` (`module_id`)
@@ -306,11 +306,15 @@ DELIMITER $$
 CREATE function wannatryschema.get_start_date() RETURNS date
 BEGIN 
 	DECLARE sem1 DATE;
+    DECLARE sem1ALT DATE;
     DECLARE sem2 DATE;
+    DECLARE sem2ALT DATE;
     SET sem1 = '2020-09-14';
     SET sem2 = '2021-01-22';
+    SET sem1ALT = '2019-09-14';
+    SET sem2ALT = '2020-01-22';
     
-	RETURN ELT(FLOOR(1 + (RAND() * (3-1))), sem1,sem2);
+	RETURN ELT(FLOOR(1 + (RAND() * (5-1))), sem1,sem2,sem1ALT,sem2ALT);
 END $$
 DELIMITER ;
 -- RANDOM END DATE --
@@ -446,8 +450,11 @@ CREATE PROCEDURE wannatryschema.load_module_data()
         SET X = 1;
 	REPEAT
 		SET s_date = get_start_date();
-		SET e_date = IF(s_date='2020-09-14','2020-11-26','2021-04-24');
-  
+		IF s_date = '2019-09-14' then set e_date = '2019-11-26';
+		ELSEIF s_date = '2020-01-22' then set e_date = '2020-04-24';
+		ELSEIF s_date = '2020-09-13' then set e_date = '2020-11-26';
+		ELSEIF s_date = '2021-01-22' then set e_date = '2021-04-24';
+        END IF;
 		REPLACE INTO modules
         VALUES (concat("COMP",LPAD(X,4,0)) ,concat(generate_name_prefix(),generate_name_suffix()),"description",e_date,360.00,s_date,findStaff());
         SET X = X + 1;

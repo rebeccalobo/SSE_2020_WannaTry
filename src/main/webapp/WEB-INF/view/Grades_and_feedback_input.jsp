@@ -23,14 +23,13 @@
             <sub-label><g>${module.module_id}</g></sub-label><br>
             <sub-label><s-b>${module.module_name}</s-b></sub-label><br><br>
             <sub-label><g>Enrolled Students:</g></sub-label><br><br>
-            <c:forEach items="${hashmap.get(module.module_name)}" var="student">
+            <c:forEach items="${hashmap.get(module.module_id)}" var="student">
                 <div class="content-outline">
                     <sub-label><sub-color>Student ID: </sub-color>${student}</sub-label><br>
-                    <form:form action="submit_grade" method="post" class="button-and-input" modelAttribute="">
+                    <form:form action="submit_grade" method="post" class="button-and-input">
                         <input type="hidden" id = "student" name = "student" value="${student}">
                         <input type="hidden" id = "module" name = "module" value="${module.module_id}">
-                        <input type="text" name="Percentage" id="Percentage" class='input-box' placeholder="Percentage Grade">
-                        <input type="text" name="Letter" id="Letter" class="input-box" placeholder="Letter Grade">
+                        <input type="number" step="0.01" name="percentage" id="percentage" class='input-box' placeholder="Percentage Grade">
                         <input type="submit" class='button' value="Submit">
                     </form:form>
                 </div><br>

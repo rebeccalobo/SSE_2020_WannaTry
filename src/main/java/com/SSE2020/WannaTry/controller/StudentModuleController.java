@@ -31,6 +31,9 @@ public class StudentModuleController {
         modules_not_enrolled.removeAll(modules);
         model.addAttribute("modules",modules);
         model.addAttribute("available_modules",modules_not_enrolled);
+        model.addAttribute("isStaff",false);
+        model.addAttribute("isStudent",true);
+        model.addAttribute("flag",false);
         return "StudentModule";
     }
     //DISPLAY ALL THE STUDENTS MODULE

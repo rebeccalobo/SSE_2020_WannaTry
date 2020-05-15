@@ -32,7 +32,7 @@
             <sub-label><g>Module Duration:</g></sub-label><br>
             <sub-label><sub-color>${module.start_date} to ${module.end_date}</sub-color></sub-label><br><br>
             <sub-label><g>Enrolled Students:</g></sub-label><br>
-            <c:forEach items="${hashmap.get(module.module_name)}" var="student">
+            <c:forEach items="${hashmap.get(module.module_id)}" var="student">
                 <sub-label><sub-color>Student ID:</sub-color> ${student}</sub-label><br>
             </c:forEach>
         </div><br><br>

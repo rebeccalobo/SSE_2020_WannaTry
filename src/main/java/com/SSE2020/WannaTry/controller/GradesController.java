@@ -3,13 +3,16 @@ package com.SSE2020.WannaTry.controller;
 import com.SSE2020.WannaTry.model.*;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.transaction.Transactional;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,35 +25,59 @@ public class GradesController {
     @Autowired
     BackendRepoService backendRepoService;
 
-    @RequestMapping(value = "/grades")
+    @RequestMapping(value = "/grades",method = RequestMethod.GET)
     public String goToGradesPage(Model model){
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDetails.getUser();
         for(Role r : user.getRoles()){
-            if(r.getName().equals("ROLL_STAFF")){
+            if(r.getName().equals("ROLE_STAFF")){
                return isStaff(user,model);
             }
         }
        return isStudent(user,model);
         //check roles, if the user is staff goto input page -> if student display his grades
     }
+
+
+
         @RequestMapping(value="/submit_grade",method = RequestMethod.POST)
-        public void submitGrade(Model model, @ModelAttribute("grades") Grades grade){
-                Optional<Grades> optional = backendRepoService.getSmgRepo().getGradeBySandM(grade.getStudent_id(),grade.getModule_id());
+        public String submitGrade(Model model, @RequestParam("student")int student_id,@RequestParam("module")String module_id,@RequestParam("percentage") double percentage){
+                Optional<Grades> optional = backendRepoService.getSmgRepo().getGradeBySandM(student_id,module_id);
                 if(optional.isPresent()){
                     Grades newGrade = optional.get();
-                    newGrade.setLetter_grade(grade.getLetter_grade());
-                    newGrade.setPercentage(grade.getPercentage());
-                    newGrade.setModule_id(grade.getModule_id());
-                    newGrade.setStudent_id(grade.getStudent_id());
+
+                    newGrade.setPercentage(percentage);
+
+
+                    newGrade.setLetter_grade(getLetter(percentage));
+
                     backendRepoService.getSmgRepo().save(newGrade);
                 }else{
+                    Grades grade = new Grades(module_id,student_id,percentage,getLetter(percentage),"");
                     backendRepoService.getSmgRepo().save(grade);
                 }
-            isStaff((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(),model);
+               return "redirect:/grades";
     }
 
+    private String getLetter(double percentage){
+        String lG = "";
 
+        if(percentage>= 85.00){
+            lG = "A";
+        }
+        else if(percentage >= 70.00 && percentage< 85.00){
+            lG = "B";
+        }
+        else if(percentage >= 55.00 && percentage< 70.00){
+            lG = "C";
+        }
+        else if(percentage >= 40.00 && percentage< 55.00){
+            lG = "D";
+        }else{
+            lG="F";
+        }
+        return lG;
+    }
 //    @RequestMapping(value = "/StaffModule")
 //    public String getTerminated(Model model){
 //        Staff current_staff = CurrentStaffSingleton.getInstance().getCurrentUser();
@@ -84,9 +111,21 @@ public class GradesController {
         Collection<Grades> grades = backendRepoService.getSmgRepo().getStudentsGrades(user.getID(),date);
         model.addAttribute("grades",grades);
         model.addAttribute("current_user", user);
-
+        model.addAttribute("isStaff",false);
+        model.addAttribute("isStudent",true);
+        model.addAttribute("flag",false);
         return "StudentGradesAndFeedbackPage";
     }
+
+
+
+
+
+
+
+
+
+
     public String isStaff(User user,Model model){
 
         long millis=System.currentTimeMillis();
@@ -97,10 +136,12 @@ public class GradesController {
 
         ArrayList<Modules> modules = backendRepoService.getModuleRepo().getStaffModules(user.getID());
         ArrayList<Modules> terminated = new ArrayList<>();
+
+
         for(Modules module : modules){
             if(module.getEnd_date().before(date)){
                 terminated.add(module);
-                students_enroled_in_module.put(module.getModule_name(),
+                students_enroled_in_module.put(module.getModule_id(),
                         backendRepoService.getModuleRepo().getStudentsInSpecificModuleStaff(module.getModule_id(),user.getID()));
             }
         }
@@ -108,6 +149,9 @@ public class GradesController {
         model.addAttribute("hashmap",students_enroled_in_module);
         model.addAttribute("modules",terminated);
         model.addAttribute("current_staff", user);
+        model.addAttribute("isStaff",true);
+        model.addAttribute("isStudent",false);
+        model.addAttribute("flag",false);
         return "Grades_and_feedback_input";
     }
 }

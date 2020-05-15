@@ -22,13 +22,13 @@ public interface ModuleRepository extends JpaRepository<Modules, String> {
     ArrayList<Modules> getStaffModules(int id);
 
 
-    @Query(value = "SELECT me.student_id FROM module_enrolement as me INNER JOIN modules as m ON me.module_id = m.module_id where m.module_id=?1 AND m.lecturer_id = ?2",nativeQuery = true)
-    ArrayList<Integer> getStudentsInSpecificModuleStaff(String module,int id);
+    @Query(value = "SELECT me.student_id FROM wannatryschema.module_enrolement as me INNER JOIN wannatryschema.modules as m ON me.module_id = m.module_id where m.module_id=?1 AND m.lecturer_id = ?2",nativeQuery = true)
+    ArrayList<Integer> getStudentsInSpecificModuleStaff(String module_id,int staff_id);
 
     @Query(value= "SELECT sum(m.price) FROM modules as m INNER JOIN module_enrolement as en ON m.module_id = en.module_id\n" +
             "\n" +
             "WHERE en.student_id = ?1",nativeQuery=true)
-    double calculateFees(int id);
+    Optional<Double> calculateFees(int id);
 
     @Transactional
     @Modifying
