@@ -21,18 +21,29 @@
     </c:if>
     <title-medium>User Registration</title-medium>
     <form:form method="post" action="save" modelAttribute="User" name="RegisterForm" class='main-content'>
-        <form:input path="FName" class='input-box' placeholder='First Name'/><br><br>
-        <form:input path="LName" class='input-box' placeholder='Surname'/><br><br>
-        <form:input path="email" class='input-box' placeholder='Email Address' type="email"/><br><br>
-        <sub-label>Password must contain at least 1 letter, at least 1 number and be between 8-20 characters</sub-label><br><br>
-        <form:input path="password" class='input-box' placeholder='Password' type="password"/><br><br>
-        <form:input path="address" class='input-box' placeholder='Address'/><br><br>
-        <sub-label>Must be in format YEAR-MONTH-DATE <i>e.g. 25th December 2020 -> 2020-12-25</i></sub-label><br><br>
-        <form:input path="DOB" class='input-box' placeholder='Date of Birth'/><br><br>
-        <form:input path="phoneNumber" class='input-box' placeholder='Phone Number' type="number"/><br><br>
-        <form:input path="ethnicity" class='input-box' placeholder='Ethnicity'/><br><br>
-        <sub-label>MALE = M, FEMALE = F, OTHER = O</sub-label><br><br>
-        <form:input path="gender" class='input-box' placeholder='Gender'/><br><br>
+        <form:input path="FName" class='input-box' placeholder='First Name' required="required" pattern="[A-Za-z]+" title="Please enter your first name"/><br><br>
+        <form:input path="LName" class='input-box' placeholder='Surname' required="required" pattern="[A-Za-z]+" title="Please enter your surname"/><br><br>
+        <form:input path="email" class='input-box' placeholder='Email Address' type="email" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter your email"/><br><br>
+        <sub-label>Password must be at least <g>8</g> characters, containing at least <g>1</g> number, at least <g>1</g> upper <g>AND</g> lowercase letter</sub-label><br><br>
+        <form:input path="password" class='input-box' placeholder='Password' type="password" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must meet the requirements"/><br><br>
+        <form:input path="address" class='input-box' placeholder='Address' required="required" pattern="[a-zA-Z0-9 ]+" title="Please enter your address"/><br><br>
+        <sub-label>Must be in format <g>YEAR-MONTH-DATE</g> <i>e.g. 25th December 2020 -> <g>2020-12-25</g></i></sub-label><br><br>
+        <form:input path="DOB" class='input-box' placeholder='Date of Birth' required="required" pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$" title="Please use the required format"/><br><br>
+        <form:input path="phoneNumber" class='input-box' placeholder='Phone Number' type="number" required="required" pattern="{,20}" title="Please enter your phone number"/><br><br>
+        <sub-label>Select Ethnicity</sub-label><br><br>
+        <form:select path="ethnicity" class='input-box' placeholder='Ethnicity'>
+            <form:option value="White">White</form:option>
+            <form:option value="Black or African American">Black</form:option>
+            <form:option value="American Indian or Alaska Native">Native American</form:option>
+            <form:option value="Asian">Asian</form:option>
+            <form:option value="African">African</form:option>
+        </form:select><br><br>
+        <sub-label>Select Gender</sub-label><br><br>
+        <form:select path="gender" class='input-box' placeholder='Gender' >
+            <form:option value="M">Male</form:option>
+            <form:option value="F">Female</form:option>
+            <form:option value="O">Other</form:option>
+        </form:select><br><br>
         <input type="submit" class='button' value="Submit">
     </form:form>
 </div>
