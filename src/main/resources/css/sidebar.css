@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300');
+
+.sidebar {
+    background-color: #191e27;
+
+    border-right: 1px solid #484e57;
+
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    text-align: right;
+
+    display: block;
+    width: 160px;
+
+    border-bottom: 1px solid #484e57;
+    padding: 20px 20px 20px 20px;
+
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+}
+
+a:hover {
+    color: #3ddc97;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+h1, p{
+    text-decoration-color: #333333;
+}
+
+.collapsible {
+    color: white;
+    background-color: #191e27;
+
+    padding: 20px 0px 20px 20px;
+
+    border-right: 1px solid #484e57;
+    border-left: 1px solid #484e57;
+    border-top: 1px solid #484e57;
+
+    cursor: pointer;
+
+    text-align: left;
+    outline: none;
+
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+    background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
