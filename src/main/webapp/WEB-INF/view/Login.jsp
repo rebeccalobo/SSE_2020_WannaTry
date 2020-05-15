@@ -18,8 +18,8 @@
 
     <div class="form-container">
         <title-medium>Student Login</title-medium>
-        <c:if test="${failed_attempt == true}"><p>Username or password incorrect</p>p</c:if>
         <form:form method="post"  class='main-content'>
+            <c:if test="${failed_attempt == true}"><error-text>Username or Password incorrect</error-text></c:if><br><br>
             <input type ="number" class='input-box' placeholder='Student ID' name="id" min="0" max ="2147483647"><br><br>
             <c:if test="${error!=null}">
                 <error-text>${error}</error-text><br><br>
