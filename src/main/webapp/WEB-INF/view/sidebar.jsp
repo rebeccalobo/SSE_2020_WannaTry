@@ -20,10 +20,9 @@
 
 </script>
 <div class="sidebar">
-    <ul>
         <c:choose>
             <c:when test="${flag == true}">
-                <a href="">Home</a>
+                <a href="Home">Home</a>
                 <a href="Register">Register</a>
                 <a href="Login">Login</a>
                 </c:when>
@@ -35,7 +34,6 @@
                 <a href="logout">Logout</a>
             </c:otherwise>
         </c:choose>
-    </ul>
 </div>
 
 
