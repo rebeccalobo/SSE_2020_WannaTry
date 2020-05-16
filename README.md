@@ -1,14 +1,12 @@
 # SSE_2020_WannaTry
 
-Please run the given sql script which will populate a new database with sample studetns and staff
+Please use Branch Assignment 3 for testing the assignment 3 changes
 
-To test staff functionality please ensure you use ID = 00000099   || PASSWORD = test1234
-Any staff in your table will do - this staff is just predefined
-
+Please run the DB script found in the resources folder. This shoudl be ran inside workbench to generate fake data and relevant tables.
 ## Diary 
 Team Members:
-Ronan Merriman - UX/UI Designer
-Kiowa Daly - Main Back-end Designer 
+Ronan Merriman
+Kiowa Daly 
 Rebecca Lobo (group leader)
 
-All roles and responsiblities have been clearly laid out in the 'Projects' tab of the Repository. 
+For assignment 3 our roles can be found in the report submitted. 
