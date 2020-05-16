@@ -17,14 +17,14 @@
     <%@include file="sidebar.jsp"%>
 
     <div class="form-container">
-        <title-medium>Student Login</title-medium>
+        <title-medium>User Login</title-medium>
         <form:form method="post"  class='main-content'>
             <c:if test="${failed_attempt == true}"><error-text>Username or Password incorrect</error-text></c:if><br><br>
-            <input type ="number" class='input-box' placeholder='Student ID' name="id" min="0" max ="2147483647"><br><br>
+            <input type ="number" class='input-box' placeholder='Staff / Student ID' name="id" pattern="{,10}"><br><br>
             <c:if test="${error!=null}">
                 <error-text>${error}</error-text><br><br>
             </c:if>
-            <input path="password" class='input-box' placeholder='Password' name="pwd"/><br><br>
+            <input path="password" class='input-box' placeholder='Password' type="password" name="pwd"/><br><br>
             <c:if test="${password_ok == false}">
                 <error-text>Incorrect password, please try again!</error-text><br><br>
             </c:if>
