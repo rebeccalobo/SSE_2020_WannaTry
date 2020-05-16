@@ -19,7 +19,7 @@ CREATE TABLE `wannatryschema`.`failed_attempts` (
   `LAST_ATTEMPT` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `IP_ADDRESS_UNIQUE` (`IP_ADDRESS` ASC));
-  
+
   -- Action log table --
 CREATE TABLE `wannatryschema`.`logged_actions` (
   `id` INT NOT NULL AUTO_INCREMENT UNIQUE,
@@ -63,6 +63,7 @@ CREATE TABLE if not exists `wannatryschema`.`user` (
   `phone_number` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- USER ROLES --
@@ -73,9 +74,9 @@ CREATE TABLE if not exists `wannatryschema`.`user_roles` (
   PRIMARY KEY (`id`),
   KEY `FKh8ciramu9cc9q3qcqiv4ue8a6` (`role_id`),
   KEY `FK55itppkw3i07do3h7qoclqd4k` (`user_id`),
-  CONSTRAINT `FK55itppkw3i07do3h7qoclqd4k` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKh8ciramu9cc9q3qcqiv4ue8a6` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3140 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK55itppkw3i07do3h7qoclqd4k` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `FKh8ciramu9cc9q3qcqiv4ue8a6` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3256 DEFAULT CHARSET=utf8;
 
 -- MODULE --
 CREATE TABLE if not exists `wannatryschema`.`modules` (
@@ -92,15 +93,16 @@ CREATE TABLE if not exists `wannatryschema`.`modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- module enrolement --
-CREATE TABLE if not exists `wannatryschema`.`module_enrolement` (
+CREATE TABLE `wannatryschema`.`module_enrolement` (
   `id` int NOT NULL AUTO_INCREMENT,
   `student_id` int NOT NULL,
   `module_id` varchar(8) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKmnvefqj644xdkvel0iptlpeyw` (`student_id`),
-  CONSTRAINT `FKhxgsf7oi56y6257tfwb43ruib` FOREIGN KEY (`module_id`) REFERENCES `modules` (`module_id`),
-  CONSTRAINT `FKmnvefqj644xdkvel0iptlpeyw` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `FKhxgsf7oi56y6257tfwb43ruib` (`module_id`),
+  CONSTRAINT `FKhxgsf7oi56y6257tfwb43ruib` FOREIGN KEY (`module_id`) REFERENCES `modules` (`module_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FKmnvefqj644xdkvel0iptlpeyw` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE if not exists `wannatryschema`.`grades` (
@@ -118,7 +120,7 @@ CREATE TABLE if not existS `wannatryschema`.`new_table` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `wannatryschema`.`user_fee` (
+CREATE TABLE if not exists `wannatryschema`.`user_fee` (
   `id` int NOT NULL,
   `fees` double NOT NULL,
   PRIMARY KEY (`id`)
@@ -542,3 +544,13 @@ END $$
 DELIMITER ;
 call wannatryschema.populate_roles_privi();
 
+drop procedure if exists wannatryschema.delete_user;
+DELIMITER $$
+create procedure wannatryschema.delete_user(s_id INT)
+BEGIN
+	DELETE FROM user_roles where user_id = s_id;
+    DELETE FROM user_fee where id = s_id;
+    DELETE FROM module_enrolement where student_id = s_id;
+    delete from user where id = s_id;
+END $$
+DELIMITER ;

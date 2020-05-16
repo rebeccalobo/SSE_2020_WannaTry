@@ -1,0 +1,294 @@
+Index: src/main/java/com/SSE2020/WannaTry/databaserepo/UserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.SSE2020.WannaTry.databaserepo;\n\nimport com.SSE2020.WannaTry.model.User;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.stereotype.Repository;\n\nimport java.util.Optional;\n\n@Repository\npublic interface UserRepository extends JpaRepository<User, Integer> {\n    @Query(value = \"Select * from wannatryschema.user where fname = ?1 and lname = ?2\",nativeQuery = true)\n    Optional<User> findByName(String f, String l);\n\n    @Query(value=\"CALL wannatryschema.random_id();\",nativeQuery = true)\n    int getRandomID();\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/SSE2020/WannaTry/databaserepo/UserRepository.java	(revision e7f953257e326ff6079bc5fb809e363c8258fc9c)
++++ src/main/java/com/SSE2020/WannaTry/databaserepo/UserRepository.java	(date 1589554498984)
+@@ -5,6 +5,8 @@
+ import org.springframework.data.jpa.repository.Query;
+ import org.springframework.stereotype.Repository;
+ 
++import java.lang.reflect.Array;
++import java.util.ArrayList;
+ import java.util.Optional;
+ 
+ @Repository
+@@ -15,5 +17,8 @@
+     @Query(value="CALL wannatryschema.random_id();",nativeQuery = true)
+     int getRandomID();
+ 
+-
++    @Query(value = "Select gender from wannatryschema.user",nativeQuery = true)
++    ArrayList<String> genders();
++    @Query(value = "Select ethnicity from wannatryschema.user",nativeQuery = true)
++    ArrayList<String> ethnicity();
+ }
+Index: src/main/webapp/WEB-INF/view/Home.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%--\n\n  User: kiowa\n  Date: 09/02/2020\n  Time: 21:41\n--%>\n<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\n\n<%@ taglib prefix=\"f\" uri=\"http://java.sun.com/jsp/jstl/core\" %>\n\n<html>\n<head>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"../../resources/css/Main.css\">\n    <style>\n\n    </style>\n\n    <title>Wanna Try - University Web Portal</title>\n</head>\n<body>\n<script src=\"https://d3js.org/d3.v5.min.js\" charset=\"utf-8\"></script>\n\n\n\n    <%@include file=\"sidebar.jsp\"%><br>\n\n    <div class=\"main\">\n<%--        Home page things go in here!--%>\n        <div class=\"parallax_top\"></div>\n        <title-large>Welcome to the University of Springfield Web Portal</title-large>\n        <p> Here At the School of Computer Science we strive to be diverse and inclusive.\n\n            Our vision is to create safe and effective learning spaces for students of all backgrounds!\n\n\n            With over one thousand students on our Dublin campus, the UCD School of Computer Science is the largest computer science department in Ireland. We offer a 4-year BSc Honours degree in Computer Science, a range a Masters degrees for both computer science graduates and conversion students, plus a suite of 4-year Structured PhD programmes. Our courses cover the principles and practise of computer science encompassing programming, algorithm development, and data science. All of our teaching is informed by state-of-the-art research conducted within the School. In short, our programmes are Software-Focused and Research-Led\n\n        </p>\n        <div class=\"parallax_gender\"></div>\n        <div id=\"pie-chart-area\" style=\"text-align: center\"></div>\n        <p> The School has topped the rankings for computer science research in Ireland for many years.\n\n            The School has over 130 postgraduate students working on the latest topics in computer science.\n\n            We host the Insight Centre for Data Analytics, the UCD Centre for Cybersecurity & Cybercrime Investigation, and the SFI Centre for Research Training in Machine Learning, amongst others.\n        </p>\n        <div class=\"parallax_gender_class\"></div>\n        <p>\n            UCD is ranked #1 in Ireland for graduate employability and graduates from the School are in high-demand from industry.\n            These industry opportunities are supported by popular internships programmes embedded within our B.Sc. and M.Sc. curricula.\n        </p>\n        <div class=\"parallax_graduates\"></div>\n    <p>We are a vibrant community of educators, researchers, students, staff, collaborators and friends. Join us.</p>\n\n\n    </div>\n\n</body>\n</html>\n<script>\n    // set the dimensions and margins of the graph\n    var width = 450\n    height = 450\n    margin = 40\n\n    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.\n    var radius = Math.min(width, height) / 2 - margin\n\n    // append the svg object to the div called 'my_dataviz'\n    var svg = d3.select(\"#pie-chart-area\")\n        .append(\"svg\")\n        .attr(\"width\", width)\n        .attr(\"height\", height)\n        .append(\"g\")\n        .attr(\"transform\", \"translate(\" + width / 2 + \",\" + height / 2 + \")\").selectAll(\"null\");\n\n    // Create dummy data\n\n    var data = {Male:${genders.get(\"MALE\")},Female:${genders.get(\"FEMALE\")},Other:${genders.get(\"OTHER\")}};\n\n    // set the color scale\n    var color = d3.scaleOrdinal()\n        .domain(data)\n        .range([\"#10c500\", \"#0044ff\", \"#ffaf00\", \"#ff0200\", \"#a05d56\"])\n\n    // Compute the position of each group on the pie:\n    var pie = d3.pie()\n        .value(function(d) {return d.value; })\n    var data_ready = pie(d3.entries(data))\n\n    // shape helper to build arcs:\n    var arcGenerator = d3.arc()\n        .innerRadius(0)\n        .outerRadius(radius)\n\n    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.\n    svg\n        .selectAll('whatever')\n        .data(data_ready)\n        .enter()\n        .append('path')\n        .attr('d', d3.arc()\n            .innerRadius(0)\n            .outerRadius(radius)\n        )\n        .attr('fill', function(d){ return(color(d.data.key)) })\n        .attr(\"stroke\", \"black\")\n        .style(\"stroke-width\", \"2px\")\n        .style(\"opacity\", 0.7)\n    svg\n        .selectAll('mySlices')\n        .data(data_ready)\n        .enter()\n        .append('text')\n        .text(function(d){ return d.data.key})\n        .attr(\"transform\", function(d) { return \"translate(\" + arcGenerator.centroid(d) + \")\";  })\n        .style(\"text-anchor\", \"middle\")\n        .style(\"font-size\", 17)\n\n</script>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/view/Home.jsp	(revision e7f953257e326ff6079bc5fb809e363c8258fc9c)
++++ src/main/webapp/WEB-INF/view/Home.jsp	(date 1589555787760)
+@@ -19,7 +19,7 @@
+ </head>
+ <body>
+ <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+-
++<meta charset="utf-8">
+ 
+ 
+     <%@include file="sidebar.jsp"%><br>
+@@ -36,8 +36,9 @@
+             With over one thousand students on our Dublin campus, the UCD School of Computer Science is the largest computer science department in Ireland. We offer a 4-year BSc Honours degree in Computer Science, a range a Masters degrees for both computer science graduates and conversion students, plus a suite of 4-year Structured PhD programmes. Our courses cover the principles and practise of computer science encompassing programming, algorithm development, and data science. All of our teaching is informed by state-of-the-art research conducted within the School. In short, our programmes are Software-Focused and Research-Led
+ 
+         </p>
+-        <div class="parallax_gender"></div>
+-        <div id="pie-chart-area" style="text-align: center"></div>
++<%--        <div class="parallax_gender"></div>--%>
++
++        <div id="pie-chart-area" class="main-content" style="text-align: center" ></div>
+         <p> The School has topped the rankings for computer science research in Ireland for many years.
+ 
+             The School has over 130 postgraduate students working on the latest topics in computer science.
+@@ -46,7 +47,7 @@
+         </p>
+         <div class="parallax_gender_class"></div>
+         <p>
+-            UCD is ranked #1 in Ireland for graduate employability and graduates from the School are in high-demand from industry.
++            Springfield University is ranked #1 in Ireland for graduate employability and graduates from the School are in high-demand from industry.
+             These industry opportunities are supported by popular internships programmes embedded within our B.Sc. and M.Sc. curricula.
+         </p>
+         <div class="parallax_graduates"></div>
+@@ -57,17 +58,17 @@
+ 
+ </body>
+ </html>
+-<script>
++<script type="text/javascript">
+     // set the dimensions and margins of the graph
+-    var width = 450
++    let width = 450;
+     height = 450
+     margin = 40
+ 
+     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+-    var radius = Math.min(width, height) / 2 - margin
++    let radius = Math.min(width, height) / 2 - margin;
+ 
+     // append the svg object to the div called 'my_dataviz'
+-    var svg = d3.select("#pie-chart-area")
++    let svg = d3.select("#pie-chart-area")
+         .append("svg")
+         .attr("width", width)
+         .attr("height", height)
+@@ -76,22 +77,24 @@
+ 
+     // Create dummy data
+ 
+-    var data = {Male:${genders.get("MALE")},Female:${genders.get("FEMALE")},Other:${genders.get("OTHER")}};
++    let g_data = {Male:${genders.get("M")}, Female:${genders.get("F")}, Other:${genders.get("O")}};
+ 
+     // set the color scale
+-    var color = d3.scaleOrdinal()
+-        .domain(data)
+-        .range(["#10c500", "#0044ff", "#ffaf00", "#ff0200", "#a05d56"])
++    let color = d3.scaleOrdinal()
++        .domain(g_data)
++        .range(["#10c500", "#0044ff", "#ffaf00", "#ff0200", "#a05d56"]);
+ 
+     // Compute the position of each group on the pie:
+-    var pie = d3.pie()
+-        .value(function(d) {return d.value; })
+-    var data_ready = pie(d3.entries(data))
++    let pie = d3.pie()
++        .value(function (d) {
++            return d.value;
++        });
++    let data_ready = pie(d3.entries(g_data));
+ 
+     // shape helper to build arcs:
+-    var arcGenerator = d3.arc()
++    let arcGenerator = d3.arc()
+         .innerRadius(0)
+-        .outerRadius(radius)
++        .outerRadius(radius);
+ 
+     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+     svg
+Index: src/main/java/com/SSE2020/WannaTry/service/SecurityConfiguration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.SSE2020.WannaTry.service;\n\nimport com.SSE2020.WannaTry.exceptions.UserNotFoundException;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.data.jpa.repository.config.EnableJpaRepositories;\nimport org.springframework.security.authentication.dao.DaoAuthenticationProvider;\nimport org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.config.annotation.web.builders.WebSecurity;\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\nimport org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.ui.Model;\nimport org.springframework.web.bind.annotation.ExceptionHandler;\n\nimport javax.sql.DataSource;\n\n@Configuration\n@EnableWebSecurity\n@EnableJpaRepositories(basePackages = {\"com.SSE2020.WannaTry.databaserepo\"})\npublic class SecurityConfiguration extends WebSecurityConfigurerAdapter {\n\n    @Autowired\n    DataSource dataSource;\n    @Autowired\n    private CustomUserDetailsService userDetailsService;\n\n    @Autowired\n    public void configure(AuthenticationManagerBuilder auth) throws Exception {\n            auth.authenticationProvider(authenticationProvider());\n    }\n\n    @Override\n    public void configure(WebSecurity web) throws Exception {\n        web.ignoring().antMatchers(\"/resources/**\");\n    }\n\n    @Override\n    protected void configure(HttpSecurity http) throws Exception{\n        http\n                .csrf().and()\n                .authorizeRequests()\n                    .antMatchers(\"/editDescription\",\"/submit_grade\").hasAnyRole(\"ADMIN\",\"STAFF\")\n                    .antMatchers(\"/Dashboard\",\"/StudentModule\",\"/grades\",\"/enrol\",\"/un_enrol\",\"/Payments\",\"/update_balance\").hasAnyRole(\"ADMIN\",\"STAFF\",\"STUDENT\")\n                    .antMatchers(\"/\",\"/Home\",\"**/Register\",\"**/resources/**\",\"**/save\",\"/Login\",\"/login_user\",\"/LoginFailed\",\"/blocked\").permitAll()\n                    .and()\n                .formLogin()\n                    .loginPage(\"/Login\")\n                    .usernameParameter(\"id\").passwordParameter(\"pwd\")\n                    .defaultSuccessUrl(\"/LoginSuccess\",true).failureUrl(\"/LoginFailed\")\n                    .failureForwardUrl(\"/LoginFailed\")\n                    .permitAll()\n                    .and()\n                .logout()\n                .logoutUrl(\"/logout\")\n                .deleteCookies(\"JSESSIONID\")\n                .clearAuthentication(true)\n                    .permitAll()\n                .and()\n                .requiresChannel().antMatchers(\"/*\").requiresSecure();\n\n        http.sessionManagement().maximumSessions(1).expiredUrl(\"/logout\");\n\n    }\n\n\n\n    @Bean\n    public PasswordEncoder passwordEncoder(){\n        return new BCryptPasswordEncoder();\n    }\n\n    @Bean\n    DaoAuthenticationProvider authenticationProvider(){\n        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();\n        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());\n        daoAuthenticationProvider.setUserDetailsService(userDetailsService);\n        return daoAuthenticationProvider;\n    }\n    //EXCEPTION HANDLERS\n    @ExceptionHandler(UserNotFoundException.class)\n    public String handleUserNotFound(UserNotFoundException ex, Model model){\n        return \"redirect:/LoginFailed\";\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/SSE2020/WannaTry/service/SecurityConfiguration.java	(revision e7f953257e326ff6079bc5fb809e363c8258fc9c)
++++ src/main/java/com/SSE2020/WannaTry/service/SecurityConfiguration.java	(date 1589556610886)
+@@ -45,7 +45,7 @@
+                 .authorizeRequests()
+                     .antMatchers("/editDescription","/submit_grade").hasAnyRole("ADMIN","STAFF")
+                     .antMatchers("/Dashboard","/StudentModule","/grades","/enrol","/un_enrol","/Payments","/update_balance").hasAnyRole("ADMIN","STAFF","STUDENT")
+-                    .antMatchers("/","/Home","**/Register","**/resources/**","**/save","/Login","/login_user","/LoginFailed","/blocked").permitAll()
++                    .antMatchers("/","/Home","/Register","**/resources/**","/save","/Login","/login_user","/LoginFailed","/blocked").permitAll()
+                     .and()
+                 .formLogin()
+                     .loginPage("/Login")
+Index: src/main/java/com/SSE2020/WannaTry/controller/RegisterController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.SSE2020.WannaTry.controller;\n\nimport com.SSE2020.WannaTry.databaserepo.BlacklistRepository;\nimport com.SSE2020.WannaTry.model.CustomUserDetails;\nimport com.SSE2020.WannaTry.model.IP_Blacklist;\nimport com.SSE2020.WannaTry.model.Role;\nimport com.SSE2020.WannaTry.model.User;\nimport com.SSE2020.WannaTry.service.BackendRepoService;\nimport org.springframework.security.core.context.SecurityContextHolder;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.ui.Model;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.ModelAttribute;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RequestMethod;\n\nimport javax.servlet.http.HttpServletRequest;\nimport java.util.ArrayList;\nimport java.util.Optional;\n\n@Controller\npublic class RegisterController {\n\n    final\n    BackendRepoService repoService;\n    final\n    BlacklistRepository blacklistRepository;\n    final\n    PasswordEncoder passwordEncoder;\n\n    public RegisterController(BackendRepoService repoService, BlacklistRepository blacklistRepository, PasswordEncoder passwordEncoder) {\n        this.repoService = repoService;\n        this.blacklistRepository = blacklistRepository;\n        this.passwordEncoder = passwordEncoder;\n    }\n\n\n    @GetMapping(value=\"/Register\")\n    public String register(Model model, HttpServletRequest request){\n        String ip = request.getRemoteAddr();\n        if(isBlackListed(ip)){\n            return \"redirect:/blocked\";\n        }\n        Object context = SecurityContextHolder.getContext().getAuthentication().getPrincipal();\n        model.addAttribute(\"flag\", !(context instanceof CustomUserDetails));\n        User user = new User();\n        model.addAttribute(\"User\",user);\n        model.addAttribute(\"incorrectFormat\",\"correct\");\n        return \"Register\";\n    }\n    private boolean isBlackListed(String IP){\n        Optional<IP_Blacklist> blacklistedIP = blacklistRepository.findById(IP);\n        return blacklistedIP.map(ip_blacklist -> ip_blacklist.getIP_ADDRESS().equals(IP)).orElse(false);\n    }\n    @RequestMapping(value=\"/save\",method=RequestMethod.POST)\n    private String saveUser(@ModelAttribute(\"User\") User user){\n        ArrayList<Role> roles = new ArrayList<>();\n        Role role = repoService.getRoleRepository().findByName(\"ROLE_STUDENT\");\n        roles.add(role);\n        user.setRoles(roles);\n        user.setPassword(passwordEncoder.encode(user.getPassword()));\n        user.setID(repoService.getUserRepository().getRandomID());\n        repoService.getUserRepository().save(user);\n        return \"redirect:/Dashboard\";\n    }\n\n    // Delete a Note\n    @GetMapping(\"/unregister\")\n    public String deleteUser(HttpServletRequest request){\n        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();\n        User user = userDetails.getUser();\n        repoService.getUserRepository().delete(user);\n        request.getSession().invalidate();\n        return \"redirect:/logout\";\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/SSE2020/WannaTry/controller/RegisterController.java	(revision e7f953257e326ff6079bc5fb809e363c8258fc9c)
++++ src/main/java/com/SSE2020/WannaTry/controller/RegisterController.java	(date 1589556277695)
+@@ -43,10 +43,13 @@
+             return "redirect:/blocked";
+         }
+         Object context = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+-        model.addAttribute("flag", !(context instanceof CustomUserDetails));
++
+         User user = new User();
+         model.addAttribute("User",user);
+-        model.addAttribute("incorrectFormat","correct");
++        model.addAttribute("invalid",false);
++        model.addAttribute("isStaff",false);
++        model.addAttribute("isStudent",true);
++        model.addAttribute("flag", !(context instanceof CustomUserDetails));
+         return "Register";
+     }
+     private boolean isBlackListed(String IP){
+@@ -54,14 +57,24 @@
+         return blacklistedIP.map(ip_blacklist -> ip_blacklist.getIP_ADDRESS().equals(IP)).orElse(false);
+     }
+     @RequestMapping(value="/save",method=RequestMethod.POST)
+-    private String saveUser(@ModelAttribute("User") User user){
++    private String saveUser(@ModelAttribute("User") User newuser,Model model){
++        if(newuser == null){
++
++            User user = new User();
++            model.addAttribute("User",user);
++            model.addAttribute("invalid",true);
++            model.addAttribute("isStaff",false);
++            model.addAttribute("isStudent",false);
++            model.addAttribute("flag",true);
++            return "Register";
++        }
+         ArrayList<Role> roles = new ArrayList<>();
+         Role role = repoService.getRoleRepository().findByName("ROLE_STUDENT");
+         roles.add(role);
+-        user.setRoles(roles);
+-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+-        user.setID(repoService.getUserRepository().getRandomID());
+-        repoService.getUserRepository().save(user);
++        newuser.setRoles(roles);
++        newuser.setPassword(passwordEncoder.encode(newuser.getPassword()));
++        newuser.setID(repoService.getUserRepository().getRandomID());
++        repoService.getUserRepository().save(newuser);
+         return "redirect:/Dashboard";
+     }
+ 
+Index: src/main/java/com/SSE2020/WannaTry/controller/HomePageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.SSE2020.WannaTry.controller;\n\n\nimport com.SSE2020.WannaTry.exceptions.UserNotFoundException;\nimport com.SSE2020.WannaTry.model.CustomUserDetails;\nimport com.SSE2020.WannaTry.model.Role;\nimport com.SSE2020.WannaTry.model.User;\nimport com.SSE2020.WannaTry.service.BackendRepoService;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.security.authentication.InternalAuthenticationServiceException;\nimport org.springframework.security.core.context.SecurityContextHolder;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.ui.Model;\nimport org.springframework.web.bind.annotation.ExceptionHandler;\nimport org.springframework.web.bind.annotation.GetMapping;\n\nimport java.util.NoSuchElementException;\n\n\n@Controller\npublic class HomePageController {\n    @Autowired\n    BackendRepoService repoService;\n    @GetMapping(value={ \"/\",\"/Home\"})\n    public String homePage(Model model){\n        Object context = SecurityContextHolder.getContext().getAuthentication().getPrincipal();\n        if(context instanceof CustomUserDetails){\n            User user = ((CustomUserDetails) context).getUser();\n            for(Role r : user.getRoles()){\n                if(r.getName().equals(\"ROLE_STAFF\")){\n                    model.addAttribute(\"isStaff\",true);\n                    model.addAttribute(\"isStudent\",false);\n                    model.addAttribute(\"flag\",false);\n                }\n                else if(r.getName().equals(\"ROLE_STUDENT\")){\n                    model.addAttribute(\"isStaff\",false);\n                    model.addAttribute(\"isStudent\",true);\n                    model.addAttribute(\"flag\",false);\n                }\n            }\n        }\n        else{\n            model.addAttribute(\"isStaff\",false);\n            model.addAttribute(\"isStudent\",false);\n            model.addAttribute(\"flag\",true);\n        }\n\n\n        return \"Home\";\n    }\n    @GetMapping(value = \"/error\")\n    public String error(Model model){\n        model.addAttribute(\"flag\",true);\n        return \"redirect:/LoginFailed\";\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/SSE2020/WannaTry/controller/HomePageController.java	(revision e7f953257e326ff6079bc5fb809e363c8258fc9c)
++++ src/main/java/com/SSE2020/WannaTry/controller/HomePageController.java	(date 1589554707715)
+@@ -14,6 +14,8 @@
+ import org.springframework.web.bind.annotation.ExceptionHandler;
+ import org.springframework.web.bind.annotation.GetMapping;
+ 
++import java.util.ArrayList;
++import java.util.HashMap;
+ import java.util.NoSuchElementException;
+ 
+ 
+@@ -45,6 +47,28 @@
+             model.addAttribute("flag",true);
+         }
+ 
++        ArrayList<String> allGenders = repoService.getUserRepository().genders();
++        ArrayList<String> allEth = repoService.getUserRepository().ethnicity();
++
++        HashMap<String,Integer> genders = new HashMap<>();
++        HashMap<String,Integer> ethnicities = new HashMap<>();
++
++        for(String s : allGenders){
++            if(genders.containsKey(s)){
++                genders.put(s,genders.get(s)+1);
++            }else{
++                genders.put(s,1);
++            }
++        }
++        for(String s : allEth){
++            if(ethnicities.containsKey(s)){
++                ethnicities.put(s,ethnicities.get(s)+1);
++            }else{
++                ethnicities.put(s,1);
++            }
++        }
++        model.addAttribute("genders",genders);
++        model.addAttribute("ethnicities",ethnicities);
+ 
+         return "Home";
+     }
+Index: src/main/webapp/WEB-INF/view/Register.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ taglib prefix=\"form\" uri=\"http://www.springframework.org/tags/form\" %>\n<%--\n  Created by IntelliJ IDEA.\n  User: kiowa\n  Date: 10/02/2020\n  Time: 18:53\n  To change this template use File | Settings | File Templates.\n--%>\n<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\n<html>\n<head>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"../../resources/css/Main.css\">\n    <title>Registration Page</title>\n</head>\n<body>\n\n<%@include file=\"sidebar.jsp\" %>\n<div class=\"form-container\">\n    <c:if test=\"${incorrectFormat==correct}\">\n        <error-text>Please ensure that you enter the correct values when registering!</error-text>\n    </c:if>\n    <title-medium>User Registration</title-medium>\n    <form:form method=\"post\" action=\"save\" modelAttribute=\"User\" name=\"RegisterForm\" class='main-content'>\n        <form:input path=\"FName\" class='input-box' placeholder='First Name'/><br><br>\n        <form:input path=\"LName\" class='input-box' placeholder='Surname'/><br><br>\n        <form:input path=\"email\" class='input-box' placeholder='Email Address' type=\"email\"/><br><br>\n        <sub-label>Password must contain at least 1 letter, at least 1 number and be between 8-20 characters</sub-label><br><br>\n        <form:input path=\"password\" class='input-box' placeholder='Password' type=\"password\"/><br><br>\n        <form:input path=\"address\" class='input-box' placeholder='Address'/><br><br>\n        <sub-label>Must be in format YEAR-MONTH-DATE <i>e.g. 25th December 2020 -> 2020-12-25</i></sub-label><br><br>\n        <form:input path=\"DOB\" class='input-box' placeholder='Date of Birth'/><br><br>\n        <form:input path=\"phoneNumber\" class='input-box' placeholder='Phone Number' type=\"number\"/><br><br>\n        <form:input path=\"ethnicity\" class='input-box' placeholder='Ethnicity'/><br><br>\n        <sub-label>MALE = M, FEMALE = F, OTHER = O</sub-label><br><br>\n        <form:input path=\"gender\" class='input-box' placeholder='Gender'/><br><br>\n        <input type=\"submit\" class='button' value=\"Submit\">\n    </form:form>\n</div>\n</body>\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/view/Register.jsp	(revision e7f953257e326ff6079bc5fb809e363c8258fc9c)
++++ src/main/webapp/WEB-INF/view/Register.jsp	(date 1589558068397)
+@@ -16,24 +16,34 @@
+ 
+ <%@include file="sidebar.jsp" %>
+ <div class="form-container">
+-    <c:if test="${incorrectFormat==correct}">
++    <c:if test="${invalid}">
+         <error-text>Please ensure that you enter the correct values when registering!</error-text>
+     </c:if>
+     <title-medium>User Registration</title-medium>
+     <form:form method="post" action="save" modelAttribute="User" name="RegisterForm" class='main-content'>
+         <form:input path="FName" class='input-box' placeholder='First Name'/><br><br>
+         <form:input path="LName" class='input-box' placeholder='Surname'/><br><br>
+-        <form:input path="email" class='input-box' placeholder='Email Address' type="email"/><br><br>
++        <form:input  path="email" class='input-box' placeholder='Email Address' type="email"/><br><br>
+         <sub-label>Password must contain at least 1 letter, at least 1 number and be between 8-20 characters</sub-label><br><br>
+         <form:input path="password" class='input-box' placeholder='Password' type="password"/><br><br>
+         <form:input path="address" class='input-box' placeholder='Address'/><br><br>
+         <sub-label>Must be in format YEAR-MONTH-DATE <i>e.g. 25th December 2020 -> 2020-12-25</i></sub-label><br><br>
+-        <form:input path="DOB" class='input-box' placeholder='Date of Birth'/><br><br>
++        <form:d path="DOB" class='input-box' placeholder='Date of Birth'/><br><br>
+         <form:input path="phoneNumber" class='input-box' placeholder='Phone Number' type="number"/><br><br>
+-        <form:input path="ethnicity" class='input-box' placeholder='Ethnicity'/><br><br>
+-        <sub-label>MALE = M, FEMALE = F, OTHER = O</sub-label><br><br>
+-        <form:input path="gender" class='input-box' placeholder='Gender'/><br><br>
+-        <input type="submit" class='button' value="Submit">
++        <form:select path="ethnicity" class='input-box' placeholder='Ethnicity'>
++            <form:option value="White">White</form:option>
++            <form:option value="Black or African American">Black</form:option>
++            <form:option value="American Indian or Alaska Native">Native American</form:option>
++            <form:option value="Asian">Asian</form:option>
++            <form:option value="African">African</form:option>
++        </form:select><br><br>
++        <sub-label>Select Gender</sub-label><br><br>
++        <form:select path="gender" class='input-box' placeholder='Gender' >
++            <form:option value="M">Male</form:option>
++            <form:option value="F">Female</form:option>
++            <form:option value="O">Other</form:option>
++        </form:select><br><br>
++        <input type="submit" class='button' value="Submit" >
+     </form:form>
+ </div>
+ </body>
