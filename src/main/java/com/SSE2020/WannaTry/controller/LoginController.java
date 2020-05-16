@@ -2,9 +2,12 @@ package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.databaserepo.BlacklistRepository;
 import com.SSE2020.WannaTry.databaserepo.LoginAttemptRepository;
+import com.SSE2020.WannaTry.databaserepo.LoggedActionsRepository;
 import com.SSE2020.WannaTry.model.IP_Blacklist;
 import com.SSE2020.WannaTry.model.FailedAttempts;
+import com.SSE2020.WannaTry.model.LoggedActions;
 import com.SSE2020.WannaTry.model.User;
+import com.SSE2020.WannaTry.model.CustomUserDetails;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,15 +30,18 @@ public class LoginController {
     final
     BackendRepoService repoService;
     final
-    LoginAttemptRepository loginAttemptRepository;
+    LoginAttemptRepository loginAttemptRepository; 
+    final 
+    LoggedActionsRepository loggedActionsRepository;
     final
     BlacklistRepository blacklistRepository;
     final
     PasswordEncoder passwordEncoder;
 
-    public LoginController(BackendRepoService repoService, LoginAttemptRepository loginAttemptRepository, BlacklistRepository blacklistRepository, PasswordEncoder passwordEncoder) {
+    public LoginController(BackendRepoService repoService, LoginAttemptRepository loginAttemptRepository, LoggedActionsRepository loggedActionsRepository, BlacklistRepository blacklistRepository, PasswordEncoder passwordEncoder) {
         this.repoService = repoService;
         this.loginAttemptRepository = loginAttemptRepository;
+        this.loggedActionsRepository = loggedActionsRepository;
         this.blacklistRepository = blacklistRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -57,8 +63,15 @@ public class LoginController {
         }
     }
 
+    @Transactional
     @GetMapping(value = "/LoginSuccess")
-    public String redirectToDashBoard(HttpSession session){
+    public String redirectToDashBoard(HttpSession session, HttpServletRequest request){
+        String ip = request.getRemoteAddr();
+        CustomUserDetails details = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = details.getUser();     
+
+        loggedActionsRepository.log(user.getID(), "LOGIN", "User: " + user.getFName() + " " + user.getLName() + " successfully logged in.", ip, new Date());
+
         session.setMaxInactiveInterval(120);
         return "redirect:/Dashboard";
     }

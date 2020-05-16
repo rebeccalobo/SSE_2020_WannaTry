@@ -3,6 +3,8 @@ package com.SSE2020.WannaTry.controller;
 
 import com.SSE2020.WannaTry.model.CustomUserDetails;
 import com.SSE2020.WannaTry.model.User;
+import com.SSE2020.WannaTry.model.LoggedActions;
+import com.SSE2020.WannaTry.databaserepo.LoggedActionsRepository;
 import com.SSE2020.WannaTry.service.BackendRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.JdbcUpdateAffectedIncorrectNumberOfRowsException;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
+import java.util.Date;
+
 
 @Controller
 public class PaymentsController {
@@ -24,6 +28,11 @@ public class PaymentsController {
     @Autowired
     BackendRepoService repoService;
 
+    final LoggedActionsRepository loggedActionsRepository;
+
+    public PaymentsController(LoggedActionsRepository loggedActionsRepository) {
+        this.loggedActionsRepository = loggedActionsRepository;
+    }
 
     @RequestMapping(value = "/Payments",method = RequestMethod.GET)
     public String goToPaymentPage(Model model){
@@ -69,7 +78,7 @@ public class PaymentsController {
 
     @Transactional
     @RequestMapping(value="/update_balance",method= RequestMethod.POST)
-    public String updateBalance(@ModelAttribute("fees_input")double input, Model model){
+    public String updateBalance(@ModelAttribute("fees_input")double input, Model model, HttpServletRequest request){
 
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDetails.getUser();
@@ -81,6 +90,10 @@ public class PaymentsController {
             return "redirect:/PaymentsError";
         }
         repoService.getModuleRepo().updateFees(user.getID(),opt_fees_due.get()-input_amount);
+
+        String ip = request.getRemoteAddr();
+        loggedActionsRepository.log(user.getID(), "FEE PAYMENT", "User: " + user.getFName() + " " + user.getLName() + " paid €" + input_amount + " in fees.", ip, new Date());
+
         return "redirect:/Payments";
     }
 }
